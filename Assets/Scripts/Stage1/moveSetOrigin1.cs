@@ -19,6 +19,12 @@ public class moveSetOrigin1 : MonoBehaviourPunCallbacks, IPunObservable
     {
         isGround = true;
     }
+
+    //PV초기화, 시작시 Awake 구문은 쓰면 안되는 걸로 알고있는데 나중에 궁금하면 ㄱㄱ
+    void Start(){
+        PV = this.GetComponent<PhotonView>();
+    }
+
     void Update()
     {
         if (PV.IsMine)

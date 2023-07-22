@@ -33,7 +33,13 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         //isDarkCharacter 인지 확인 필요
         if(PV.IsMine){
             //처음에 Null로 고정시킴
-            PR = PlayerRole.Dark;
+            PR = PlayerRole.Null;
+            if(PV.Owner.NickName == "Dark"){
+                PR = PlayerRole.Dark;
+            }
+            else if(PV.Owner.NickName == "Light"){
+                PR = PlayerRole.Light;
+            }
            }
     }
 
@@ -102,7 +108,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     private void Teleport(){
         //TP코드
         Debug.Log("TP코드실행");
-        Vector3 desiredPosition = new Vector3(5, 5f, 0);
+        Vector3 desiredPosition = new Vector3(-5, 5f, 0);
         PV.transform.position = desiredPosition;
         //TP이펙트가 있을 경우
 
