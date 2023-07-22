@@ -42,7 +42,6 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
 
 
     // 싱글톤 패턴을 이용해 여러 개의 Scene으로 관리하는 다양한 stage로 넘어가도 Pun2 서버 연결을 유지할 수 있도록 한다.
-    // 또한 TitleCanvas도 싱글톤 객체로 취급해 넘긴다.
     public GameObject TitleCanvas;
     private static PhotonManeger instance;
 
@@ -148,14 +147,16 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     // 게임 내부에서는 적절히 처리해야한다.
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        // 방에 남은 자신이 Master Client이고 현재 존재하는 Scene이 'Title' 일 경우.
-        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().name == "Title")
+        // 현재 존재하는 Scene이 'Title' 일 경우, 
+        if (SceneManager.GetActiveScene().name == "Title")
         {
             // 1명밖에 남지 않았다면 다시 게임 시작을 비활성화함.
             if (PhotonNetwork.PlayerList.Length == 1)
             {
                 InRoomStatus.text = "Status : Waiting Your Friends...";
                 GameStartBtn.SetActive(false);
+                WaitGamePanel.SetActive(false);
+                LeaveRoom();
             }
         }
 
@@ -163,10 +164,13 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().name != "Title")
         {
             // 1명밖에 남지 않았다면 타이틀 화면으로 되돌아간다.
+            // 이 때 이 게임오브젝트 자체를 삭제한다.
+            // - 포톤 연결을 끊고 다시 Title 환경에서  awake 함수로 호출되는 photon에 연결한다.
             if (PhotonNetwork.PlayerList.Length == 1)
             {
-                PhotonNetwork.LoadLevel("Title");
-                photonView.RPC("ActiveTitleCanvas", RpcTarget.AllBuffered);
+                SceneManager.LoadScene("Title");
+                Disconnect();
+                Destroy(gameObject);
             }
         }
     }
