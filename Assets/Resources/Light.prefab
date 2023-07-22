@@ -193,6 +193,7 @@ MonoBehaviour:
   SR: {fileID: 4299124305899392683}
   PV: {fileID: 4299124305899392687}
   isGround: 0
+<<<<<<< HEAD
 --- !u!114 &6898466436908255015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,3 +210,5 @@ MonoBehaviour:
   Light: {fileID: 0}
   Dark: {fileID: 0}
   DashPower: 0
+=======
+>>>>>>> parent of 6a9dc5a (Merge branch 'main' of https://github.com/belfly1111/Photon0720)

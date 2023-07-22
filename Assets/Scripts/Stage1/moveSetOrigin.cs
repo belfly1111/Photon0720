@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class moveSetOrigin1 : MonoBehaviourPunCallbacks, IPunObservable
+public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Rigidbody2D RB;
     public SpriteRenderer SR;
@@ -20,8 +20,8 @@ public class moveSetOrigin1 : MonoBehaviourPunCallbacks, IPunObservable
         isGround = true;
     }
 
-    //PV초기화, 시작시 Awake 구문은 쓰면 안되는 걸로 알고있는데 나중에 궁금하면 ㄱㄱ
-    void Start(){
+    void Start()
+    {
         PV = this.GetComponent<PhotonView>();
     }
 
@@ -31,12 +31,11 @@ public class moveSetOrigin1 : MonoBehaviourPunCallbacks, IPunObservable
         {
             // ← → 이동
             float axis = Input.GetAxisRaw("Horizontal");
-            RB.velocity = new Vector2(4 * axis, RB.velocity.y);
+            RB.velocity = new Vector2(12 * axis, RB.velocity.y);
 
             if (axis != 0) PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis); // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
             
             // ↑ 점프, 바닥체크
-            //isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(0, -0.5f), 0.07f, 1 << LayerMask.NameToLayer("Ground"));
             if (Input.GetKeyDown(KeyCode.Space) && isGround) PV.RPC("JumpRPC", RpcTarget.All);
         }
         // IsMine이 아닌 것들은 부드럽게 위치 동기화
@@ -75,4 +74,14 @@ public class moveSetOrigin1 : MonoBehaviourPunCallbacks, IPunObservable
             curPos = (Vector3)stream.ReceiveNext();
         }
     }
+
+    //isground 바닥 체크
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGround = true;
+        }
+    }
+
 }

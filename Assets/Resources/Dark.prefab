@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 3244911331013244387}
   - component: {fileID: 3244911331013244396}
   - component: {fileID: 3244911331013244397}
-  - component: {fileID: 4867162495317841546}
-  - component: {fileID: 9042478861170340959}
+  - component: {fileID: -747812626717378141}
   m_Layer: 0
   m_Name: Dark
   m_TagString: Untagged
@@ -157,7 +156,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3244911331013244397}
-  - {fileID: 9042478861170340959}
+  - {fileID: -747812626717378141}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -177,7 +176,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &4867162495317841546
+--- !u!114 &-747812626717378141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,6 +185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3244911331013244391}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: b25d127310f92dc428b9a5c16348cfc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -203,6 +203,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 955c610174224ba4195cbbf4ce3b844d, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: b66ec4a51598620458e942a3d3b7dc65, type: 3}
+>>>>>>> parent of 6a9dc5a (Merge branch 'main' of https://github.com/belfly1111/Photon0720)
   m_Name: 
   m_EditorClassIdentifier: 
   RB: {fileID: 3244911331013244386}
