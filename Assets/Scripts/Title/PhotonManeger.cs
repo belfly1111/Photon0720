@@ -12,7 +12,7 @@ using UnityEditor;
 
 public class PhotonManeger : MonoBehaviourPunCallbacks
 {
-    // ¾îÂ¿ ¼ö ¾øÀÌ ³Ö¾îÁá´Ù... stage°¡ ¹Ù²î¸é ¾µ¸ğ¾ø¾îÁø´Ù.
+    // ì–´ì©” ìˆ˜ ì—†ì´ ë„£ì–´ì¤¬ë‹¤... stageê°€ ë°”ë€Œë©´ ì“¸ëª¨ì—†ì–´ì§„ë‹¤.
     [Header("GamePanel")]
     public GameObject StartPanel;
     public GameObject SettingPanel;
@@ -41,7 +41,7 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     static public bool Dark;
 
 
-    // ½Ì±ÛÅæ ÆĞÅÏÀ» ÀÌ¿ëÇØ ¿©·¯ °³ÀÇ SceneÀ¸·Î °ü¸®ÇÏ´Â ´Ù¾çÇÑ stage·Î ³Ñ¾î°¡µµ Pun2 ¼­¹ö ¿¬°áÀ» À¯ÁöÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
+    // ì‹±ê¸€í†¤ íŒ¨í„´ì„ ì´ìš©í•´ ì—¬ëŸ¬ ê°œì˜ Sceneìœ¼ë¡œ ê´€ë¦¬í•˜ëŠ” ë‹¤ì–‘í•œ stageë¡œ ë„˜ì–´ê°€ë„ Pun2 ì„œë²„ ì—°ê²°ì„ ìœ ì§€í•  ìˆ˜ ìˆë„ë¡ í•œë‹¤.
     public GameObject TitleCanvas;
     private static PhotonManeger instance;
 
@@ -54,7 +54,7 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
 
         // -------------------------------------------
 
-        // PhotonManeger ½Ì±ÛÅæ Ã³¸®
+        // PhotonManeger ì‹±ê¸€í†¤ ì²˜ë¦¬
         if (instance == null)
         {
             instance = this;
@@ -62,11 +62,11 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         }
         else
         {
-            // ´Ù¸¥ Scene¿¡¼­ PhotonManager°¡ ÀÌ¹Ì ÀÖ´ÂÁö È®ÀÎÇÏ°í ÀÖ´Ù¸é ÆÄ±«ÇÏÁö ¾Ê½À´Ï´Ù.
+            // ë‹¤ë¥¸ Sceneì—ì„œ PhotonManagerê°€ ì´ë¯¸ ìˆëŠ”ì§€ í™•ì¸í•˜ê³  ìˆë‹¤ë©´ íŒŒê´´í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
             PhotonManeger[] managers = FindObjectsOfType<PhotonManeger>();
             if (managers.Length > 1)
             {
-                // µÎ °³ ÀÌ»óÀÇ ÀÎ½ºÅÏ½º°¡ ÀÖ´Â °æ¿ì, Ã¹ ¹øÂ°¸¦ Á¦¿ÜÇÑ ¸ğµç ´Ù¸¥ ÀÎ½ºÅÏ½º¸¦ ÆÄ±«ÇÕ´Ï´Ù.
+                // ë‘ ê°œ ì´ìƒì˜ ì¸ìŠ¤í„´ìŠ¤ê°€ ìˆëŠ” ê²½ìš°, ì²« ë²ˆì§¸ë¥¼ ì œì™¸í•œ ëª¨ë“  ë‹¤ë¥¸ ì¸ìŠ¤í„´ìŠ¤ë¥¼ íŒŒê´´í•©ë‹ˆë‹¤.
                 for (int i = 1; i < managers.Length; i++)
                 {
                     Destroy(managers[i].gameObject);
@@ -78,10 +78,10 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     {
         try
         {
-            // Photon ¼­¹ö¿¡ Á¢¼Ó
+            // Photon ì„œë²„ì— ì ‘ì†
             PhotonNetwork.ConnectUsingSettings();
         }
-        // Á¢¼Ó½ÇÆĞ ½Ã console¿¡ ½ÇÆĞ¸Ş¼¼Áö ³²±è.
+        // ì ‘ì†ì‹¤íŒ¨ ì‹œ consoleì— ì‹¤íŒ¨ë©”ì„¸ì§€ ë‚¨ê¹€.
         catch (System.Exception ex)
         {
             Debug.LogError("Failed to connect to Photon Server: " + ex.Message);
@@ -89,25 +89,25 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     }
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Photon Server Á¢¼Ó ¿Ï·á");
+        Debug.Log("Photon Server ì ‘ì† ì™„ë£Œ");
         PhotonNetwork.JoinLobby();
     }
     public override void OnJoinedLobby()
     {
-        Debug.Log("Photon Server Lobby Á¢¼Ó ¿Ï·á");
+        Debug.Log("Photon Server Lobby ì ‘ì† ì™„ë£Œ");
     }
     public void CreateRoom()
     {
-        // »ç¿ëÀÚ°¡ ¹æÀÌ¸§µµ ÀÔ·ÂÇÏ°í Stageµµ °í¸¥ °æ¿ì¿¡¸¸ CreateRoomÀÌ È°¼ºÈ­µÈ´Ù.
+        // ì‚¬ìš©ìê°€ ë°©ì´ë¦„ë„ ì…ë ¥í•˜ê³  Stageë„ ê³ ë¥¸ ê²½ìš°ì—ë§Œ CreateRoomì´ í™œì„±í™”ëœë‹¤.
         if(RoomName.text != "" && SelectedStage != 0)
         {
-            // RoomOptions. ÇÃ·¹ÀÌ¾î´Â ¹«Á¶°Ç µÎ ¸íÀÌ µé¾î¿Í¾ß ÇÏ°í ¹æÀº °ø°³ÇÏÁö ¾Ê´Â´Ù.
+            // RoomOptions. í”Œë ˆì´ì–´ëŠ” ë¬´ì¡°ê±´ ë‘ ëª…ì´ ë“¤ì–´ì™€ì•¼ í•˜ê³  ë°©ì€ ê³µê°œí•˜ì§€ ì•ŠëŠ”ë‹¤.
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 2;
-            roomOptions.EmptyRoomTtl = 0; // ¹æÀÌ ºñ¾îÀÖÀ» ¶§ÀÇ »ıÁ¸ ½Ã°£ (0À¸·Î ¼³Á¤ÇÏ¸é Áï½Ã »èÁ¦)
+            roomOptions.EmptyRoomTtl = 0; // ë°©ì´ ë¹„ì–´ìˆì„ ë•Œì˜ ìƒì¡´ ì‹œê°„ (0ìœ¼ë¡œ ì„¤ì •í•˜ë©´ ì¦‰ì‹œ ì‚­ì œ)
             roomOptions.IsVisible = false;
 
-            // ºñ¹Ğ¹øÈ£·Î ÆÇº°À» ÇÏ±â À§ÇØ ¸¸µé¾îÁÜ. - ÀÌ ¶§, ¹æÀÌ¸§ ÀÚÃ¼°¡ ºñ¹Ğ¹øÈ£ ¿ªÇÒÀ» ÇÑ´Ù.
+            // ë¹„ë°€ë²ˆí˜¸ë¡œ íŒë³„ì„ í•˜ê¸° ìœ„í•´ ë§Œë“¤ì–´ì¤Œ. - ì´ ë•Œ, ë°©ì´ë¦„ ìì²´ê°€ ë¹„ë°€ë²ˆí˜¸ ì—­í• ì„ í•œë‹¤.
             PhotonNetwork.CreateRoom(RoomName.text, roomOptions);
             StartPanel.SetActive(false);
             MakeRoomPanel.SetActive(false);
@@ -119,8 +119,8 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
             MakeRoomStatus.text = "Please input RoomName & Choose the Stage";
         }
     }
-    public override void OnCreatedRoom() => print("PhotonServer ¹æ¸¸µé±â ¿Ï·á");
-    public override void OnCreateRoomFailed(short returnCode, string message) => print("PhotonServer ¹æ¸¸µé±â ½ÇÆĞ");
+    public override void OnCreatedRoom() => print("PhotonServer ë°©ë§Œë“¤ê¸° ì™„ë£Œ");
+    public override void OnCreateRoomFailed(short returnCode, string message) => print("PhotonServer ë°©ë§Œë“¤ê¸° ì‹¤íŒ¨");
 
     public void JoinRoom()
     {
@@ -130,7 +130,7 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     {
         if(SceneManager.GetActiveScene().name == "Title")
         {
-            Debug.Log("Photon Server Room Á¢¼Ó¿Ï·á");
+            Debug.Log("Photon Server Room ì ‘ì†ì™„ë£Œ");
             InRoomName.text = "RoomName : " + RoomName.text;
             InRoomStage.text = "RoomStage : " + SelectedStage;
 
@@ -139,18 +139,18 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("Photon Server Room Á¢¼Ó½ÇÆĞ, ¹æ ÀÌ¸§À» Ã£À» ¼ö ¾øÀ½!");
+        Debug.Log("Photon Server Room ì ‘ì†ì‹¤íŒ¨, ë°© ì´ë¦„ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ!");
         FindRoomStatus.text = "FindRoomStatus : Not exist room.";
     }
     
-    // ÇÃ·¹ÀÌ¾î°¡ room¿¡¼­ ³ª°¬À» ¶§ È£ÃâµÇ´Â ÇÔ¼ö. 5ÃÊ°¡ Áö³ª¸é °ÔÀÓÀÌ Á¾·áµÇ°Ô ÃßÈÄ Ã³¸®ÇØ¾ßÇÑ´Ù.
-    // °ÔÀÓ ³»ºÎ¿¡¼­´Â ÀûÀıÈ÷ Ã³¸®ÇØ¾ßÇÑ´Ù.
+    // í”Œë ˆì´ì–´ê°€ roomì—ì„œ ë‚˜ê°”ì„ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜. 5ì´ˆê°€ ì§€ë‚˜ë©´ ê²Œì„ì´ ì¢…ë£Œë˜ê²Œ ì¶”í›„ ì²˜ë¦¬í•´ì•¼í•œë‹¤.
+    // ê²Œì„ ë‚´ë¶€ì—ì„œëŠ” ì ì ˆíˆ ì²˜ë¦¬í•´ì•¼í•œë‹¤.
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        // ÇöÀç Á¸ÀçÇÏ´Â SceneÀÌ 'Title' ÀÏ °æ¿ì, 
+        // í˜„ì¬ ì¡´ì¬í•˜ëŠ” Sceneì´ 'Title' ì¼ ê²½ìš°, 
         if (SceneManager.GetActiveScene().name == "Title")
         {
-            // 1¸í¹Û¿¡ ³²Áö ¾Ê¾Ò´Ù¸é ´Ù½Ã °ÔÀÓ ½ÃÀÛÀ» ºñÈ°¼ºÈ­ÇÔ.
+            // 1ëª…ë°–ì— ë‚¨ì§€ ì•Šì•˜ë‹¤ë©´ ë‹¤ì‹œ ê²Œì„ ì‹œì‘ì„ ë¹„í™œì„±í™”í•¨.
             if (PhotonNetwork.PlayerList.Length == 1)
             {
                 InRoomStatus.text = "Status : Waiting Your Friends...";
@@ -160,12 +160,12 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
             }
         }
 
-        // ¹æ¿¡ ³²Àº ÀÚ½ÅÀÌ Master ClientÀÌ°í ÇöÀç Á¸ÀçÇÏ´Â SceneÀÌ 'Title'ÀÌ ¾Æ´Ñ °æ¿ì.
+        // ë°©ì— ë‚¨ì€ ìì‹ ì´ Master Clientì´ê³  í˜„ì¬ ì¡´ì¬í•˜ëŠ” Sceneì´ 'Title'ì´ ì•„ë‹Œ ê²½ìš°.
         if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().name != "Title")
         {
-            // 1¸í¹Û¿¡ ³²Áö ¾Ê¾Ò´Ù¸é Å¸ÀÌÆ² È­¸éÀ¸·Î µÇµ¹¾Æ°£´Ù.
-            // ÀÌ ¶§ ÀÌ °ÔÀÓ¿ÀºêÁ§Æ® ÀÚÃ¼¸¦ »èÁ¦ÇÑ´Ù.
-            // - Æ÷Åæ ¿¬°áÀ» ²÷°í ´Ù½Ã Title È¯°æ¿¡¼­  awake ÇÔ¼ö·Î È£ÃâµÇ´Â photon¿¡ ¿¬°áÇÑ´Ù.
+            // 1ëª…ë°–ì— ë‚¨ì§€ ì•Šì•˜ë‹¤ë©´ íƒ€ì´í‹€ í™”ë©´ìœ¼ë¡œ ë˜ëŒì•„ê°„ë‹¤.
+            // ì´ ë•Œ ì´ ê²Œì„ì˜¤ë¸Œì íŠ¸ ìì²´ë¥¼ ì‚­ì œí•œë‹¤.
+            // - í¬í†¤ ì—°ê²°ì„ ëŠê³  ë‹¤ì‹œ Title í™˜ê²½ì—ì„œ  awake í•¨ìˆ˜ë¡œ í˜¸ì¶œë˜ëŠ” photonì— ì—°ê²°í•œë‹¤.
             if (PhotonNetwork.PlayerList.Length == 1)
             {
                 SceneManager.LoadScene("Title");
@@ -177,23 +177,23 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        Debug.Log("¹æÀ» ¶°³³´Ï´Ù. : ");
+        Debug.Log("ë°©ì„ ë– ë‚©ë‹ˆë‹¤. : ");
         PhotonNetwork.LeaveRoom();
         SelectedStage = 0;
     }
     public void Disconnect() => PhotonNetwork.Disconnect();
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.Log("Photon Server Á¢¼Ó ²÷±è");
+        Debug.Log("Photon Server ì ‘ì† ëŠê¹€");
     }
 
-    // ½ºÅ×ÀÌÁö¸¦ °í¸¦ ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    // ìŠ¤í…Œì´ì§€ë¥¼ ê³ ë¥¼ ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     public void StageSelect()
     {
         SelectedStage = 1;
     }
 
-    // InRoomPanel¿¡¼­ GameStart ¹öÆ°À» ´©¸£¸é È£ÃâµÇ´Â ÇÔ¼ö
+    // InRoomPanelì—ì„œ GameStart ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     public void GameStart()
     {
         if(SelectedStage == 1)
@@ -203,13 +203,13 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ »õ·Î¿î SceneÀ¸·Î ÀÌµ¿ÇÒ ¶§ ½ÇÇàµÇ´Â Äİ¹é
+    // í”Œë ˆì´ì–´ê°€ ìƒˆë¡œìš´ Sceneìœ¼ë¡œ ì´ë™í•  ë•Œ ì‹¤í–‰ë˜ëŠ” ì½œë°±
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         if (SceneManager.GetActiveScene().name == "Title")
         {
             base.OnPlayerEnteredRoom(newPlayer);
-            Debug.Log("´©±º°¡ ¹æ¿¡ µé¾î¿È : " + newPlayer);
+            Debug.Log("ëˆ„êµ°ê°€ ë°©ì— ë“¤ì–´ì˜´ : " + newPlayer);
             InRoomStatus.text = "Status : Ready to Start";
             GameStartBtn.SetActive(true);
         }
@@ -232,4 +232,3 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         TitleCanvas.SetActive(true);
     }
 }
-

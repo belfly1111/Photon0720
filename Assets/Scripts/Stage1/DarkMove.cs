@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Æ÷Åæ È¯°æ¿¡¼­ÀÇ namespaceÀÌ´Ù.
+// í¬í†¤ í™˜ê²½ì—ì„œì˜ namespaceì´ë‹¤.
 using Photon.Pun;
 using Photon.Realtime;
 using System.Reflection;
