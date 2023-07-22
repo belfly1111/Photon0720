@@ -13,23 +13,17 @@ using UnityEditor;
 
 public class Skillmanager_Stage_1 : MonoBehaviourPun
 {
-    public enum PlayerRole
-    {
-        Dark,
-        Light
-    }
-
-    private PlayerRole PR;
     public PhotonView PV;
 
     [SerializeField] GameObject Light;
     [SerializeField] GameObject Dark;
-
-    [SerializeField] float DashPower = 0;
+    [SerializeField] float DashPower = 500;
     bool skillcool;
 
     void Start()
     {
+        Light = GameObject.Find("Light(Clone)");
+        Dark = GameObject.Find("Dark(Clone)");
         skillcool = false;
         PV = this.GetComponent<PhotonView>();
     }
@@ -38,23 +32,16 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {
         if(Input.GetKey(KeyCode.V))
         {
-            if(Light == null) Light = GameObject.Find("Light(Clone)");
-            if(Dark == null) Dark = GameObject.Find("Dark(Clone)");
-            if(Dark != null && Light != null) UseSkill();
+            UseSkill();
         }
     }
 
-
     #region Nomalregion
-
     //스킬 사용
     public void UseSkill()
     {
-        // 플레이어가 선택한게 없을 경우
-        if (StageUI_1.LocalPlayerRule == -1) return;
-
         // 플레이어가 선택한게 'Light'인 경우
-        else if (StageUI_1.LocalPlayerRule == 1 && !skillcool)
+        if (StageUI_1.LocalPlayerRule == 1 && !skillcool)
         {
             StartCoroutine("Dash");
         }
@@ -81,6 +68,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Debug.Log("Dash코드실행");
         PV.RPC("DASH", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(7f);
+        Light.GetComponent<Rigidbody2D>().gravityScale = 1f;
 
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
@@ -110,15 +98,17 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void DASH()
     {
         SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
-        Rigidbody2D RD = Light.GetComponent<Rigidbody2D>();
+        Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
 
         if (SR.flipX == true)
         {
-            RD.AddForce(new Vector2(DashPower, 20), ForceMode2D.Impulse);
+            RB.gravityScale = 0f;
+            RB.velocity = new Vector2(Light.transform.localScale.x * -24f, 0f);
         }
         else if (SR.flipX == false)
         {
-            RD.AddForce(new Vector2(DashPower, 20), ForceMode2D.Impulse);
+            RB.gravityScale = 0f;
+            RB.velocity = new Vector2(Light.transform.localScale.x * 24f, 0f);
         }
     }
 

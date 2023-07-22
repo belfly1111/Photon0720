@@ -16,12 +16,24 @@ public class StageUI_1 : MonoBehaviourPun
 
     public static int LocalPlayerRule;
 
+
+    public bool LightReady;
+    public bool DarkReady;
+
     private void Awake()
     {
         LocalPlayerRule = -1;
+        LightReady = false;
+        DarkReady = false;  
     }
 
-
+    private void Update()
+    {
+        if(LightReady && DarkReady)
+        {
+            Skillmaneger_Stage_1.SetActive(true);
+        }
+    }
 
     public void setLight()
     {
@@ -36,6 +48,8 @@ public class StageUI_1 : MonoBehaviourPun
         Debug.Log("Light를 선택하셨습니다.");
         PhotonNetwork.Instantiate("Light", new Vector3(-10, 0.5f, 0), Quaternion.identity);
         photonView.RPC("DestroyBtn", RpcTarget.OthersBuffered, LocalPlayerRule);
+        photonView.RPC("setLightReady", RpcTarget.AllBuffered);
+
     }
 
     public void setDark()
@@ -51,6 +65,7 @@ public class StageUI_1 : MonoBehaviourPun
         Debug.Log("Dark를 선택하셨습니다.");
         PhotonNetwork.Instantiate("Dark", new Vector3(10, 0.5f, 0), Quaternion.identity);
         photonView.RPC("DestroyBtn", RpcTarget.OthersBuffered, LocalPlayerRule);
+        photonView.RPC("setDarkReady", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -60,4 +75,15 @@ public class StageUI_1 : MonoBehaviourPun
         else if (AnotherSideRule == 0) DarkBtn.SetActive(false);
     }
 
+    [PunRPC]
+    void setLightReady()
+    {
+        LightReady = true;
+    }
+
+    [PunRPC]
+    void setDarkReady()
+    {
+        DarkReady = true;
+    }
 }
