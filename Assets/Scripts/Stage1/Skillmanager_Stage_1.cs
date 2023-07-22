@@ -17,8 +17,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     private bool isUsingSkill = false;
     public PhotonView PV;
     public Skillmanager_Stage_1 SM;
-    public StageUI_1 SUI1;
-
 
     public enum PlayerRole{
         Dark,
@@ -32,19 +30,15 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         PV = this.GetComponent<PhotonView>();
         SM = this.GetComponent<Skillmanager_Stage_1>();
 
-
         //isDarkCharacter 인지 확인 필요
         if(PV.IsMine){
             //처음에 Null로 고정시킴
             PR = PlayerRole.Null;
-
-            if(SUI1.LocalPlayerRule == 0){
+            if(PV.Owner.NickName == "Dark"){
                 PR = PlayerRole.Dark;
-                Debug.Log("Dark선택");
             }
-            else if(SUI1.LocalPlayerRule == 1){
+            else if(PV.Owner.NickName == "Light"){
                 PR = PlayerRole.Light;
-                Debug.Log("Light선택");
             }
            }
     }
