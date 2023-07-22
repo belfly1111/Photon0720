@@ -190,7 +190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PV: {fileID: 0}
-  SM: {fileID: 0}
+  Light: {fileID: 0}
+  Dark: {fileID: 0}
+  DashPower: 0
 --- !u!114 &9042478861170340959
 MonoBehaviour:
   m_ObjectHideFlags: 0

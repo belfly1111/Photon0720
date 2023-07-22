@@ -40,6 +40,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         {
             if(Light == null) Light = GameObject.Find("Light(Clone)");
             if(Dark == null) Dark = GameObject.Find("Dark(Clone)");
+
+            //Dark 와 Light가 동시에 존재해야 스킬사용
             if(Dark != null && Light != null) UseSkill();
         }
     }
@@ -65,6 +67,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             StartCoroutine("Teleport");
         }
     }
+
     IEnumerator Teleport()
     {
         skillcool = true;
@@ -75,6 +78,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
+
     IEnumerator Dash()
     {
         skillcool = true;
@@ -91,8 +95,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     #region PunRPC
     //Dark의 스킬 구현
     [PunRPC]
-    void TP()
-    {
+    void TP(){
         Vector3 curPos = Dark.transform.position;
         SpriteRenderer SR = Dark.GetComponent<SpriteRenderer>();
         if (SR.flipX == true)
