@@ -1,35 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using Photon.Pun;
-using Photon.Realtime;
-using UnityEditor;
+using System.Collections;
+using UnityEngine;
 
 //빛: 대쉬
 //어둠: 그림자
 //오브젝트: 지형생성, 반사 +) 유리오브젝트는 빛 투과하고 못지나감
 
-
 public class Skillmanager_Stage_1 : MonoBehaviourPun
 {
-    public enum PlayerRole
+    [SerializeField] private PhotonView PV;
+    
+    #region NormalFunction
+    private void CooTimeEnd()
     {
-        Dark,
-        Light
+        Debug.Log("쿨타임 끝");
+    }
+    #endregion
+
+    #region PunRPCFunction
+    [PunRPC]
+    IEnumerator CoolTimeCRT(float cool)
+    {
+        yield return new WaitForSeconds(cool);
+        PV.RPC("CoolTimeEnd", RpcTarget.AllBuffered);
     }
 
-    private PlayerRole PR;
-    public PhotonView PV;
-
-    [SerializeField] GameObject Light;
-    [SerializeField] GameObject Dark;
-
-    [SerializeField] float DashPower = 0;
-    bool skillcool;
-
-    void Start()
+    [PunRPC]
+    private void Teleport()
     {
+<<<<<<< HEAD
         skillcool = false;
         PV = this.GetComponent<PhotonView>();
     }
@@ -71,26 +70,24 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     IEnumerator Teleport()
     {
         skillcool = true;
+=======
+>>>>>>> parent of 7e6ee60 (Shadow 능력생성.)
         Debug.Log("TP코드실행");
-        PV.RPC("TP", RpcTarget.AllBuffered);
-        yield return new WaitForSeconds(7f);
-
-        skillcool = false;
-        Debug.Log("스킬 재사용 가능!");
+        StartCoroutine(CoolTimeCRT(7f));
     }
 
+<<<<<<< HEAD
     IEnumerator Dash()
+=======
+    [PunRPC]
+    private void Dash()
+>>>>>>> parent of 7e6ee60 (Shadow 능력생성.)
     {
-        skillcool = true;
         Debug.Log("Dash코드실행");
-        PV.RPC("DASH", RpcTarget.AllBuffered);
-        yield return new WaitForSeconds(7f);
-
-        skillcool = false;
-        Debug.Log("스킬 재사용 가능!");
+        StartCoroutine(CoolTimeCRT(7f));
     }
-
     #endregion
+<<<<<<< HEAD
 
     #region PunRPC
     //Dark의 스킬 구현
@@ -127,3 +124,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     #endregion
 }
+=======
+}
+>>>>>>> parent of 7e6ee60 (Shadow 능력생성.)

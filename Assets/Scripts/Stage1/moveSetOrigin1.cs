@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
+public class moveSetOrigin1 : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Rigidbody2D RB;
     public SpriteRenderer SR;
@@ -19,7 +19,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         isGround = true;
     }
-
     void Update()
     {
         if (PV.IsMine)
