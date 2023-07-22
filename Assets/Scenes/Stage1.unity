@@ -1483,7 +1483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 502, y: -288}
+  m_AnchoredPosition: {x: 500, y: -300}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &306294534
@@ -1617,7 +1617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -505, y: -289.5}
+  m_AnchoredPosition: {x: -500, y: -300}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416239544
@@ -1835,6 +1835,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PV: {fileID: 1056542401}
+  Light: {fileID: 0}
+  Dark: {fileID: 0}
 --- !u!4 &1056542403
 Transform:
   m_ObjectHideFlags: 0
@@ -2119,7 +2121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LightBtn: {fileID: 416239542}
   DarkBtn: {fileID: 306294532}
-  LocalPlayerRule: 0
+  Skillmaneger_Stage_1: {fileID: 1056542400}
 --- !u!4 &1706836681
 Transform:
   m_ObjectHideFlags: 0

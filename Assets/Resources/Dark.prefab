@@ -104,7 +104,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -127,7 +127,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.024, y: 1.024}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -185,27 +185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3244911331013244391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: b25d127310f92dc428b9a5c16348cfc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PV: {fileID: 0}
-  Light: {fileID: 0}
-  Dark: {fileID: 0}
-  DashPower: 0
---- !u!114 &9042478861170340959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3244911331013244391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955c610174224ba4195cbbf4ce3b844d, type: 3}
-=======
   m_Script: {fileID: 11500000, guid: b66ec4a51598620458e942a3d3b7dc65, type: 3}
->>>>>>> parent of 6a9dc5a (Merge branch 'main' of https://github.com/belfly1111/Photon0720)
   m_Name: 
   m_EditorClassIdentifier: 
   RB: {fileID: 3244911331013244386}

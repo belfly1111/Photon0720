@@ -14,12 +14,7 @@ GameObject:
   - component: {fileID: 4299124305899392685}
   - component: {fileID: 4299124305899392687}
   - component: {fileID: 4299124305899392689}
-<<<<<<< HEAD
   - component: {fileID: 643991742223933327}
-  - component: {fileID: 6898466436908255015}
-=======
-  - component: {fileID: -5071590022140788782}
->>>>>>> parent of 7e6ee60 (Shadow 능력생성.)
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -109,7 +104,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -128,18 +123,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005424276, y: 0.0024998188}
+  m_Offset: {x: 0.0039672703, y: 0.00541389}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.024, y: 1.024}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7396362, y: 1.0271213}
+  m_Size: {x: 0.7075815, y: 0.98049617}
   m_EdgeRadius: 0
 --- !u!114 &4299124305899392687
 MonoBehaviour:
@@ -161,7 +156,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 4299124305899392689}
-  - {fileID: -5071590022140788782}
+  - {fileID: 643991742223933327}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -181,7 +176,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &-5071590022140788782
+--- !u!114 &643991742223933327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,29 +185,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4299124305899392680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955c610174224ba4195cbbf4ce3b844d, type: 3}
+  m_Script: {fileID: 11500000, guid: b66ec4a51598620458e942a3d3b7dc65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RB: {fileID: 4299124305899392684}
   SR: {fileID: 4299124305899392683}
   PV: {fileID: 4299124305899392687}
   isGround: 0
-<<<<<<< HEAD
---- !u!114 &6898466436908255015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299124305899392680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25d127310f92dc428b9a5c16348cfc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PV: {fileID: 0}
-  Light: {fileID: 0}
-  Dark: {fileID: 0}
-  DashPower: 0
-=======
->>>>>>> parent of 6a9dc5a (Merge branch 'main' of https://github.com/belfly1111/Photon0720)
