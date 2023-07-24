@@ -19,7 +19,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] GameObject Light;
     [SerializeField] GameObject Dark;
     [SerializeField] CinemachineVirtualCamera VM;
-    [SerializeField] float DashSpeed = 5;
+    [SerializeField] float DashSpeed = 5f;
 
     bool skillcool;
 
@@ -81,7 +81,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Debug.Log("Dash코드실행");
         PV.RPC("DASH", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(7f);
-        Light.GetComponent<Rigidbody2D>().gravityScale = 3f;
 
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
@@ -106,28 +105,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         }
     }
 
-/*    //Light의 스킬 구현
-    [PunRPC]
-    void DASH()
-    {
-        SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
-        Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
-
-        if (SR.flipX == true)
-        {
-            RB.gravityScale = 0f;
-            RB.velocity = new Vector2(Light.transform.localScale.x * -24f, 0f) * Time.deltaTime;
-        }
-        else if (SR.flipX == false)
-        {
-            RB.gravityScale = 0f;
-            RB.velocity = new Vector2(Light.transform.localScale.x * 24f, 0f) * Time.deltaTime;
-        }
-    }*/
-
     #endregion
 
     #region 바다가 개선한 코드
+    [PunRPC]
     IEnumerator DashCoroutine(Vector3 startPos, Vector3 targetPos, float dashTime)
     {
         float elapsedTime = 0f;
@@ -149,10 +130,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
         Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
         Vector3 SPos = Light.transform.position;
-        Vector3 dashDirection = SR.flipX ? Vector3.left : Vector3.right; // 왼쪽으로 보고 있으면 왼쪽으로 대쉬, 오른쪽으로 보고 있으면 오른쪽으로 대쉬
-        Vector3 TPos = SPos + dashDirection * DashSpeed;
+        Vector3 dashDirection = new Vector3(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"),0);// 왼쪽으로 보고 있으면 왼쪽으로 대쉬, 오른쪽으로 보고 있으면 오른쪽으로 대쉬
+        Vector3 TPos = SPos + dashDirection.normalized * DashSpeed;
 
-        StartCoroutine(DashCoroutine(SPos, TPos, dashTime));
+        PV.RPC("DashCoroutine", RpcTarget.AllBuffered, SPos, TPos, dashTime);
     }
     #endregion
 }
