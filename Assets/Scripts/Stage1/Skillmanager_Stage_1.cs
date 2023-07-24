@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEditor;
+using Cinemachine;
 
 //빛: 대쉬
 //어둠: 그림자
@@ -17,15 +18,27 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     [SerializeField] GameObject Light;
     [SerializeField] GameObject Dark;
-    [SerializeField] float DashPower;
+    [SerializeField] CinemachineVirtualCamera VM;
+    [SerializeField] float DashSpeed = 5;
+
     bool skillcool;
 
     void Start()
     {
         Light = GameObject.Find("Light(Clone)");
         Dark = GameObject.Find("Dark(Clone)");
+
         skillcool = false;
         PV = this.GetComponent<PhotonView>();
+
+        if(StageUI_1.LocalPlayerRule == 1)
+        {
+            VM.Follow = Light.GetComponentInChildren<Transform>();
+        }
+        else if (StageUI_1.LocalPlayerRule == 0)
+        {
+            VM.Follow = Dark.GetComponentInChildren<Transform>();
+        }
     }
 
     void Update()
@@ -68,23 +81,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Debug.Log("Dash코드실행");
         PV.RPC("DASH", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(7f);
+        Light.GetComponent<Rigidbody2D>().gravityScale = 3f;
 
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
-    IEnumerator DashCoroutine(Vector3 startPos, Vector3 targetPos, float dashTime)
-{
-    float elapsedTime = 0f;
-
-    while (elapsedTime < dashTime)
-    {
-        Light.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / dashTime);
-        elapsedTime += Time.deltaTime;
-        yield return null;
-    }
-
-    Light.transform.position = targetPos;
-}
 
     #endregion
 
@@ -105,20 +106,53 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         }
     }
 
-    //Light의 스킬 구현
+/*    //Light의 스킬 구현
     [PunRPC]
     void DASH()
     {
-        float dashTime = 0.2f;
+        SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
+        Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
+
+        if (SR.flipX == true)
+        {
+            RB.gravityScale = 0f;
+            RB.velocity = new Vector2(Light.transform.localScale.x * -24f, 0f) * Time.deltaTime;
+        }
+        else if (SR.flipX == false)
+        {
+            RB.gravityScale = 0f;
+            RB.velocity = new Vector2(Light.transform.localScale.x * 24f, 0f) * Time.deltaTime;
+        }
+    }*/
+
+    #endregion
+
+    #region 바다가 개선한 코드
+    IEnumerator DashCoroutine(Vector3 startPos, Vector3 targetPos, float dashTime)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < dashTime)
+        {
+            Light.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / dashTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Light.transform.position = targetPos;
+    }
+
+    [PunRPC]
+    void DASH()
+    {
+        float dashTime = 0.5f;
         SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
         Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
         Vector3 SPos = Light.transform.position;
-        
         Vector3 dashDirection = SR.flipX ? Vector3.left : Vector3.right; // 왼쪽으로 보고 있으면 왼쪽으로 대쉬, 오른쪽으로 보고 있으면 오른쪽으로 대쉬
-        Vector3 TPos = SPos + dashDirection*DashPower;
+        Vector3 TPos = SPos + dashDirection * DashSpeed;
 
         StartCoroutine(DashCoroutine(SPos, TPos, dashTime));
     }
-
     #endregion
 }

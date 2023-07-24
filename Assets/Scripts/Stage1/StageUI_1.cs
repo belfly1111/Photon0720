@@ -7,12 +7,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Reflection;
 using UnityEditor;
+using Cinemachine;
 
 public class StageUI_1 : MonoBehaviourPun
 {
     [SerializeField] GameObject LightBtn;
     [SerializeField] GameObject DarkBtn;
     [SerializeField] GameObject Skillmaneger_Stage_1;
+
 
     public static int LocalPlayerRule;
 
@@ -46,7 +48,8 @@ public class StageUI_1 : MonoBehaviourPun
         LocalPlayerRule = 1;
 
         Debug.Log("Light를 선택하셨습니다.");
-        PhotonNetwork.Instantiate("Light", new Vector3(-10, 0.5f, 0), Quaternion.identity);
+
+        PhotonNetwork.Instantiate("Light", new Vector3(-1, 1, 0), Quaternion.identity);
         photonView.RPC("DestroyBtn", RpcTarget.OthersBuffered, LocalPlayerRule);
         photonView.RPC("setLightReady", RpcTarget.AllBuffered);
 
@@ -63,7 +66,8 @@ public class StageUI_1 : MonoBehaviourPun
         LocalPlayerRule = 0;
 
         Debug.Log("Dark를 선택하셨습니다.");
-        PhotonNetwork.Instantiate("Dark", new Vector3(10, 0.5f, 0), Quaternion.identity);
+
+        PhotonNetwork.Instantiate("Dark", new Vector3(1, 1, 0), Quaternion.identity);
         photonView.RPC("DestroyBtn", RpcTarget.OthersBuffered, LocalPlayerRule);
         photonView.RPC("setDarkReady", RpcTarget.AllBuffered);
     }

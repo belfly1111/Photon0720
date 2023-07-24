@@ -45,8 +45,11 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     public GameObject TitleCanvas;
     private static PhotonManeger instance;
 
+
     void Awake()
     {
+        Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true);
+
         SelectedStage = 0;
         Light = false;
         Dark = false;
