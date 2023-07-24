@@ -72,6 +72,19 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
+    IEnumerator DashCoroutine(Vector3 startPos, Vector3 targetPos, float dashTime)
+{
+    float elapsedTime = 0f;
+
+    while (elapsedTime < dashTime)
+    {
+        Light.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / dashTime);
+        elapsedTime += Time.deltaTime;
+        yield return null;
+    }
+
+    Light.transform.position = targetPos;
+}
 
     #endregion
 
@@ -97,8 +110,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void DASH()
     {
         float dashTime = 0.2f;
-        float elapsedTime = 0f;
-        // Light 오브젝트의 SpriteRenderer 컴포넌트를 이용하여 현재 방향을 확인합니다.
         SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
         Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
         Vector3 SPos = Light.transform.position;
@@ -106,11 +117,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Vector3 dashDirection = SR.flipX ? Vector3.left : Vector3.right; // 왼쪽으로 보고 있으면 왼쪽으로 대쉬, 오른쪽으로 보고 있으면 오른쪽으로 대쉬
         Vector3 TPos = SPos + dashDirection*DashPower;
 
-        while(elapsedTime < dashTime){
-            Light.transform.position = Vector3.Lerp(SPos, TPos, elapsedTime / dashTime);
-            elapsedTime += Time.deltaTime;
-        }
-        Light.transform.position = TPos;
+        StartCoroutine(DashCoroutine(SPos, TPos, dashTime));
     }
 
     #endregion
