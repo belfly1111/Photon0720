@@ -17,7 +17,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     [SerializeField] GameObject Light;
     [SerializeField] GameObject Dark;
-    [SerializeField] float DashPower = 500;
+    [SerializeField] float DashPower;
     bool skillcool;
 
     void Start()
@@ -68,7 +68,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Debug.Log("Dash코드실행");
         PV.RPC("DASH", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(7f);
-        Light.GetComponent<Rigidbody2D>().gravityScale = 1f;
 
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
@@ -97,19 +96,21 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [PunRPC]
     void DASH()
     {
+        float dashTime = 0.2f;
+        float elapsedTime = 0f;
+        // Light 오브젝트의 SpriteRenderer 컴포넌트를 이용하여 현재 방향을 확인합니다.
         SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
         Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
+        Vector3 SPos = Light.transform.position;
+        
+        Vector3 dashDirection = SR.flipX ? Vector3.left : Vector3.right; // 왼쪽으로 보고 있으면 왼쪽으로 대쉬, 오른쪽으로 보고 있으면 오른쪽으로 대쉬
+        Vector3 TPos = SPos + dashDirection*DashPower;
 
-        if (SR.flipX == true)
-        {
-            RB.gravityScale = 0f;
-            RB.velocity = new Vector2(Light.transform.localScale.x * -24f, 0f);
+        while(elapsedTime < dashTime){
+            Light.transform.position = Vector3.Lerp(SPos, TPos, elapsedTime / dashTime);
+            elapsedTime += Time.deltaTime;
         }
-        else if (SR.flipX == false)
-        {
-            RB.gravityScale = 0f;
-            RB.velocity = new Vector2(Light.transform.localScale.x * 24f, 0f);
-        }
+        Light.transform.position = TPos;
     }
 
     #endregion

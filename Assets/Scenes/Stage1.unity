@@ -1987,7 +1987,7 @@ MonoBehaviour:
   PV: {fileID: 1056542401}
   Light: {fileID: 0}
   Dark: {fileID: 0}
-  DashPower: 500
+  DashPower: 20
 --- !u!4 &1056542403
 Transform:
   m_ObjectHideFlags: 0
