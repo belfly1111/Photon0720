@@ -12,6 +12,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public PhotonView PV;
 
 
+
     public bool isGround;
     Vector3 curPos;
 
