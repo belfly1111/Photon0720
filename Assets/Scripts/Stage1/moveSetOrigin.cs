@@ -34,13 +34,13 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             RB.velocity = new Vector2(6 * axis, RB.velocity.y);
 
             if (axis != 0) PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis); // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
-            
+
             // ↑ 점프, 바닥체크
             if (Input.GetKeyDown(KeyCode.Space) && isGround) PV.RPC("JumpRPC", RpcTarget.All);
         }
         // IsMine이 아닌 것들은 부드럽게 위치 동기화
-        //else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
-        //else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+        else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
+        else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
     }
 
 
@@ -55,7 +55,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         isGround = false;
         RB.velocity = Vector2.zero;
-        RB.AddForce(Vector2.up * 700);
+        RB.AddForce(Vector2.up * 350);
     }
 
 
@@ -69,7 +69,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(transform.position);
         }
-        else
+        else if(stream.IsReading)
         {
             curPos = (Vector3)stream.ReceiveNext();
         }

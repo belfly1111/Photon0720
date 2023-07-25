@@ -97,11 +97,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         SpriteRenderer SR = Dark.GetComponent<SpriteRenderer>();
         if (SR.flipX == true)
         {
-            Dark.transform.position = curPos + new Vector3(-70f, 0, 0);
+            Dark.transform.position = curPos + new Vector3(-7f, 0, 0);
         }
         else if(SR.flipX == false)
         {
-            Dark.transform.position = curPos + new Vector3(70f, 0, 0);
+            Dark.transform.position = curPos + new Vector3(7f, 0, 0);
         }
     }
 
@@ -136,4 +136,5 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         PV.RPC("DashCoroutine", RpcTarget.AllBuffered, SPos, TPos, dashTime);
     }
     #endregion
+
 }
