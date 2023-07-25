@@ -6,6 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEditor;
 using Cinemachine;
+using System;
 
 //빛: 대쉬
 //어둠: 그림자
@@ -22,6 +23,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] float DashSpeed = 5f;
 
     bool skillcool;
+    private float dashingPower = 48f;
+    private float dashingTime = 0.2f;
 
     void Start()
     {
@@ -70,7 +73,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = true;
         Debug.Log("TP코드실행");
         PV.RPC("TP", RpcTarget.AllBuffered);
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(3f);
 
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
@@ -80,12 +83,26 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = true;
         Debug.Log("Dash코드실행");
         PV.RPC("DASH", RpcTarget.AllBuffered);
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(3f);
 
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
 
+/*    [PunRPC]
+    IEnumerator DashCoroutine(Vector3 startPos, Vector3 targetPos, float dashTime)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < dashTime)
+        {
+            Light.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / dashTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Light.transform.position = targetPos;
+    }*/
     #endregion
 
     #region PunRPC
@@ -105,35 +122,28 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         }
     }
 
-    #endregion
-
-    #region 바다가 개선한 코드
-    [PunRPC]
-    IEnumerator DashCoroutine(Vector3 startPos, Vector3 targetPos, float dashTime)
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < dashTime)
-        {
-            Light.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / dashTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        Light.transform.position = targetPos;
-    }
-
     [PunRPC]
     void DASH()
     {
-        float dashTime = 0.5f;
-        SpriteRenderer SR = Light.GetComponent<SpriteRenderer>();
-        Rigidbody2D RB = Light.GetComponent<Rigidbody2D>();
-        Vector3 SPos = Light.transform.position;
-        Vector3 dashDirection = new Vector3(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"),0);// 왼쪽으로 보고 있으면 왼쪽으로 대쉬, 오른쪽으로 보고 있으면 오른쪽으로 대쉬
-        Vector3 TPos = SPos + dashDirection.normalized * DashSpeed;
+        //float dashTime = 0.5f;
+        //Vector3 SPos = Light.transform.position;
+        //Vector3 dashDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);// 왼쪽으로 보고 있으면 왼쪽으로 대쉬, 오른쪽으로 보고 있으면 오른쪽으로 대쉬
+        //Vector3 TPos = SPos + dashDirection.normalized * DashSpeed;
+        //PV.RPC("DashCoroutine", RpcTarget.AllBuffered, SPos, TPos, dashTime);
 
-        PV.RPC("DashCoroutine", RpcTarget.AllBuffered, SPos, TPos, dashTime);
+        Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
+        Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        StartCoroutine(newDash(rb, dir));
+    }
+
+    
+    IEnumerator newDash(Rigidbody2D rb,Vector2 dir)
+    {
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = dir * dashingPower;
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
     }
     #endregion
 

@@ -48,6 +48,7 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
 
     void Awake()
     {
+        Application.targetFrameRate = 144;
         Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true);
 
         SelectedStage = 0;
