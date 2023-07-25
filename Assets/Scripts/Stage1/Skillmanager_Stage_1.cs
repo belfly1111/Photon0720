@@ -20,18 +20,15 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] GameObject Light;
     [SerializeField] GameObject Dark;
     [SerializeField] CinemachineVirtualCamera VM;
-    [SerializeField] float DashSpeed = 5f;
-
-    bool skillcool;
-    private float dashingPower = 48f;
-    private float dashingTime = 0.2f;
+    [SerializeField] private float dashingPower = 100f;
+    [SerializeField] private float dashingTime = 2f;
+    public bool skillcool = false;
 
     void Start()
     {
         Light = GameObject.Find("Light(Clone)");
         Dark = GameObject.Find("Dark(Clone)");
 
-        skillcool = false;
         PV = this.GetComponent<PhotonView>();
 
         if(StageUI_1.LocalPlayerRule == 1)
@@ -82,6 +79,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {
         skillcool = true;
         Debug.Log("Dash코드실행");
+
         PV.RPC("DASH", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(3f);
 
@@ -89,11 +87,14 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Debug.Log("스킬 재사용 가능!");
     }
 
-    IEnumerator newDash(Rigidbody2D rb, Vector2 dir)
+    IEnumerator newDash(Vector2 dir)
     {
+        Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = dir * dashingPower;
+
+        rb.velocity = Vector2.zero;
+        rb.velocity = dir.normalized * dashingPower;
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
     }
@@ -120,9 +121,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [PunRPC]
     void DASH()
     {
-        Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
-        Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        StartCoroutine(newDash(rb, dir));
+        Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        StartCoroutine(newDash(dir));
     }
     #endregion
 
