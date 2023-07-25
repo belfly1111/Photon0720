@@ -20,8 +20,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] GameObject Light;
     [SerializeField] GameObject Dark;
     [SerializeField] CinemachineVirtualCamera VM;
-    [SerializeField] private float dashingPower = 100f;
-    [SerializeField] private float dashingTime = 2f;
+    [SerializeField] private float dashingPower = 10f;
+    [SerializeField] private float dashingTime = 0.2f;
     public bool skillcool = false;
 
     void Start()
@@ -92,9 +92,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-
-        rb.velocity = Vector2.zero;
-        rb.velocity = dir.normalized * dashingPower;
+        rb.velocity += new Vector2(dir.normalized.x * dashingPower, dir.normalized.y * dashingPower);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
     }
@@ -121,6 +119,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [PunRPC]
     void DASH()
     {
+
         Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         StartCoroutine(newDash(dir));
     }
