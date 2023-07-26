@@ -49,9 +49,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             transform.rotation = Quaternion.Lerp(transform.rotation, currRot, Time.deltaTime * 10f);
         }
 
-        // IsMine이 아닌 것들은 부드럽게 위치 동기화
-        //else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
-        //else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
     }
 
     [PunRPC]
@@ -65,10 +62,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         isGround = false;
         RB.velocity = new Vector2(RB.velocity.x, jumpSpeed);
-        
-        // 기존 사용 코드
-        //RB.velocity = Vector2.zero;
-        //RB.AddForce(Vector2.up * 350);
     }
 
 
@@ -92,15 +85,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             currRot = (Quaternion)stream.ReceiveNext();
         }
     }
-
-/*    //isground 바닥 체크 - 기존 사용하던 코드
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isGround = true;
-        }
-    }*/
 
     //isground 바닥 체크2 - 그러나 Shadow_Animation_Controller.cs 는 여전히 OnCollisionEnter 방식을 사용중.
     private bool IsGrounded()

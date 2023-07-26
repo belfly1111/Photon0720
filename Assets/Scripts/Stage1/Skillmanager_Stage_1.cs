@@ -20,7 +20,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] GameObject Dark;
     [SerializeField] CinemachineVirtualCamera VM;
     [SerializeField] private float dashingPower = 10f;
-    [SerializeField] private float dashingTime = 0.3f;
+    [SerializeField] private float dashingTime = 0.2f;
     public bool skillcool = false;
 
     void Start()
@@ -85,7 +85,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
-
+/*
     IEnumerator newDash(Vector2 dir)
     {
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
@@ -95,6 +95,15 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         rb.velocity += new Vector2(dir.normalized.x * dashingPower, dir.normalized.y * dashingPower);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
+    }
+*/
+    IEnumerator LerpDash(Vector2 dir){
+        Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
+        Vector2 DPos = rb.position + dir.normalized * dashingPower;
+        Vector2 TPos = Vector2.Lerp(rb.position, DPos, dashingTime);
+        rb.position = TPos;
+        yield return new WaitForSeconds(dashingTime);
+
     }
     #endregion
 
@@ -120,7 +129,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void DASH()
     {
         Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        StartCoroutine(newDash(dir));
+        StartCoroutine(LerpDash(dir));
     }
     #endregion
 
