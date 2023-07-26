@@ -9,7 +9,14 @@ public class Shadow_AnimationController : MonoBehaviour
     private Animator Animator;
     public SpriteRenderer SR;
     public PhotonView PV;
+
     private float axis;
+    public bool isGround;
+
+    private void Awake()
+    {
+        isGround = true;
+    }
 
     void Start()
     {
@@ -20,20 +27,21 @@ public class Shadow_AnimationController : MonoBehaviour
 
     void Update()
     {
-        // 별다른 입력이 없으면 항상 idle 상태이다.
-        // 또한 Walking 상태도 아니다.
-        Animator.SetBool("isIdle", true);
-        Animator.SetBool("isWalking", false);
         if (PV.IsMine)
         {
             axis = Input.GetAxisRaw("Horizontal");
-            // 가로축에 어떠한 입력이 있었을 때, isWalking 상태를 활성화한다.
             if (axis != 0)
             {
                 PV.RPC("WalkingAnimationRPC", RpcTarget.AllBuffered);
             }
+            else
+            {
+                Animator.SetBool("isWalking", false);
+                Animator.SetBool("isIdle", true);
+            }
+
             // 점프 입력이 있었을 때, isJumping 상태를 활성화한다.
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && isGround)
             {
                 PV.RPC("JumpAnimationRPC", RpcTarget.AllBuffered);
             }
@@ -44,6 +52,7 @@ public class Shadow_AnimationController : MonoBehaviour
     void WalkingAnimationRPC()
     {
         Animator.SetBool("isWalking", true);
+        Animator.SetBool("isIdle", false);
     }
 
     [PunRPC]

@@ -11,8 +11,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public SpriteRenderer SR;
     public PhotonView PV;
 
-
-
     public bool isGround;
     Vector3 curPos;
 
@@ -34,7 +32,8 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             float axis = Input.GetAxisRaw("Horizontal");
             RB.velocity = new Vector2(3 * axis, RB.velocity.y);
 
-            if (axis != 0) PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis); // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
+            if (axis != 0) PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
+            // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
 
             // ↑ 점프, 바닥체크
             if (Input.GetKeyDown(KeyCode.Space) && isGround) PV.RPC("JumpRPC", RpcTarget.All);
@@ -49,7 +48,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         //else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
         //else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
     }
-
 
     [PunRPC]
     void FlipXRPC(float axis)

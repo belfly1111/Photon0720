@@ -203,9 +203,9 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -747812626717378141}
   - {fileID: 4418450586991827684}
   - {fileID: 5129419667822447535}
+  - {fileID: -747812626717378141}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SR: {fileID: 0}
   PV: {fileID: 0}
+  isGround: 0
 --- !u!1 &3334920698043371835
 GameObject:
   m_ObjectHideFlags: 0
