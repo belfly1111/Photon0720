@@ -11,6 +11,11 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public SpriteRenderer SR;
     public PhotonView PV;
 
+    // 정밀한 점프를 위해 추가한 변수
+    [SerializeField] private BoxCollider2D RB_groundCheck;
+    [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] int jumpSpeed = 5;
+
     public bool isGround;
     Vector3 curPos;
 
@@ -36,7 +41,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
 
             // ↑ 점프, 바닥체크
-            if (Input.GetKeyDown(KeyCode.Space) && isGround) PV.RPC("JumpRPC", RpcTarget.All);
+            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) PV.RPC("JumpRPC", RpcTarget.All);
         }
         else
         {
@@ -59,8 +64,11 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     void JumpRPC()
     {
         isGround = false;
-        RB.velocity = Vector2.zero;
-        RB.AddForce(Vector2.up * 350);
+        RB.velocity = new Vector2(RB.velocity.x, jumpSpeed);
+        
+        // 기존 사용 코드
+        //RB.velocity = Vector2.zero;
+        //RB.AddForce(Vector2.up * 350);
     }
 
 
@@ -85,13 +93,18 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //isground 바닥 체크
+/*    //isground 바닥 체크 - 기존 사용하던 코드
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             isGround = true;
         }
-    }
+    }*/
 
+    //isground 바닥 체크2 - 그러나 Shadow_Animation_Controller.cs 는 여전히 OnCollisionEnter 방식을 사용중.
+    private bool IsGrounded()
+    {
+        return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
+    }
 }

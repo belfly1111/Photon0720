@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4299124305899392683}
   - component: {fileID: 4299124305899392684}
   - component: {fileID: 4299124305899392685}
-  - component: {fileID: 7885896314700530791}
   - component: {fileID: 7794037552734502175}
   - component: {fileID: 4299124305899392687}
   - component: {fileID: -6541629967416151487}
@@ -108,7 +107,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -140,29 +139,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.60694224, y: 0.93730277}
   m_EdgeRadius: 0
---- !u!68 &7885896314700530791
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299124305899392680}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.15808433, y: 0.048962384}
-  - {x: 0.035161503, y: 0.00046375394}
-  - {x: 0.21385787, y: 0.048962384}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!95 &7794037552734502175
 Animator:
   serializedVersion: 5
@@ -257,6 +233,11 @@ MonoBehaviour:
   RB: {fileID: 4299124305899392684}
   SR: {fileID: 4299124305899392683}
   PV: {fileID: 4299124305899392687}
+  RB_groundCheck: {fileID: 4299124305899392685}
+  jumpableGround:
+    serializedVersion: 2
+    m_Bits: 512
+  jumpSpeed: 5
   isGround: 0
 --- !u!1 &8886658898591876363
 GameObject:

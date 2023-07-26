@@ -12,7 +12,6 @@ using System;
 //어둠: 그림자
 //오브젝트: 지형생성, 반사 +) 유리오브젝트는 빛 투과하고 못지나감
 
-
 public class Skillmanager_Stage_1 : MonoBehaviourPun
 {
     public PhotonView PV;
@@ -21,7 +20,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] GameObject Dark;
     [SerializeField] CinemachineVirtualCamera VM;
     [SerializeField] private float dashingPower = 10f;
-    [SerializeField] private float dashingTime = 0.2f;
+    [SerializeField] private float dashingTime = 0.3f;
     public bool skillcool = false;
 
     void Start()
@@ -92,6 +91,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        rb.velocity = Vector2.zero;
         rb.velocity += new Vector2(dir.normalized.x * dashingPower, dir.normalized.y * dashingPower);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
@@ -119,7 +119,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [PunRPC]
     void DASH()
     {
-
         Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         StartCoroutine(newDash(dir));
     }
