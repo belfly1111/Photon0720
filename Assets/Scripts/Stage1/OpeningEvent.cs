@@ -7,28 +7,48 @@ using TMPro;
 
 public class OpeningEvent : MonoBehaviour
 {
-    string OriginText;
+    string[] OriginText = new string[3];
     public TMPro.TMP_Text OpeningText;
+    [SerializeField] int dialogNum = 0;
+    [SerializeField] Image BlackImg;
+
+    bool isDialoging = false;
+
 
     void Start()
     {
-        OriginText = "이봐...! 일어나봐...!";
-        OpeningText.text = OriginText;
         OpeningText.text = "";
-
-        
-
-        StartCoroutine(TypingRoutine());
+        OriginText[0] = "...야...!";
+        OriginText[1] = "...야...일어...!";
+        OriginText[2] = "야! 일어나봐!";
     }
 
-    IEnumerator TypingRoutine()
+    private void Update()
     {
-        int typingLength = OriginText.GetTypingLength();
+        // 스페이스를 눌러 대화 진행.
+        if(Input.GetKey(KeyCode.Space) && !isDialoging)
+        {
+            if (dialogNum > 2)
+            {
+                Destroy(BlackImg);
+                gameObject.SetActive(false);
+            }
+                StartCoroutine(TypingRoutine(dialogNum));
+            dialogNum++;
+            OpeningText.text = "";
+        }
+    }
+
+    IEnumerator TypingRoutine(int dialogNum)
+    {
+        isDialoging = true;
+        int typingLength = OriginText[dialogNum].GetTypingLength();
 
         for(int index = 0; index <= typingLength; index++)
         {
-            OpeningText.text = OriginText.Typing(index);
+            OpeningText.text = OriginText[dialogNum].Typing(index);
             yield return new WaitForSeconds(0.05f);
         }
+        isDialoging = false;
     }
 }
