@@ -12,9 +12,6 @@ public class UImaneger : MonoBehaviour
     public GameObject InRoomPanel;
     public GameObject WaitGamePanel;
 
-    [SerializeField]
-    int RotationSpeed;
-
     [Header("StartPanel")]
     public TMPro.TMP_Text FindRoomStatus;
 
@@ -26,6 +23,8 @@ public class UImaneger : MonoBehaviour
 
     [Header("WaitGamePanel")]
     public Image LoadingImg_2;
+
+    [SerializeField] int RotationSpeed;
 
     private void Awake()
     {
@@ -48,6 +47,7 @@ public class UImaneger : MonoBehaviour
     public void GameStart()
     {
         FindRoomStatus.text = "FindRoomStatus";
+
         StartPanel.SetActive(true);
     }
     public void Setting()
