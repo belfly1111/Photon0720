@@ -89,14 +89,29 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     IEnumerator LerpDash(Vector2 dir){
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         Vector2 DPos = rb.position + dir.normalized * dashingPower;
+
+        //layerMask에서 플레이어 레이어 삭제
+        int layerMask = ~(1 << LayerMask.NameToLayer("Player"));
+        //레이케스트 중심이 (0,0)일 경우 발에서 레이케스트를 쏘기 때문에 지하로 들어가는 것을 Vector2(0,0.5f)를 추가함으로 정 가운데서 레이케스트를 쏨
+        RaycastHit2D RCh = Physics2D.Raycast(rb.position + new Vector2(0,0.5f), dir.normalized, dir.normalized.magnitude * dashingPower, layerMask);
+
+        //레이캐스트를 통해 충돌한 경우 그 위치까지 설정
+        if (RCh.collider != null)
+        {
+            DPos = RCh.point - new Vector2(0,0.5f);
+            // 캐릭터의 콜라이더의 크기만큼 충돌후 위치를 수정함
+            DPos.x -= dir.x * 0.375f;
+            DPos.y -= dir.y * 0.5f;
+        }
+
         float elapsedTime = 0f;
         while (elapsedTime < dashingTime){
             rb.position = Vector2.Lerp(rb.position, DPos, elapsedTime / dashingTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        rb.position = DPos;
 
+        rb.position = DPos;
     }
     #endregion
 

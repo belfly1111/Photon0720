@@ -70139,7 +70139,7 @@ MonoBehaviour:
   Light: {fileID: 0}
   Dark: {fileID: 0}
   VM: {fileID: 331720999}
-  dashingPower: 10
+  dashingPower: 4
   dashingTime: 0.2
   skillcool: 0
 --- !u!4 &1720648676
