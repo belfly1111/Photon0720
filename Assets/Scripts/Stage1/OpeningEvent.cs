@@ -8,16 +8,21 @@ using TMPro;
 public class OpeningEvent : MonoBehaviour
 {
     string[] OriginText = new string[3];
-    public TMPro.TMP_Text OpeningText;
+    [SerializeField] TMPro.TMP_Text OpeningText;
     [SerializeField] int dialogNum = 0;
+
     [SerializeField] Image BlackImg;
+    [SerializeField] Image NextIcon;
+
+    [SerializeField] GameObject SelectLightBtn;
+    [SerializeField] GameObject SelectShadowBtn;
+    
 
     bool isDialoging = false;
 
-
     void Start()
     {
-        OpeningText.text = "";
+        OpeningText.text = "...";
         OriginText[0] = "...야...!";
         OriginText[1] = "...야...일어...!";
         OriginText[2] = "야! 일어나봐!";
@@ -30,10 +35,15 @@ public class OpeningEvent : MonoBehaviour
         {
             if (dialogNum > 2)
             {
-                Destroy(BlackImg);
+                SelectLightBtn.SetActive(true);
+                SelectShadowBtn.SetActive(true);
+
+                BlackImg.enabled = false;
+                NextIcon.enabled = false;
+
                 gameObject.SetActive(false);
             }
-                StartCoroutine(TypingRoutine(dialogNum));
+            StartCoroutine(TypingRoutine(dialogNum));
             dialogNum++;
             OpeningText.text = "";
         }
