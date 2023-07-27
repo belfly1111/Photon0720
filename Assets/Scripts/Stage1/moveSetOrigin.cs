@@ -9,7 +9,11 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Rigidbody2D RB;
     public SpriteRenderer SR;
+    public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
     public PhotonView PV;
+
+    //상호작용하는 인스턴스의 정보를 저장
+    private InteractiveObject _interactiveObject;
 
     // 정밀한 점프를 위해 추가한 변수
     [SerializeField] private BoxCollider2D RB_groundCheck;
@@ -42,6 +46,12 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
             // ↑ 점프, 바닥체크
             if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) PV.RPC("JumpRPC", RpcTarget.All);
+
+            //상호작용
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Interaction();
+            }
         }
         else
         {
@@ -90,5 +100,15 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
+    }
+    private void Interaction()
+    {
+        //만일 상호작용할 애들이 없다면 반환한다.
+        if(_interactiveObject == null)
+        {
+            return;
+        }
+
+        _interactiveObject.Interaction();
     }
 }
