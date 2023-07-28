@@ -80,7 +80,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         }
 
     }
-    #endregion
 
     //Dark 텔레포트 (구현중)
     #region  DarkSkill
