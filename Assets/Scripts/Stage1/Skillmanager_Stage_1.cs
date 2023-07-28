@@ -29,7 +29,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
         PV = this.GetComponent<PhotonView>();
 
-        if(PhotonManeger.LocalPlayerRule == 1)
+        if (PhotonManeger.LocalPlayerRule == 1)
         {
             VM.Follow = Light.GetComponentInChildren<Transform>();
         }
@@ -41,7 +41,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.V))
+        if (Input.GetKey(KeyCode.V))
         {
             UseSkill();
         }
@@ -63,11 +63,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             StartCoroutine("Teleport");
         }
     }
-<<<<<<< Updated upstream
+
+    #endregion
 
     //Dark 텔레포트 (구현중)
     #region  DarkSkill
-
     IEnumerator Teleport()
     {
         skillcool = true;
@@ -79,9 +79,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Debug.Log("스킬 재사용 가능!");
     }
 
-    IEnumerator RCTeleport(){
+    IEnumerator RCTeleport()
+    {
         //TP 실행시 
-        Rigidbody2D rb = Dark.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = Shadow.GetComponent<Rigidbody2D>();
         yield return new WaitForSeconds(3f);
 
     }
@@ -90,8 +91,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     //Light 대쉬 (유리라는 오브젝트를 통해 추가적 대쉬를 할건지 결정 필요)
     #region LightSkill
-=======
->>>>>>> Stashed changes
     IEnumerator Dash()
     {
         skillcool = true;
@@ -103,33 +102,31 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
-    IEnumerator Teleport()
-    {
-        skillcool = true;
-        Debug.Log("TP코드실행");
-        PV.RPC("TP", RpcTarget.AllBuffered);
-        yield return new WaitForSeconds(3f);
+    // 구버전 위치 지정 텔레포트
+    /*    IEnumerator Teleport()
+        {
+            skillcool = true;
+            Debug.Log("TP코드실행");
+            PV.RPC("TP", RpcTarget.AllBuffered);
+            yield return new WaitForSeconds(3f);
+            skillcool = false;
+            Debug.Log("스킬 재사용 가능!");
+        }*/
 
-<<<<<<< Updated upstream
-    
-=======
-        skillcool = false;
-        Debug.Log("스킬 재사용 가능!");
-    }
->>>>>>> Stashed changes
-    IEnumerator LerpDash(Vector2 dir){
+    IEnumerator LerpDash(Vector2 dir)
+    {
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         Vector2 DPos = rb.position + dir.normalized * dashingPower;
 
         //layerMask에서 플레이어 레이어 삭제
         int layerMask = ~(1 << LayerMask.NameToLayer("Player"));
         //레이케스트 중심이 (0,0)일 경우 발에서 레이케스트를 쏘기 때문에 지하로 들어가는 것을 Vector2(0,0.5f)를 추가함으로 정 가운데서 레이케스트를 쏨
-        RaycastHit2D RCh = Physics2D.Raycast(rb.position + new Vector2(0,0.5f), dir.normalized, dir.normalized.magnitude * dashingPower, layerMask);
+        RaycastHit2D RCh = Physics2D.Raycast(rb.position + new Vector2(0, 0.5f), dir.normalized, dir.normalized.magnitude * dashingPower, layerMask);
 
         //레이캐스트를 통해 충돌한 경우 그 위치까지 설정
         if (RCh.collider != null)
         {
-            DPos = RCh.point - new Vector2(0,0.5f);
+            DPos = RCh.point - new Vector2(0, 0.5f);
             // 캐릭터의 콜라이더의 크기만큼 충돌후 위치를 수정함
             DPos.x -= dir.x * 0.375f;
             DPos.y -= dir.y * 0.5f;
@@ -137,7 +134,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
         //Lerp구문을 이용한 대쉬 모션 구현 
         float elapsedTime = 0f;
-        while (elapsedTime < dashingTime){
+        while (elapsedTime < dashingTime)
+        {
             rb.position = Vector2.Lerp(rb.position, DPos, elapsedTime / dashingTime);
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -146,18 +144,14 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         rb.position = DPos;
     }
     #endregion
-    
-    #endregion
+
 
     #region PunRPC
     //Dark의 스킬 구현
     [PunRPC]
     void TP()
-<<<<<<< Updated upstream
-    {   
-        StartCoroutine(RCTeleport());
-=======
     {
+        StartCoroutine(RCTeleport());
         Vector3 curPos = Shadow.transform.position;
         SpriteRenderer SR = Shadow.GetComponent<SpriteRenderer>();
 
@@ -165,11 +159,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         {
             Shadow.transform.position = curPos + new Vector3(-7f, 0, 0);
         }
-        else if(SR.flipX == false)
+        else if (SR.flipX == false)
         {
             Shadow.transform.position = curPos + new Vector3(7f, 0, 0);
         }
->>>>>>> Stashed changes
     }
 
     [PunRPC]
@@ -179,5 +172,4 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         StartCoroutine(LerpDash(dir));
     }
     #endregion
-
 }
