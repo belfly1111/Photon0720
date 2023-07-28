@@ -22,6 +22,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] private float dashingPower = 4f;
     [SerializeField] private float dashingTime = 0.2f;
     public bool skillcool = false;
+    public bool passivecool = true;
+    public bool canDash = true;
 
     void Start()
     {
@@ -57,7 +59,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public void UseSkill()
     {
         // 플레이어가 선택한게 'Light'인 경우
-        if (PhotonManeger.LocalPlayerRule == 1 && !skillcool)
+        if (PhotonManeger.LocalPlayerRule == 1 && !skillcool && canDash)
         {
             StartCoroutine("Dash");
         }
@@ -70,14 +72,27 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     }
 
     public void UniqueSkill(){
-        if(PhotonManeger.LocalPlayerRule == 1 && !skillcool){
+        if(PhotonManeger.LocalPlayerRule == 1 && passivecool){
             Light2D BLight = Light.GetComponentInChildren<Light2D>();
             BLight.enabled = !BLight.enabled;
         }
 
-        else if(PhotonManeger.LocalPlayerRule == 0){
+        else if(PhotonManeger.LocalPlayerRule == 0 && !skillcool){
             return;
         }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other){
+        Debug.Log("트리거 OTEnter실행");
+        
+    }
+    
+    public void OnTriggerStay2D(Collider2D other){
+        Debug.Log("트리거 OTStay실행");
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        Debug.Log("트리거 OTExit실행");
 
     }
     #endregion
