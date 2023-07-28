@@ -9,7 +9,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Rigidbody2D RB;
     public SpriteRenderer SR;
-    public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
     public PhotonView PV;
 
     //상호작용하는 인스턴스의 정보를 저장
@@ -20,11 +19,16 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] int jumpSpeed = 5;
 
+    // 대화 & 상호작용 관련 변수
+    public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
+    private bool inEvent;
+
     public bool isGround;
     Vector3 curPos;
 
     void Awake()
     {
+        inEvent = false;
         isGround = true;
     }
 
@@ -35,7 +39,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
-        if (PV.IsMine)
+        if (PV.IsMine && !inEvent)
         {
             // ← → 이동
             float axis = Input.GetAxisRaw("Horizontal");
@@ -47,10 +51,12 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             // ↑ 점프, 바닥체크
             if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) PV.RPC("JumpRPC", RpcTarget.All);
 
-            //상호작용
+            //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
             if (Input.GetKeyDown(KeyCode.F))
             {
+                inEvent = true;
                 Interaction();
+                inEvent = false;
             }
         }
         else
@@ -74,10 +80,8 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         RB.velocity = new Vector2(RB.velocity.x, jumpSpeed);
     }
 
-
     [PunRPC]
     void DestroyRPC() => Destroy(gameObject);
-
 
     private Vector3 currPos;
     private Quaternion currRot;
@@ -96,7 +100,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //isground 바닥 체크2 - 그러나 Shadow_Animation_Controller.cs 는 여전히 OnCollisionEnter 방식을 사용중.
+    //isground 바닥 체크 - 그러나 Shadow_Animation_Controller.cs 는 여전히 OnCollisionEnter 방식을 사용중.
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, .1f, jumpableGround);

@@ -8,16 +8,15 @@ using UnityEditor;
 using Cinemachine;
 using System;
 
-//빛: 대쉬
-//어둠: 그림자
-//오브젝트: 지형생성, 반사 +) 유리오브젝트는 빛 투과하고 못지나감
+//빛: 발광, 대쉬
+//그림자 : 지형 파괴, 텔레포트
 
 public class Skillmanager_Stage_1 : MonoBehaviourPun
 {
     public PhotonView PV;
 
     [SerializeField] GameObject Light;
-    [SerializeField] GameObject Dark;
+    [SerializeField] GameObject Shadow;
     [SerializeField] CinemachineVirtualCamera VM;
     [SerializeField] private float dashingPower = 4f;
     [SerializeField] private float dashingTime = 0.2f;
@@ -26,17 +25,17 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void Start()
     {
         Light = GameObject.Find("Light(Clone)");
-        Dark = GameObject.Find("Dark(Clone)");
+        Shadow = GameObject.Find("Dark(Clone)");
 
         PV = this.GetComponent<PhotonView>();
 
-        if(StageUI_1.LocalPlayerRule == 1)
+        if(PhotonManeger.LocalPlayerRule == 1)
         {
             VM.Follow = Light.GetComponentInChildren<Transform>();
         }
-        else if (StageUI_1.LocalPlayerRule == 0)
+        else if (PhotonManeger.LocalPlayerRule == 0)
         {
-            VM.Follow = Dark.GetComponentInChildren<Transform>();
+            VM.Follow = Shadow.GetComponentInChildren<Transform>();
         }
     }
 
@@ -53,17 +52,18 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public void UseSkill()
     {
         // 플레이어가 선택한게 'Light'인 경우
-        if (StageUI_1.LocalPlayerRule == 1 && !skillcool)
+        if (PhotonManeger.LocalPlayerRule == 1 && !skillcool)
         {
             StartCoroutine("Dash");
         }
 
         // 플레이어가 선택한게 'Dark'인 경우
-        else if (StageUI_1.LocalPlayerRule == 0 && !skillcool)
+        else if (PhotonManeger.LocalPlayerRule == 0 && !skillcool)
         {
             StartCoroutine("Teleport");
         }
     }
+<<<<<<< Updated upstream
 
     //Dark 텔레포트 (구현중)
     #region  DarkSkill
@@ -90,6 +90,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     //Light 대쉬 (유리라는 오브젝트를 통해 추가적 대쉬를 할건지 결정 필요)
     #region LightSkill
+=======
+>>>>>>> Stashed changes
     IEnumerator Dash()
     {
         skillcool = true;
@@ -101,8 +103,20 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
+    IEnumerator Teleport()
+    {
+        skillcool = true;
+        Debug.Log("TP코드실행");
+        PV.RPC("TP", RpcTarget.AllBuffered);
+        yield return new WaitForSeconds(3f);
 
+<<<<<<< Updated upstream
     
+=======
+        skillcool = false;
+        Debug.Log("스킬 재사용 가능!");
+    }
+>>>>>>> Stashed changes
     IEnumerator LerpDash(Vector2 dir){
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         Vector2 DPos = rb.position + dir.normalized * dashingPower;
@@ -139,8 +153,23 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     //Dark의 스킬 구현
     [PunRPC]
     void TP()
+<<<<<<< Updated upstream
     {   
         StartCoroutine(RCTeleport());
+=======
+    {
+        Vector3 curPos = Shadow.transform.position;
+        SpriteRenderer SR = Shadow.GetComponent<SpriteRenderer>();
+
+        if (SR.flipX == true)
+        {
+            Shadow.transform.position = curPos + new Vector3(-7f, 0, 0);
+        }
+        else if(SR.flipX == false)
+        {
+            Shadow.transform.position = curPos + new Vector3(7f, 0, 0);
+        }
+>>>>>>> Stashed changes
     }
 
     [PunRPC]

@@ -37,14 +37,15 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     public GameObject GameStartBtn;
 
 
-    static public bool Light;
-    static public bool Dark;
-
-
     // 싱글톤 패턴을 이용해 여러 개의 Scene으로 관리하는 다양한 stage로 넘어가도 Pun2 서버 연결을 유지할 수 있도록 한다.
     public GameObject TitleCanvas;
-    private static PhotonManeger instance;
+    public static PhotonManeger instance;
 
+    // 플레이어의 역할을 알 수 있는 변수
+    // 1. 미선택 : -1
+    // 2. Light : 1
+    // 3. Dark : 0
+    public static int LocalPlayerRule;
 
     void Awake()
     {
@@ -52,8 +53,7 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         Screen.SetResolution(Screen.width, (Screen.width * 9) / 16, false);
 
         SelectedStage = 0;
-        Light = false;
-        Dark = false;
+        LocalPlayerRule = -1;
         PhotonNetwork.AutomaticallySyncScene = true;
 
         // -------------------------------------------
@@ -209,11 +209,13 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         if(SelectedStage == 1)
         {
             photonView.RPC("InActiveTitleCanvas", RpcTarget.AllBuffered);
+
+
+
             PhotonNetwork.LoadLevel("Stage1");
         }
     }
 
-    // 플레이어가 새로운 Scene으로 이동할 때 실행되는 콜백
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         if (SceneManager.GetActiveScene().name == "Title")
@@ -241,4 +243,6 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     {
         TitleCanvas.SetActive(true);
     }
+
+
 }
