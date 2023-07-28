@@ -70,16 +70,17 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     }
 
     public void UniqueSkill(){
-        if(StageUI_1.LocalPlayerRule == 1 && !skillcool){
+        if(PhotonManeger.LocalPlayerRule == 1 && !skillcool){
             Light2D BLight = Light.GetComponentInChildren<Light2D>();
             BLight.enabled = !BLight.enabled;
         }
 
-        else if(StageUI_1.LocalPlayerRule == 0){
+        else if(PhotonManeger.LocalPlayerRule == 0){
             return;
         }
 
     }
+    #endregion
 
     //Dark 텔레포트 (구현중)
     #region  DarkSkill
