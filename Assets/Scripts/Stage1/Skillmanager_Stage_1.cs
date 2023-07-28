@@ -64,6 +64,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             StartCoroutine("Teleport");
         }
     }
+
+    //Dark 텔레포트 (구현중)
+    #region  DarkSkill
+
     IEnumerator Teleport()
     {
         skillcool = true;
@@ -74,6 +78,18 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
+
+    IEnumerator RCTeleport(){
+        //TP 실행시 
+        Rigidbody2D rb = Dark.GetComponent<Rigidbody2D>();
+        yield return new WaitForSeconds(3f);
+
+    }
+
+    #endregion
+
+    //Light 대쉬 (유리라는 오브젝트를 통해 추가적 대쉬를 할건지 결정 필요)
+    #region LightSkill
     IEnumerator Dash()
     {
         skillcool = true;
@@ -86,6 +102,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Debug.Log("스킬 재사용 가능!");
     }
 
+    
     IEnumerator LerpDash(Vector2 dir){
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         Vector2 DPos = rb.position + dir.normalized * dashingPower;
@@ -104,6 +121,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             DPos.y -= dir.y * 0.5f;
         }
 
+        //Lerp구문을 이용한 대쉬 모션 구현 
         float elapsedTime = 0f;
         while (elapsedTime < dashingTime){
             rb.position = Vector2.Lerp(rb.position, DPos, elapsedTime / dashingTime);
@@ -114,23 +132,15 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         rb.position = DPos;
     }
     #endregion
+    
+    #endregion
 
     #region PunRPC
     //Dark의 스킬 구현
     [PunRPC]
     void TP()
-    {
-        Vector3 curPos = Dark.transform.position;
-        SpriteRenderer SR = Dark.GetComponent<SpriteRenderer>();
-
-        if (SR.flipX == true)
-        {
-            Dark.transform.position = curPos + new Vector3(-7f, 0, 0);
-        }
-        else if(SR.flipX == false)
-        {
-            Dark.transform.position = curPos + new Vector3(7f, 0, 0);
-        }
+    {   
+        StartCoroutine(RCTeleport());
     }
 
     [PunRPC]
