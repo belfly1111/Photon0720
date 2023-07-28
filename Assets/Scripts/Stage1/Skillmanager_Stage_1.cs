@@ -7,6 +7,7 @@ using Photon.Realtime;
 using UnityEditor;
 using Cinemachine;
 using System;
+using UnityEngine.Rendering.Universal;
 
 //빛: 발광, 대쉬
 //그림자 : 지형 파괴, 텔레포트
@@ -45,6 +46,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         {
             UseSkill();
         }
+        if(Input.GetKeyDown(KeyCode.K)){
+            UniqueSkill();
+
+        }
     }
 
     #region Nomalregion
@@ -64,7 +69,17 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         }
     }
 
-    #endregion
+    public void UniqueSkill(){
+        if(StageUI_1.LocalPlayerRule == 1 && !skillcool){
+            Light2D BLight = Light.GetComponentInChildren<Light2D>();
+            BLight.enabled = !BLight.enabled;
+        }
+
+        else if(StageUI_1.LocalPlayerRule == 0){
+            return;
+        }
+
+    }
 
     //Dark 텔레포트 (구현중)
     #region  DarkSkill
