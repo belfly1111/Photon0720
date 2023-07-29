@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - HintPanel
   - Canvas
+  - Trigger
   layers:
   - Default
   - TransparentFX

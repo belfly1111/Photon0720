@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4016822492697119701}
   - component: {fileID: 4575921419083129814}
+  - component: {fileID: 8675979416401880403}
   m_Layer: 7
   m_Name: BackLight
   m_TagString: Untagged
@@ -111,6 +112,22 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!58 &8675979416401880403
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219269736352095905}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
 --- !u!1 &4299124305899392680
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +145,6 @@ GameObject:
   - component: {fileID: -6541629967416151487}
   - component: {fileID: 4045115291183865611}
   - component: {fileID: 643991742223933327}
-  - component: {fileID: 2513396080092661503}
   m_Layer: 7
   m_Name: Light
   m_TagString: Player
@@ -352,22 +368,6 @@ MonoBehaviour:
     m_Bits: 512
   jumpSpeed: 5
   isGround: 0
---- !u!58 &2513396080092661503
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299124305899392680}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  serializedVersion: 2
-  m_Radius: 3
 --- !u!1 &8886658898591876363
 GameObject:
   m_ObjectHideFlags: 0

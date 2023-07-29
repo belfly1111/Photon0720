@@ -73,8 +73,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     public void UniqueSkill(){
         if(PhotonManeger.LocalPlayerRule == 1 && passivecool){
-            Light2D BLight = Light.GetComponentInChildren<Light2D>();
-            BLight.enabled = !BLight.enabled;
+            StartCoroutine("flashTime");
         }
 
         else if(PhotonManeger.LocalPlayerRule == 0 && !skillcool){
@@ -84,6 +83,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     public void OnTriggerEnter2D(Collider2D other){
         Debug.Log("트리거 OTEnter실행");
+        if (other.CompareTag("Trigger"))
+        {
+            Debug.Log("Trigger와 충돌했습니다.");
+        }
         
     }
     
@@ -117,6 +120,16 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         yield return new WaitForSeconds(3f);
 
     }
+// 구버전 위치 지정 텔레포트
+    /*    IEnumerator Teleport()
+        {
+            skillcool = true;
+            Debug.Log("TP코드실행");
+            PV.RPC("TP", RpcTarget.AllBuffered);
+            yield return new WaitForSeconds(3f);
+            skillcool = false;
+            Debug.Log("스킬 재사용 가능!");
+        }*/
 
     #endregion
 
@@ -133,17 +146,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         skillcool = false;
         Debug.Log("스킬 재사용 가능!");
     }
-    // 구버전 위치 지정 텔레포트
-    /*    IEnumerator Teleport()
-        {
-            skillcool = true;
-            Debug.Log("TP코드실행");
-            PV.RPC("TP", RpcTarget.AllBuffered);
-            yield return new WaitForSeconds(3f);
-            skillcool = false;
-            Debug.Log("스킬 재사용 가능!");
-        }*/
-
+    
     IEnumerator LerpDash(Vector2 dir)
     {
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
@@ -174,6 +177,19 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
         rb.position = DPos;
     }
+
+    IEnumerator flashTime(){
+        passivecool = false;
+        Debug.Log("패시브 쿨 Off");
+        PV.RPC("Flash",RpcTarget.AllBuffered);
+        Debug.Log("Flash실행");
+        yield return new WaitForSeconds(3f);
+        PV.RPC("Flash",RpcTarget.AllBuffered);
+        passivecool = true;
+        Debug.Log("패시브 쿨 On");
+    }
+
+    
     #endregion
 
 
@@ -201,6 +217,12 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {
         Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         StartCoroutine(LerpDash(dir));
+    }
+
+    [PunRPC]
+    void Flash(){
+        Light2D BLight = Light.GetComponentInChildren<Light2D>();
+        BLight.enabled = !BLight.enabled;
     }
     #endregion
 }
