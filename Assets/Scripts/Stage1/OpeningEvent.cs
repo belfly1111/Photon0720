@@ -17,9 +17,9 @@ using UnityEditor;
 // 아래 3가지 역할을 완수하면 스스로 파괴됨.
 //
 // 1. 인트로 대사 재생
-// 2. 페이드아웃 / 페이드인 기능 수행.
-// 3. 플레이어 역할 선택. - 2명이 모두 선택할 때까지 캐릭터는 나오지 않음.
-// 4. 플레이어 역할에 따른 다른 오프닝 재생. - 아직 없음.
+// 2. 플레이어 역할 선택. - 2명이 모두 선택할 때까지 캐릭터는 나오지 않음.
+// 3. 플레이어 역할에 따른 다른 오프닝 재생. - 아직 없음.
+// 4. 페이드인 효과가 발생되며 게임 시작.
 
 public class OpeningEvent : MonoBehaviourPun
 {
@@ -63,14 +63,22 @@ public class OpeningEvent : MonoBehaviourPun
         // Skillmaeger_Stage_1을 활성화함.
         // 07.28 현재는 개인 추가 컷신이 없으므로 페이드인 효과만 추가함.
 
-        // 스페이스를 눌러 오프닝 대화를 진행함.
+        // 1. 스페이스를 눌러 오프닝 대화를 진행함.
         if (Input.GetKey(KeyCode.Space) && !isDialoging && dialogNum <= 3)
         {
             if (dialogNum > 2)
             {
                 NextIcon.enabled = false;
                 OpeningText.enabled = false;
-                StartFadeIn = true;
+
+                if (!LightReady)
+                {
+                    SelectLightBtn.SetActive(true);
+                }
+                if (!DarkReady)
+                {
+                    SelectShadowBtn.SetActive(true);
+                }
                 return;
             }
 
@@ -79,39 +87,38 @@ public class OpeningEvent : MonoBehaviourPun
             OpeningText.text = "";
         }
 
-        // 페이드인 연출을 시작함. 연출이 종료되면 역할 선택 버튼을 활성화함.
+        // 2. 역할군을 선택함. 역할군을 선택한 뒤에는 되돌릴 수 없음.
+        if (LightReady && DarkReady && !isDialoging && PhotonManeger.LocalPlayerRule != -1 && !StartFadeIn)
+        {
+            if (PhotonManeger.LocalPlayerRule == 1)
+            {
+                PhotonNetwork.Instantiate("Light", new Vector3(-1, 1, 0), Quaternion.identity);
+            }
+            else if (PhotonManeger.LocalPlayerRule == 0)
+            {
+                PhotonNetwork.Instantiate("Dark", new Vector3(1, 1, 0), Quaternion.identity);
+            }
+
+            Skillmaneger_Stage_1.SetActive(true);
+
+            SelectLightBtn.SetActive(false);
+            SelectShadowBtn.SetActive(false);
+            StartFadeIn = true;
+        }
+
+        // 3. 페이드인 연출을 시작함. 연출이 종료되면 페이드인 효과가 발동함.
         if (StartFadeIn && !isDialoging)
         {
             elapsedTime += Time.deltaTime;
-            float normalizedTime = elapsedTime / 1.0f;
+            float normalizedTime = elapsedTime / 3.0f;
             BlackImg.color = Color.Lerp(BlackImg.color, new Color(0, 0, 0, 0), normalizedTime);
 
             if (normalizedTime >= 1f)
             {
                 BlackImg.enabled = false;
                 StartFadeIn = false;
-                SelectLightBtn.SetActive(true);
-                SelectShadowBtn.SetActive(true);
+                Destroy(gameObject);
             }
-        }
-
-
-        // 마지막으로 실행됨. 모든 이벤트가 끝나고 게임이 시작됨. 
-        // 이제부터 스킬 사용이 가능해짐. 또한 여기서 개인별 인트로를 재생할 수도 있음.
-        if (LightReady && DarkReady && !isDialoging)
-        {
-            if(PhotonManeger.LocalPlayerRule == 1)
-            {
-                PhotonNetwork.Instantiate("Light", new Vector3(-1, 1, 0), Quaternion.identity);
-            }
-            else if(PhotonManeger.LocalPlayerRule == 0)
-            {
-                PhotonNetwork.Instantiate("Dark", new Vector3(1, 1, 0), Quaternion.identity);
-            }
-            Skillmaneger_Stage_1.SetActive(true);
-            SelectLightBtn.SetActive(false);
-            SelectShadowBtn.SetActive(false);
-            Destroy(gameObject);
         }
     }
 

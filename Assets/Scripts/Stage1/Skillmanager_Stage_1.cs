@@ -14,8 +14,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Skillmanager_Stage_1 : MonoBehaviourPun
 {
-    public PhotonView PV;
-
+    [SerializeField] PhotonView PV;
     [SerializeField] GameObject Light;
     [SerializeField] GameObject Shadow;
     [SerializeField] CinemachineVirtualCamera VM;
@@ -25,13 +24,14 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public bool passivecool = true;
     public bool canDash = true;
 
-    void Start()
+    void FindPrefab()
     {
         Light = GameObject.Find("Light(Clone)");
         Shadow = GameObject.Find("Dark(Clone)");
+    }
 
-        PV = this.GetComponent<PhotonView>();
-
+    void FindPrefabCam()
+    {
         if (PhotonManeger.LocalPlayerRule == 1)
         {
             VM.Follow = Light.GetComponentInChildren<Transform>();
@@ -40,6 +40,12 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         {
             VM.Follow = Shadow.GetComponentInChildren<Transform>();
         }
+    }
+
+    void Start()
+    {
+        Invoke("FindPrefab", 1f);
+        Invoke("FindPrefabCam", 1f);
     }
 
     void Update()
@@ -194,7 +200,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
 
     #region PunRPC
-    //Dark의 스킬 구현
     [PunRPC]
     void TP()
     {

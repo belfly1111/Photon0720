@@ -57,10 +57,8 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
 
         // -------------------------------------------
-        // 고라니에서 추가로 찾은 코드 https://goraniunity2d.blogspot.com/2019/08/2d-pun2.html
         PhotonNetwork.SendRate = 144;
         PhotonNetwork.SerializationRate = 144;
-
         // -------------------------------------------
 
 
