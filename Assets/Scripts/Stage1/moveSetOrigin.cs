@@ -58,10 +58,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 Interaction();
                 inEvent = false;
             }
-            if(RB.name == "123(Clone)"){
-                float ver = Input.GetAxisRaw("Vertical");
-                RB.velocity = new Vector2(axis,ver);
-            }
         }
         else
         {
