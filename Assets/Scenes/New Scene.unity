@@ -332,6 +332,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4219269736352095905, guid: d0288758274f5c94f8c6632bb547c545, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4299124305899392680, guid: d0288758274f5c94f8c6632bb547c545, type: 3}
       propertyPath: m_Name
       value: Light

@@ -34,11 +34,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {
         if (PhotonManeger.LocalPlayerRule == 1)
         {
-            VM.Follow = Light.GetComponentInChildren<Transform>();
+            VM.Follow = Light.transform.GetChild(0);
         }
         else if (PhotonManeger.LocalPlayerRule == 0)
         {
-            VM.Follow = Shadow.GetComponentInChildren<Transform>();
+            VM.Follow = Shadow.transform.GetChild(0);
         }
     }
 

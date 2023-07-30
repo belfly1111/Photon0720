@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: -6541629967416151487}
   - component: {fileID: 4045115291183865611}
   - component: {fileID: 643991742223933327}
+  - component: {fileID: 5025623226350121862}
   m_Layer: 7
   m_Name: Light
   m_TagString: Player
@@ -357,7 +358,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: isIdle
+  - Type: 4
+    SynchronizeType: 2
+    Name: isWalking
+  - Type: 4
+    SynchronizeType: 2
+    Name: isJumping
+  - Type: 4
+    SynchronizeType: 2
+    Name: isDashing
+  - Type: 4
+    SynchronizeType: 2
+    Name: isDead
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -381,6 +397,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   jumpSpeed: 5
+  isGround: 0
+--- !u!114 &5025623226350121862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4299124305899392680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a13ff66fc70c9c479853da6f973653c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SR: {fileID: 4299124305899392683}
+  PV: {fileID: 4299124305899392687}
   isGround: 0
 --- !u!1 &8886658898591876363
 GameObject:

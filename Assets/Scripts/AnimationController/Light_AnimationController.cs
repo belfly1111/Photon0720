@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class Shadow_AnimationController : MonoBehaviour
+public class Light_AnimationController : MonoBehaviour
 {
     private Animator Animator;
     public SpriteRenderer SR;
@@ -17,13 +17,13 @@ public class Shadow_AnimationController : MonoBehaviour
     {
         isGround = true;
     }
-
     void Start()
     {
         Animator = GetComponent<Animator>();
-        SR = GetComponent<SpriteRenderer>();   
+        SR = GetComponent<SpriteRenderer>();
         PV = GetComponent<PhotonView>();
     }
+
 
     void Update()
     {
@@ -49,6 +49,11 @@ public class Shadow_AnimationController : MonoBehaviour
                 Animator.SetBool("isIdle", false);
                 Animator.SetBool("isWalking", false);
                 // PV.RPC("JumpAnimationRPC", RpcTarget.AllBuffered);
+            }
+
+            if(Input.GetKeyDown(KeyCode.V))
+            {
+                Animator.SetTrigger("isDashing");
             }
         }
     }
