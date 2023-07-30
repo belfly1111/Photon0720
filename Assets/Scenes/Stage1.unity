@@ -70430,6 +70430,7 @@ MonoBehaviour:
   canSkill: 1
   canPassive: 1
   canDash: 0
+  DPort: {fileID: 0}
 --- !u!4 &1720648676
 Transform:
   m_ObjectHideFlags: 0
