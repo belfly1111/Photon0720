@@ -11,6 +11,9 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public SpriteRenderer SR;
     public PhotonView PV;
 
+    public AudioClip[] walkAudio;
+    public AudioClip[] jumpAudio;
+
     // 정밀한 점프를 위해 추가한 변수
     [SerializeField] private BoxCollider2D RB_groundCheck;
     [SerializeField] private LayerMask jumpableGround;
@@ -46,11 +49,19 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 float axis = Input.GetAxisRaw("Horizontal");
                 RB.velocity = new Vector2(3 * axis, RB.velocity.y);
 
-                if (axis != 0) PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
+            if (axis != 0)
+            {
                 // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
+                PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
+                PV.RPC("SoundRPC", RpcTarget.All, 1);
+            }
 
-                // ↑ 점프, 바닥체크
-                if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) PV.RPC("JumpRPC", RpcTarget.All);
+            // ↑ 점프, 바닥체크
+            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+            {
+                PV.RPC("JumpRPC", RpcTarget.All);
+                PV.RPC("SoundRPC", RpcTarget.All,2);
+            }
 
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
                 if (Input.GetKeyDown(KeyCode.F))
@@ -89,6 +100,32 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
     [PunRPC]
     void DestroyRPC() => Destroy(gameObject);
+
+    [PunRPC]
+    void SoundRPC(int type)
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        if (type == 0)
+        {
+        //    audio.Stop();
+        }
+        if(type == 1)
+        {
+            if (!audio.isPlaying)
+            {
+                audio.clip = walkAudio[Random.Range(0,9)];
+                audio.Play();
+            }
+        }
+        if(type == 2)
+        {
+            if (!audio.isPlaying)
+            {
+                audio.clip = jumpAudio[Random.Range(0, 2)];
+                audio.Play();
+            }
+        }
+    }
 
     private Vector3 currPos;
     private Quaternion currRot;
