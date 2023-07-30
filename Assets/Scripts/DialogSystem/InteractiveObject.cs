@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InteractiveObject : MonoBehaviour
 {
     public int objectType;          //상호작용하는 npc를 구분하기 위한 태그.
     private moveSetOrigin player;   //플레이어 정보를 저장
-    [SerializeField]private GameObject QustionMark;
+    [SerializeField] private GameObject QustionMark;
+    [SerializeField] private GameObject DialogImg;
+    [SerializeField] private TMP_Text Dialog;
+    [SerializeField] private Image Light;
+    [SerializeField] private Image Dark;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,6 +50,7 @@ public class InteractiveObject : MonoBehaviour
         Debug.Log("상호작용");
         if (objectType == 1)
         {
+            DialogImg.SetActive(true);
             Debug.Log("상호작용 1 작동");
         }
     }
