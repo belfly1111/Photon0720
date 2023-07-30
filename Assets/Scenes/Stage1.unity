@@ -70427,9 +70427,9 @@ MonoBehaviour:
   VM: {fileID: 331720999}
   dashingPower: 4
   dashingTime: 0.2
-  skillcool: 0
-  passivecool: 1
-  canDash: 1
+  canSkill: 1
+  canPassive: 1
+  canDash: 0
 --- !u!4 &1720648676
 Transform:
   m_ObjectHideFlags: 0

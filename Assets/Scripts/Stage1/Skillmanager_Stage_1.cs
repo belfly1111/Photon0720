@@ -20,9 +20,9 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] CinemachineVirtualCamera VM;
     [SerializeField] private float dashingPower = 4f;
     [SerializeField] private float dashingTime = 0.2f;
-    public bool skillcool = false;
-    public bool passivecool = true;
-    public bool canDash = true;
+    public bool canSkill = true;
+    public bool canPassive= true;
+    public bool canDash = false;
 
     void FindPrefab()
     {
@@ -46,6 +46,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {
         Invoke("FindPrefab", 1f);
         Invoke("FindPrefabCam", 1f);
+        PV = this.GetComponent<PhotonView>();
     }
 
     void Update()
@@ -65,57 +66,40 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public void UseSkill()
     {
         // 플레이어가 선택한게 'Light'인 경우
-        if (PhotonManeger.LocalPlayerRule == 1 && !skillcool && canDash)
+        if (PhotonManeger.LocalPlayerRule == 1 && canSkill && canDash)
         {
             StartCoroutine("Dash");
         }
 
         // 플레이어가 선택한게 'Dark'인 경우
-        else if (PhotonManeger.LocalPlayerRule == 0 && !skillcool)
+        else if (PhotonManeger.LocalPlayerRule == 0 && canSkill)
         {
             StartCoroutine("Teleport");
         }
     }
 
     public void UniqueSkill(){
-        if(PhotonManeger.LocalPlayerRule == 1 && passivecool){
+        if(PhotonManeger.LocalPlayerRule == 1 && canPassive){
             StartCoroutine("flashTime");
         }
 
-        else if(PhotonManeger.LocalPlayerRule == 0 && !skillcool){
+        else if(PhotonManeger.LocalPlayerRule == 0 && canPassive){
             return;
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D other){
-        Debug.Log("트리거 OTEnter실행");
-        if (other.CompareTag("Trigger"))
-        {
-            Debug.Log("Trigger와 충돌했습니다.");
-        }
-        
-    }
-    
-    public void OnTriggerStay2D(Collider2D other){
-        Debug.Log("트리거 OTStay실행");
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("트리거 OTExit실행");
-
-    }
     #endregion
 
     //Dark 텔레포트 (구현중)
     #region  DarkSkill
     IEnumerator Teleport()
     {
-        skillcool = true;
+        canSkill = false;
         Debug.Log("TP코드실행");
         PV.RPC("TP", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(3f);
 
-        skillcool = false;
+       canSkill = true;
         Debug.Log("스킬 재사용 가능!");
     }
 
@@ -129,11 +113,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 // 구버전 위치 지정 텔레포트
     /*    IEnumerator Teleport()
         {
-            skillcool = true;
+            canSkill = false;
             Debug.Log("TP코드실행");
             PV.RPC("TP", RpcTarget.AllBuffered);
             yield return new WaitForSeconds(3f);
-            skillcool = false;
+            canSkill = true;
             Debug.Log("스킬 재사용 가능!");
         }*/
 
@@ -143,13 +127,13 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     #region LightSkill
     IEnumerator Dash()
     {
-        skillcool = true;
+        canSkill = false;
         Debug.Log("Dash코드실행");
 
         PV.RPC("DASH", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(3f);
 
-        skillcool = false;
+        canSkill = true;
         Debug.Log("스킬 재사용 가능!");
     }
     
@@ -185,13 +169,14 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     }
 
     IEnumerator flashTime(){
-        passivecool = false;
+        
+        canPassive = false;
         Debug.Log("패시브 쿨 Off");
         PV.RPC("Flash",RpcTarget.AllBuffered);
         Debug.Log("Flash실행");
         yield return new WaitForSeconds(3f);
         PV.RPC("Flash",RpcTarget.AllBuffered);
-        passivecool = true;
+        canPassive = true;
         Debug.Log("패시브 쿨 On");
     }
 
@@ -226,8 +211,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     [PunRPC]
     void Flash(){
-        Light2D BLight = Light.GetComponentInChildren<Light2D>();
-        BLight.enabled = !BLight.enabled;
+        GameObject BL = Light.transform.GetChild(1).gameObject;
+        BL.SetActive(!BL.activeSelf);
     }
     #endregion
 }
