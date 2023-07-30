@@ -11,17 +11,16 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public SpriteRenderer SR;
     public PhotonView PV;
 
-    //상호작용하는 인스턴스의 정보를 저장
-    private InteractiveObject _interactiveObject;
-
     // 정밀한 점프를 위해 추가한 변수
     [SerializeField] private BoxCollider2D RB_groundCheck;
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] int jumpSpeed = 5;
 
-    // 대화 & 상호작용 관련 변수
+    // 대화 & 상호작용 관련 변수. 이때 inEvent변수와 curTextLine 변수는 정적 변수로 다른 곳에서도 참조할 수 있게 하였다.
+    private InteractiveObject _interactiveObject;
     public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
-    private bool inEvent;
+    public static bool inEvent;
+
 
     public bool isGround;
     Vector3 curPos;
@@ -39,24 +38,33 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
-        if (PV.IsMine && !inEvent)
+        if (PV.IsMine)
         {
-            // ← → 이동
-            float axis = Input.GetAxisRaw("Horizontal");
-            RB.velocity = new Vector2(3 * axis, RB.velocity.y);
-
-            if (axis != 0) PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
-            // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
-
-            // ↑ 점프, 바닥체크
-            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) PV.RPC("JumpRPC", RpcTarget.All);
-
-            //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
-            if (Input.GetKeyDown(KeyCode.F))
+            if(!inEvent)
             {
-                inEvent = true;
-                Interaction();
-                inEvent = false;
+                // ← → 이동
+                float axis = Input.GetAxisRaw("Horizontal");
+                RB.velocity = new Vector2(3 * axis, RB.velocity.y);
+
+                if (axis != 0) PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
+                // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
+
+                // ↑ 점프, 바닥체크
+                if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) PV.RPC("JumpRPC", RpcTarget.All);
+
+                //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    inEvent = true;
+                }
+            }
+            else if(inEvent)
+            {
+                //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    Interaction();
+                }
             }
         }
         else
@@ -64,7 +72,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             transform.position = Vector3.Lerp(transform.position, currPos, Time.deltaTime * 10f);
             transform.rotation = Quaternion.Lerp(transform.rotation, currRot, Time.deltaTime * 10f);
         }
-
     }
 
     [PunRPC]
@@ -105,14 +112,16 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
-    private void Interaction()
+
+    public void Interaction()
     {
         //만일 상호작용할 애들이 없다면 반환한다.
-        if(_interactiveObject == null)
+        if (_interactiveObject == null)
         {
             return;
         }
 
         _interactiveObject.Interaction();
+
     }
 }

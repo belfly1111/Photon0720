@@ -6,14 +6,26 @@ using TMPro;
 
 public class InteractiveObject : MonoBehaviour
 {
-    public int objectType;          //상호작용하는 npc를 구분하기 위한 태그.
-    private moveSetOrigin player;   //플레이어 정보를 저장
+    public int objectType;  // 상호작용하는 npc를 구분하기 위한 태그.
+    public int previousObjectType; // 지난 번 상호작용했던 npc를 구분하는 태그.
+    public int curTextNum; // 현재 몇 번째 문장을 읽고 있는지 판별하는 변수.
+    private moveSetOrigin player;
+
     [SerializeField] private GameObject QustionMark;
     [SerializeField] private GameObject DialogImg;
-    [SerializeField] private TMP_Text Dialog;
-    [SerializeField] private Image Light;
-    [SerializeField] private Image Dark;
+    [SerializeField] private TMP_Text DialogTxt;
+    [SerializeField] private Image LightImg;
+    [SerializeField] private Image DarkImg;
 
+    
+    private void Awake()
+    {
+        curTextNum = 0;
+        DialogTxt.text = "";
+        LightImg.enabled = false;
+        DarkImg.enabled = false;
+        DialogImg.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -47,11 +59,34 @@ public class InteractiveObject : MonoBehaviour
     //대화창이나 퀘스트 수락은 여기서 작업하면 된다.
     public void Interaction()
     {
-        Debug.Log("상호작용");
         if (objectType == 1)
         {
-            DialogImg.SetActive(true);
-            Debug.Log("상호작용 1 작동");
+            if(curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
+                DialogTxt.text = "정신이 좀 들어요?";
+                LightImg.enabled = true;
+                DarkImg.enabled = false;
+                curTextNum++;
+            }
+            else if(curTextNum == 1)
+            {
+                DialogTxt.text = "네...네!";
+                LightImg.enabled = false;
+                DarkImg.enabled = true;
+                curTextNum++;
+
+            }
+            else if(curTextNum == 2)
+            {
+                DialogTxt.text = "그럼 계속 이동해요!";
+                DarkImg.enabled = false;
+                LightImg.enabled = true;
+
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
     }
 }

@@ -191,9 +191,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1628644713}
     - target: {fileID: 1094089562241743163, guid: a42adc8e32f75b449b2de5f8a51da3bb, type: 3}
+      propertyPath: DarkImg
+      value: 
+      objectReference: {fileID: 1375312874}
+    - target: {fileID: 1094089562241743163, guid: a42adc8e32f75b449b2de5f8a51da3bb, type: 3}
+      propertyPath: LightImg
+      value: 
+      objectReference: {fileID: 1548511538}
+    - target: {fileID: 1094089562241743163, guid: a42adc8e32f75b449b2de5f8a51da3bb, type: 3}
       propertyPath: DialogImg
       value: 
       objectReference: {fileID: 2095286033}
+    - target: {fileID: 1094089562241743163, guid: a42adc8e32f75b449b2de5f8a51da3bb, type: 3}
+      propertyPath: DialogTxt
+      value: 
+      objectReference: {fileID: 1628644713}
     - target: {fileID: 1094089562241743163, guid: a42adc8e32f75b449b2de5f8a51da3bb, type: 3}
       propertyPath: DialogCanvas
       value: 
