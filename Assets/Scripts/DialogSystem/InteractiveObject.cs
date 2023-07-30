@@ -21,10 +21,6 @@ public class InteractiveObject : MonoBehaviour
     private void Awake()
     {
         curTextNum = 0;
-        DialogTxt.text = "";
-        LightImg.enabled = false;
-        DarkImg.enabled = false;
-        DialogImg.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,6 +78,26 @@ public class InteractiveObject : MonoBehaviour
                 DialogTxt.text = "그럼 계속 이동해요!";
                 DarkImg.enabled = false;
                 LightImg.enabled = true;
+
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
+        }
+
+        if(objectType == 2)
+        {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
+                DialogTxt.text = "'뭐야? 별 것 아니였네'";
+                LightImg.enabled = true;
+                DarkImg.enabled = false;
+                curTextNum++;
+            }
+            else if(curTextNum == 1)
+            {
+                DialogTxt.text = "이렇게 장애물을 피해가면 되요! 쉽죠?";
 
                 curTextNum = 0;
                 DialogImg.SetActive(false);

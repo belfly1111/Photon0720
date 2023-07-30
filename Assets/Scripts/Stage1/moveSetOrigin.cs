@@ -49,24 +49,25 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 float axis = Input.GetAxisRaw("Horizontal");
                 RB.velocity = new Vector2(3 * axis, RB.velocity.y);
 
-            if (axis != 0)
-            {
-                // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
-                PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
-                PV.RPC("SoundRPC", RpcTarget.All, 1);
-            }
+                if (axis != 0)
+                {
+                    // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
+                    PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
+                    PV.RPC("SoundRPC", RpcTarget.All, 1);
+                }
 
-            // ↑ 점프, 바닥체크
-            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
-            {
-                PV.RPC("JumpRPC", RpcTarget.All);
-                PV.RPC("SoundRPC", RpcTarget.All,2);
-            }
+                // ↑ 점프, 바닥체크
+                if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+                {
+                    PV.RPC("JumpRPC", RpcTarget.All);
+                    PV.RPC("SoundRPC", RpcTarget.All,2);
+                }
 
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     inEvent = true;
+                    Interaction();
                 }
             }
             else if(inEvent)

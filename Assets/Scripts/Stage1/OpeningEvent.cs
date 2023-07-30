@@ -50,7 +50,7 @@ public class OpeningEvent : MonoBehaviourPun
         isDialoging = false;
         StartFadeIn = false;
 
-        // 오프닝 대화는 DialogManager에서 관리하지 않고 직접 초기화함.
+        // 오프닝 대화는 직접 초기화함.
         OpeningText.text = "...";
         OriginText[0] = "...야...!";
         OriginText[1] = "...야...일어...!";
@@ -64,7 +64,7 @@ public class OpeningEvent : MonoBehaviourPun
         // 07.28 현재는 개인 추가 컷신이 없으므로 페이드인 효과만 추가함.
 
         // 1. 스페이스를 눌러 오프닝 대화를 진행함.
-        if (Input.GetKey(KeyCode.Space) && !isDialoging && dialogNum <= 3)
+        if (Input.GetKey(KeyCode.Space) && !isDialoging && dialogNum <= 3 && PhotonManeger.LocalPlayerRule == -1)
         {
             if (dialogNum > 2)
             {
