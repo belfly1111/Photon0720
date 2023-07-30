@@ -24,7 +24,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public bool canSkill = true;
     public bool canPassive= true;
     public bool canDash = false;
-    public bool IsGround;
 
 
     void FindPrefab()
@@ -167,7 +166,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         RaycastHit2D RCh = Physics2D.Raycast(rb.position + new Vector2(0, 0.5f), dir.normalized, dir.normalized.magnitude * dashingPower, layerMask);
 
         //레이캐스트를 통해 충돌한 경우 그 위치까지 설정
-        if (RCh.collider != null)
+        if (RCh.collider != null && !RCh.collider.CompareTag("Trigger")) 
         {
             DPos = RCh.point - new Vector2(0, 0.5f);
             // 캐릭터의 콜라이더의 크기만큼 충돌후 위치를 수정함
