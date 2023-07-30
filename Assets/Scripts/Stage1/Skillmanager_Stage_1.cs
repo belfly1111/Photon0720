@@ -24,6 +24,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public bool canSkill = true;
     public bool canPassive= true;
     public bool canDash = false;
+    public bool IsGround;
 
 
     void FindPrefab()
@@ -95,24 +96,39 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     //Dark 텔레포트 (구현중)
     #region  DarkSkill
     IEnumerator Teleport()
-    {
+    {   
+        if(!PV.IsMine) yield return null;
         canSkill = false;
+        Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
 
-        //TP에서는 위치만 가져오도록 하기
+        //TP에서는 위치만 가져오도록 하기 + 캐릭터 안보이게
         PV.RPC("TP", RpcTarget.AllBuffered);
-        yield return new WaitForSeconds(3f);
 
+        //Shadow 위치 포지션 가져오고 위치 바꾸기 시작
+        Vector3 SPos = Shadow.transform.position;
+        StartCoroutine(SetMark(SPos,RB));
+
+        yield return new WaitForSeconds(8f);
         canSkill = true;
         Debug.Log("스킬 재사용 가능!");
     }
 
-    IEnumerator RCTeleport(Vector3 SPos, Rigidbody2D RB)
-    {
+    IEnumerator SRdisabled(){
+        SpriteRenderer SR = Shadow.GetComponent<SpriteRenderer>();
+        SR.enabled = false;
+        yield return new WaitForSeconds(5f);
+        SR.enabled = true;
+
+    }
+
+    IEnumerator SetMark(Vector3 SPos, Rigidbody2D RB)
+    {   
         GameObject Marker = Instantiate(Dport,SPos,Quaternion.identity);
         GameObject TMP = Shadow;
         Shadow = Marker;
 
         yield return new WaitForSeconds(5f);
+
         Vector2 MP = Shadow.transform.position;
         Shadow = TMP;
         Shadow.transform.position = MP;
@@ -128,6 +144,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     #region LightSkill
     IEnumerator Dash()
     {
+        if(!PV.IsMine) yield return null;
         canSkill = false;
         Debug.Log("Dash코드실행");
 
@@ -192,12 +209,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {
         //지금 조작하고 있는 Shadow의 움직임을 제한함.
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
-        RB.constraints = RigidbodyConstraints2D.FreezeAll;
+        StartCoroutine(SRdisabled());
 
-        //Shadow 위치 포지션 가져오고 위치 바꾸기 시작
-        Vector3 SPos = Shadow.transform.position;
-        StartCoroutine(RCTeleport(SPos,RB));
+        RB.constraints = RigidbodyConstraints2D.FreezeAll;
     }
+
 
     //Light 스킬 대쉬
     [PunRPC]
@@ -213,5 +229,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         GameObject BL = Light.transform.GetChild(1).gameObject;
         BL.SetActive(!BL.activeSelf);
     }
+
     #endregion
 }
