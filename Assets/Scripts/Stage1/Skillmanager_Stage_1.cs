@@ -110,8 +110,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         GameObject Sobj = Shadow;
 
         //Shadow의 현재 위치에 "123" 프리팹 생성
-        GameObject Dport = Shadow;
-        Shadow = Instantiate(Dport,SPos,Quaternion.identity);
+        PhotonNetwork.Instantiate("123",SPos,Quaternion.identity);
         Debug.Log("5초 시작");
         yield return new WaitForSeconds(5f);
         Debug.Log("5초 끝");
@@ -124,17 +123,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Destroy(GameObject.Find("123(Clone)"));
 
     }
-// 구버전 위치 지정 텔레포트
-    /*    IEnumerator Teleport()
-        {
-            canSkill = false;
-            Debug.Log("TP코드실행");
-            PV.RPC("TP", RpcTarget.AllBuffered);
-            yield return new WaitForSeconds(3f);
-            canSkill = true;
-            Debug.Log("스킬 재사용 가능!");
-        }*/
-
     #endregion
 
     //Light 대쉬 (유리라는 오브젝트를 통해 추가적 대쉬를 할건지 결정 필요)
