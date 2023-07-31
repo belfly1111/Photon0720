@@ -47,6 +47,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         {
             if(!inEvent)
             {
+                isGround = IsGrounded();
                 // ← → 이동
                 float axis = Input.GetAxisRaw("Horizontal");
                 RB.velocity = new Vector2(3 * axis, RB.velocity.y);
@@ -59,7 +60,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 }
 
                 // ↑ 점프, 바닥체크
-                if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+                if (Input.GetKeyDown(KeyCode.Space) && isGround)
                 {
                     PV.RPC("JumpRPC", RpcTarget.All);
                     PV.RPC("SoundRPC", RpcTarget.All,2);

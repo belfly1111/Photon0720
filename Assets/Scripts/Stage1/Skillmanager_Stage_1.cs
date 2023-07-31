@@ -61,7 +61,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         if(Input.GetKeyDown(KeyCode.K) && !moveSetOrigin.inEvent)
         {
             UniqueSkill();
-
         }
     }
 
@@ -88,7 +87,14 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         }
 
         else if(PhotonManeger.LocalPlayerRule == 0 && canPassive){
-            StartCoroutine("Teleport");
+            moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
+            Debug.Log("고유스킬 시작");
+            if(mso.isGround){
+                Debug.Log("텔포시작");
+                StartCoroutine("Teleport");
+            }
+            else Debug.Log("텔포실패 이유: isGround = " + mso.isGround);
+
         }
     }
 
@@ -100,7 +106,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {   
         if(!PV.IsMine) yield return null;
 
-        canSkill = false;
+        canPassive = false;
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
 
         //TP에서는 위치만 가져오도록 하기 + 캐릭터 안보이게
@@ -111,7 +117,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         StartCoroutine(SetMark(SPos));
 
         yield return new WaitForSeconds(8f);
-        canSkill = true;
+        canPassive = true;
         Debug.Log("스킬 재사용 가능!");
     }
 
@@ -211,9 +217,9 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void TP()
     {
         moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
-        //지금 조작하고 있는 Shadow의 움직임을 제한함.
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
         mso.DS = true;
+        
         StartCoroutine(SRdisabled(RB));
 
         RB.constraints = RigidbodyConstraints2D.FreezeAll;
