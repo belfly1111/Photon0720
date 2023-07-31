@@ -14,6 +14,8 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public AudioClip[] walkAudio;
     public AudioClip[] jumpAudio;
 
+    public bool DS = false;
+
     // 정밀한 점프를 위해 추가한 변수
     [SerializeField] private BoxCollider2D RB_groundCheck;
     [SerializeField] private LayerMask jumpableGround;
@@ -81,8 +83,10 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, currPos, Time.deltaTime * 10f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, currRot, Time.deltaTime * 10f);
+            if(!DS){
+                transform.position = Vector3.Lerp(transform.position, currPos, Time.deltaTime * 10f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, currRot, Time.deltaTime * 10f);
+            }
         }
     }
 

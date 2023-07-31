@@ -13,6 +13,6 @@ public class moveObj : MonoBehaviour
         float axis = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
 
-        RB.velocity = new Vector2(axis,vert);
+        RB.velocity = new Vector2(1.5f*axis,1.5f*vert);
     }
 }

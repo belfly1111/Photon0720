@@ -24,6 +24,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public bool canSkill = true;
     public bool canPassive= true;
     public bool canDash = false;
+    public moveSetOrigin mso;
 
 
     void FindPrefab()
@@ -98,6 +99,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     IEnumerator Teleport()
     {   
         if(!PV.IsMine) yield return null;
+
         canSkill = false;
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
 
@@ -106,36 +108,37 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
         //Shadow 위치 포지션 가져오고 위치 바꾸기 시작
         Vector3 SPos = Shadow.transform.position;
-        StartCoroutine(SetMark(SPos,RB));
+        StartCoroutine(SetMark(SPos));
 
         yield return new WaitForSeconds(8f);
         canSkill = true;
         Debug.Log("스킬 재사용 가능!");
     }
 
-    IEnumerator SRdisabled(){
+    IEnumerator SRdisabled(Rigidbody2D RB){
+        moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
         SpriteRenderer SR = Shadow.GetComponent<SpriteRenderer>();
         SR.enabled = false;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5.3f);
         SR.enabled = true;
+        mso.DS = false;
+        RB.constraints = RigidbodyConstraints2D.FreezeRotation;
 
     }
 
-    IEnumerator SetMark(Vector3 SPos, Rigidbody2D RB)
+    IEnumerator SetMark(Vector3 SPos)
     {   
         GameObject Marker = Instantiate(Dport,SPos,Quaternion.identity);
         GameObject TMP = Shadow;
         Shadow = Marker;
-
         yield return new WaitForSeconds(5f);
-
+        
         Vector2 MP = Shadow.transform.position;
         Shadow = TMP;
         Shadow.transform.position = MP;
-
         Destroy(Marker);
         //Shadow움직임 제한 풀기
-        RB.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
 
     }
     #endregion
@@ -207,9 +210,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [PunRPC]
     void TP()
     {
+        moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
         //지금 조작하고 있는 Shadow의 움직임을 제한함.
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
-        StartCoroutine(SRdisabled());
+        mso.DS = true;
+        StartCoroutine(SRdisabled(RB));
 
         RB.constraints = RigidbodyConstraints2D.FreezeAll;
     }
