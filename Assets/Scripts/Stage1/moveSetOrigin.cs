@@ -167,7 +167,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     //isground 바닥 체크 - 그러나 Shadow_Animation_Controller.cs 는 여전히 OnCollisionEnter 방식을 사용중.
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
@@ -177,6 +177,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         //만일 상호작용할 애들이 없다면 반환한다.
         if (_interactiveObject == null)
         {
+            inEvent = false;
             return;
         }
 

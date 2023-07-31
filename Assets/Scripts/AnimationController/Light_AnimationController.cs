@@ -13,6 +13,9 @@ public class Light_AnimationController : MonoBehaviour
     private float axis;
     public bool isGround;
 
+
+    [SerializeField] moveSetOrigin MSO;
+
     /// <summary>
     /// 아래 정적 변수 isDead_Light는 플레이어가 죽었을 때 입력을 하지 못하게 막는 변수이다.
     /// 이미 movesetOrigin에 같은 역할을 하는 같은 이름의 변수가 존재한다. 
@@ -65,13 +68,15 @@ public class Light_AnimationController : MonoBehaviour
                     Animator.SetBool("isIdle", true);
                 }
 
+                isGround = MSO.IsGrounded();
                 // 점프 입력이 있었을 때, isJumping 상태를 활성화한다.
                 if (Input.GetKeyDown(KeyCode.Space) && isGround)
                 {
-                    Animator.SetBool("isJumping", true);
-                    Animator.SetBool("isIdle", false);
-                    Animator.SetBool("isWalking", false);
-                    // PV.RPC("JumpAnimationRPC", RpcTarget.AllBuffered);
+                    PV.RPC("JumpAnimationRPC", RpcTarget.AllBuffered);
+                }
+                else
+                {
+                    Animator.SetBool("isJumping", false);
                 }
 
                 if (Input.GetKeyDown(KeyCode.V))
@@ -95,14 +100,6 @@ public class Light_AnimationController : MonoBehaviour
         Animator.SetBool("isJumping", true);
         Animator.SetBool("isIdle", false);
         Animator.SetBool("isWalking", false);
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            Animator.SetBool("isJumping", false);
-        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -105,7 +105,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             StartCoroutine("Teleport");
         }
     }
-
     #endregion
 
     //Dark 텔레포트 (구현중)
@@ -137,7 +136,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         SR.enabled = true;
         mso.DS = false;
         RB.constraints = RigidbodyConstraints2D.FreezeRotation;
-
     }
 
     IEnumerator SetMark(Vector3 SPos)
@@ -152,8 +150,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Shadow.transform.position = MP;
         Destroy(Marker);
         //Shadow움직임 제한 풀기
-        
-
     }
     #endregion
 

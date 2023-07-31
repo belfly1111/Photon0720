@@ -285,6 +285,7 @@ MonoBehaviour:
   SR: {fileID: 3244911331013244384}
   PV: {fileID: 3244911331013244396}
   isGround: 0
+  MSO: {fileID: -747812626717378141}
 --- !u!82 &-5730772242730143593
 AudioSource:
   m_ObjectHideFlags: 0

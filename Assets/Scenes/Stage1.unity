@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 445955482}
   - component: {fileID: 445955481}
   - component: {fileID: 445955480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Glass (1)
   m_TagString: Trigger
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1100,7 +1100,7 @@ GameObject:
   - component: {fileID: 839254255}
   - component: {fileID: 839254254}
   - component: {fileID: 839254253}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Glass
   m_TagString: Trigger
   m_Icon: {fileID: 0}
@@ -1117,7 +1117,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -71164,6 +71164,7 @@ MonoBehaviour:
   canSkill: 1
   canPassive: 1
   canDash: 0
+  mso: {fileID: 0}
 --- !u!4 &1720648676
 Transform:
   m_ObjectHideFlags: 0
