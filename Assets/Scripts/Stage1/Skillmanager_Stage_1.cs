@@ -69,23 +69,25 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public void UseSkill()
     {
         // 플레이어가 선택한게 'Light'인 경우
-        if (PhotonManeger.LocalPlayerRule == 1 && canSkill && canDash)
+        if (PhotonManeger.LocalPlayerRule == 1 && canSkill && canDash && !Light_AnimationController.isDead_Light)
         {
             StartCoroutine("Dash");
         }
 
         // 플레이어가 선택한게 'Dark'인 경우
-        else if (PhotonManeger.LocalPlayerRule == 0 && canSkill)
+        else if (PhotonManeger.LocalPlayerRule == 0 && canSkill && !Shadow_AnimationController.isDead_Shadow)
         {
             return;
         }
     }
 
     public void UniqueSkill(){
-        if(PhotonManeger.LocalPlayerRule == 1 && canPassive){
+        if(PhotonManeger.LocalPlayerRule == 1 && canPassive && !Light_AnimationController.isDead_Light)
+        {
             StartCoroutine("flashTime");
         }
 
+<<<<<<< Updated upstream
         else if(PhotonManeger.LocalPlayerRule == 0 && canPassive){
             moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
             Debug.Log("고유스킬 시작");
@@ -95,6 +97,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             }
             else Debug.Log("텔포실패 이유: isGround = " + mso.isGround);
 
+=======
+        else if(PhotonManeger.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
+        {
+            StartCoroutine("Teleport");
+>>>>>>> Stashed changes
         }
     }
 

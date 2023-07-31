@@ -92,11 +92,11 @@ public class OpeningEvent : MonoBehaviourPun
         {
             if (PhotonManeger.LocalPlayerRule == 1)
             {
-                PhotonNetwork.Instantiate("Light", new Vector3(-1, 1, 0), Quaternion.identity);
+                PhotonNetwork.Instantiate("Light", new Vector3(-26, 0.5f, 0), Quaternion.identity);
             }
             else if (PhotonManeger.LocalPlayerRule == 0)
             {
-                PhotonNetwork.Instantiate("Dark", new Vector3(1, 1, 0), Quaternion.identity);
+                PhotonNetwork.Instantiate("Dark", new Vector3(-25, 0.5f, 0), Quaternion.identity);
             }
 
             Skillmaneger_Stage_1.SetActive(true);
@@ -113,7 +113,7 @@ public class OpeningEvent : MonoBehaviourPun
             float normalizedTime = elapsedTime / 3.0f;
             BlackImg.color = Color.Lerp(BlackImg.color, new Color(0, 0, 0, 0), normalizedTime);
 
-            if (normalizedTime >= 1f)
+            if (normalizedTime >= 4f)
             {
                 BlackImg.enabled = false;
                 StartFadeIn = false;

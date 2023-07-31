@@ -11,6 +11,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public SpriteRenderer SR;
     public PhotonView PV;
 
+    // 사운드 관리를 위해 추가한 변수
     public AudioClip[] walkAudio;
     public AudioClip[] jumpAudio;
 
@@ -26,12 +27,18 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
     public static bool inEvent;
 
+    // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
+    // 플레이어가 죽었을 때 세이브 포인트로 이동하기 위한 변수를 저장하는 변수
+    public bool isDead;
+    private Vector2 SavePointPosition;
 
     public bool isGround;
     Vector3 curPos;
 
     void Awake()
     {
+        SavePointPosition = new Vector2(-25, 0.5f);
+        this.isDead = false;
         inEvent = false;
         isGround = true;
     }
@@ -45,6 +52,15 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (PV.IsMine)
         {
+            if(this.isDead)
+            {
+                if(Input.GetKeyDown(KeyCode.R))
+                {
+                    transform.position = SavePointPosition;
+                    this.isDead = false;
+                }
+                return;
+            }
             if(!inEvent)
             {
                 isGround = IsGrounded();
@@ -71,7 +87,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     inEvent = true;
                     Interaction();
-                }
+                } 
             }
             else if(inEvent)
             {
@@ -167,4 +183,16 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         _interactiveObject.Interaction();
 
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("DeadZone"))
+        {
+            this.isDead = true;
+        }
+        if(other.CompareTag("SavePoint"))
+        {
+            SavePointPosition = other.transform.position;
+        }
+    }    
 }

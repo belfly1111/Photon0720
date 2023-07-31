@@ -9,6 +9,8 @@ TagManager:
   - HintPanel
   - Canvas
   - Trigger
+  - DeadZone
+  - SavePoint
   layers:
   - Default
   - TransparentFX
