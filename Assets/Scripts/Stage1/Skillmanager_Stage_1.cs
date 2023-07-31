@@ -82,26 +82,27 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     }
 
     public void UniqueSkill(){
-        if(PhotonManeger.LocalPlayerRule == 1 && canPassive && !Light_AnimationController.isDead_Light)
+
+        if (PhotonManeger.LocalPlayerRule == 1 && canPassive && !Light_AnimationController.isDead_Light)
         {
             StartCoroutine("flashTime");
         }
 
-<<<<<<< Updated upstream
-        else if(PhotonManeger.LocalPlayerRule == 0 && canPassive){
+        else if (PhotonManeger.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
+        {
             moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
             Debug.Log("고유스킬 시작");
-            if(mso.isGround){
+            if (mso.isGround)
+            {
                 Debug.Log("텔포시작");
                 StartCoroutine("Teleport");
             }
             else Debug.Log("텔포실패 이유: isGround = " + mso.isGround);
+        }
 
-=======
-        else if(PhotonManeger.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
+        else if (PhotonManeger.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
         {
             StartCoroutine("Teleport");
->>>>>>> Stashed changes
         }
     }
 
