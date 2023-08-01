@@ -22,10 +22,12 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] int jumpSpeed = 5;
 
-    // 대화 & 상호작용 관련 변수. 이때 inEvent변수와 curTextLine 변수는 정적 변수로 다른 곳에서도 참조할 수 있게 하였다.
+    // 대화 & 상호작용 관련 변수.
     private InteractiveObject _interactiveObject;
     public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
+    [SerializeField] Vector3 previousPosition; 
     public static bool inEvent;
+
 
     // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
     // 플레이어가 죽었을 때 세이브 포인트로 이동하기 위한 변수를 저장하는 변수
@@ -33,7 +35,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     private Vector2 SavePointPosition;
 
     public bool isGround;
-    Vector3 curPos;
+    //Vector3 curPos;
 
     void Awake()
     {
@@ -83,15 +85,19 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 }
 
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
-                if (Input.GetKeyDown(KeyCode.F))
+                //상호작용 - 08.01 땅에 붙어있어야 대화가 가능함.
+                if (Input.GetKeyDown(KeyCode.F) && isGround)
                 {
                     inEvent = true;
+                    previousPosition = gameObject.transform.position;
                     Interaction();
                 } 
             }
             else if(inEvent)
             {
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
+                //상호작용 - 08.01 상호 작용 중 플레이어의 좌표를 고정함.
+                gameObject.transform.position = previousPosition;
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     Interaction();
@@ -177,7 +183,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         //만일 상호작용할 애들이 없다면 반환한다.
         if (_interactiveObject == null)
         {
-            inEvent = false;
             return;
         }
 

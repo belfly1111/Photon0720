@@ -78,10 +78,13 @@ public class InteractiveObject : MonoBehaviour
                 DialogTxt.text = "그럼 계속 이동해요!";
                 DarkImg.enabled = false;
                 LightImg.enabled = true;
-
+                curTextNum++;
+            }
+            else if(curTextNum == 3)
+            {
                 curTextNum = 0;
                 DialogImg.SetActive(false);
-                moveSetOrigin.inEvent = false;
+                moveSetOrigin.inEvent = false; 
             }
         }
 

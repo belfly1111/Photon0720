@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094089562241743156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.6, y: 0.2, z: 0}
+  m_LocalPosition: {x: 20.673, y: -0.191, z: 0}
   m_LocalScale: {x: 1.023, y: 1.0575, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -210,4 +210,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 1
+  previousObjectType: 0
+  curTextNum: 0
   QustionMark: {fileID: 1094089560171267969}
+  DialogImg: {fileID: 0}
+  DialogTxt: {fileID: 0}
+  LightImg: {fileID: 0}
+  DarkImg: {fileID: 0}
