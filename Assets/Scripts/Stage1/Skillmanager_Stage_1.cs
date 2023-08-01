@@ -24,6 +24,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public bool canSkill = true;
     public bool canPassive= true;
     public bool canDash = false;
+    public bool canTP = true;
     public moveSetOrigin mso;
 
 
@@ -144,10 +145,14 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         GameObject TMP = Shadow;
         Shadow = Marker;
         yield return new WaitForSeconds(5f);
-        
-        Vector2 MP = Shadow.transform.position;
-        Shadow = TMP;
-        Shadow.transform.position = MP;
+        if(canTP){
+            Vector2 MP = Shadow.transform.position;
+            Shadow = TMP;
+            Shadow.transform.position = MP;
+        }
+        else{
+            Shadow = TMP;
+        }
         Destroy(Marker);
         //Shadow움직임 제한 풀기
     }

@@ -70117,7 +70117,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -70881,14 +70881,14 @@ CompositeCollider2D:
       - {x: -3, y: -2.9999707}
       - {x: -2.9999707, y: -2}
       - {x: 0, y: -2.0000293}
-    - - {x: 58.99997, y: -32}
-      - {x: 58.99997, y: -30.59375}
-      - {x: 56, y: -30.593779}
-      - {x: 56.000034, y: -32}
     - - {x: 52.999973, y: -32}
       - {x: 52.999973, y: -30.59375}
       - {x: 50, y: -30.593779}
       - {x: 50.00003, y: -32}
+    - - {x: 58.99997, y: -32}
+      - {x: 58.99997, y: -30.59375}
+      - {x: 56, y: -30.593779}
+      - {x: 56.000034, y: -32}
     - - {x: 62.99997, y: -39}
       - {x: 62.99997, y: -37.59375}
       - {x: 60, y: -37.59378}
@@ -71164,6 +71164,7 @@ MonoBehaviour:
   canSkill: 1
   canPassive: 1
   canDash: 0
+  canTP: 1
   mso: {fileID: 0}
 --- !u!4 &1720648676
 Transform:

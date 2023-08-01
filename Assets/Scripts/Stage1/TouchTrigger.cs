@@ -8,21 +8,32 @@ using Photon.Realtime;
 public class TouchTrigger : MonoBehaviourPun
 {
     public Skillmanager_Stage_1 SM;
-
+    
     void Awake(){
-
         SM = GameObject.FindObjectOfType<Skillmanager_Stage_1>();
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Trigger")){
             SM.canDash = true;
+            SM.canTP = false;
+        }
+        if(other.CompareTag("Ground")){
+            SM.canTP = false;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other) {
+        if(other.CompareTag("Ground")){
+            SM.canTP = false;
         }
     }
     
+
     void OnTriggerExit2D(Collider2D other) {
-        if(other.CompareTag("Trigger")){
+        if(other.CompareTag("Trigger") || other.CompareTag("Ground")){
             SM.canDash = false;
+            SM.canTP = true;
         }
     }
 
