@@ -45,11 +45,9 @@ public class Shadow_AnimationController : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.R))
                 {
-                    Animator.SetBool("isIdle", true);
-                    Animator.SetBool("isWalking", false);
-                    Animator.SetBool("isJumping", false);
-
                     isDead_Shadow = false;
+                    Animator.SetTrigger("isAlive");
+                    PV.RPC("setAliveRPC", RpcTarget.All);
                 }
             }
             else
@@ -59,7 +57,7 @@ public class Shadow_AnimationController : MonoBehaviour
                 {
                     Animator.SetBool("isWalking", true);
                     Animator.SetBool("isIdle", false);
-                    //PV.RPC("WalkingAnimationRPC", RpcTarget.AllBuffered);
+
                 }
                 else
                 {
@@ -71,7 +69,7 @@ public class Shadow_AnimationController : MonoBehaviour
                 // 점프 입력이 있었을 때, isJumping 상태를 활성화한다.
                 if (Input.GetKeyDown(KeyCode.Space) && isGround)
                 {
-                    PV.RPC("JumpAnimationRPC", RpcTarget.AllBuffered);
+                    PV.RPC("JumpAnimationRPC", RpcTarget.All);
                 }
                 else
                 {
@@ -96,13 +94,24 @@ public class Shadow_AnimationController : MonoBehaviour
         Animator.SetBool("isWalking", false);
     }
 
+    [PunRPC]
+    void setAliveRPC()
+    {
+        Animator.SetTrigger("isAlive");
+    }
+
+    [PunRPC]
+    void setDeadRPC()
+    {
+        Animator.SetTrigger("isDead");
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("DeadZone"))
         {
             isDead_Shadow = true;
-            Animator.SetTrigger("isDead");
+            PV.RPC("setDeadRPC", RpcTarget.All);
         }
     }
 }

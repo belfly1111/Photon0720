@@ -69,6 +69,9 @@ MonoBehaviour:
   - SetLerpStateRPC
   - hide
   - SoundRPC
+  - setAliveRPC
+  - setDeadRPC
+  - setDashRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
