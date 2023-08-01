@@ -47,8 +47,7 @@ public class Light_AnimationController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                    isDead_Light = false;
-                    Animator.SetTrigger("isAlive");
-                    PV.RPC("setAliveRPC", RpcTarget.All);
+                    PV.RPC("setAlive_Light", RpcTarget.All);
                 }
             }
             else
@@ -85,31 +84,11 @@ public class Light_AnimationController : MonoBehaviour
     }
 
     [PunRPC]
-    void WalkingAnimationRPC()
-    {
-        Animator.SetBool("isWalking", true);
-        Animator.SetBool("isIdle", false);
-    }
-
-    [PunRPC]
     void JumpAnimationRPC()
     {
         Animator.SetBool("isJumping", true);
         Animator.SetBool("isIdle", false);
         Animator.SetBool("isWalking", false);
-    }
-
-
-    [PunRPC]
-    void setAliveRPC()
-    {
-        Animator.SetTrigger("isAlive");
-    }
-
-    [PunRPC]
-    void setDeadRPC()
-    {
-        Animator.SetTrigger("isDead");
     }
 
     [PunRPC]
@@ -119,13 +98,24 @@ public class Light_AnimationController : MonoBehaviour
         Animator.SetTrigger("isDashing");
     }
 
+    [PunRPC]
+    void setDead_Light()
+    {
+        Animator.SetBool("isDead", true);
+    }
+
+    [PunRPC]
+    void setAlive_Light()
+    {
+        Animator.SetBool("isDead", false);
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("DeadZone"))
         {
             isDead_Light = true;
-            PV.RPC("setDeadRPC", RpcTarget.All);
+            PV.RPC("setDead_Light", RpcTarget.All);
         }
     }
 }

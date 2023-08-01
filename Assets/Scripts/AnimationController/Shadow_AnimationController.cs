@@ -46,8 +46,7 @@ public class Shadow_AnimationController : MonoBehaviour
                 if (Input.GetKey(KeyCode.R))
                 {
                     isDead_Shadow = false;
-                    Animator.SetTrigger("isAlive");
-                    PV.RPC("setAliveRPC", RpcTarget.All);
+                    PV.RPC("setAlive_Dark", RpcTarget.All);
                 }
             }
             else
@@ -80,13 +79,6 @@ public class Shadow_AnimationController : MonoBehaviour
     }
 
     [PunRPC]
-    void WalkingAnimationRPC()
-    {
-        Animator.SetBool("isWalking", true);
-        Animator.SetBool("isIdle", false);
-    }
-
-    [PunRPC]
     void JumpAnimationRPC()
     {
         Animator.SetBool("isJumping", true);
@@ -95,15 +87,15 @@ public class Shadow_AnimationController : MonoBehaviour
     }
 
     [PunRPC]
-    void setAliveRPC()
+    void setDead_Dark()
     {
-        Animator.SetTrigger("isAlive");
+        Animator.SetBool("isDead", true);
     }
 
     [PunRPC]
-    void setDeadRPC()
+    void setAlive_Dark()
     {
-        Animator.SetTrigger("isDead");
+        Animator.SetBool("isDead", false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -111,7 +103,7 @@ public class Shadow_AnimationController : MonoBehaviour
         if (other.CompareTag("DeadZone"))
         {
             isDead_Shadow = true;
-            PV.RPC("setDeadRPC", RpcTarget.All);
+            PV.RPC("setDead_Dark", RpcTarget.All);
         }
     }
 }

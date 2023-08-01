@@ -72,6 +72,12 @@ MonoBehaviour:
   - setAliveRPC
   - setDeadRPC
   - setDashRPC
+  - setDead
+  - setAlive
+  - setDead_Light
+  - setAlive_Light
+  - setAlive_Dark
+  - setDead_Dark
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

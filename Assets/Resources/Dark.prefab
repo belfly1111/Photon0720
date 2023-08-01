@@ -378,11 +378,8 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: isJumping
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: isDead
-  - Type: 9
-    SynchronizeType: 0
-    Name: isAlive
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
