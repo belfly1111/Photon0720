@@ -27,8 +27,8 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
     [SerializeField] Vector3 previousPosition;
     public static bool inEvent;
-
-
+    
+    public bool aired;
     // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
     // 플레이어가 죽었을 때 세이브 포인트로 이동하기 위한 변수를 저장하는 변수
     public bool isDead;
@@ -43,6 +43,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         this.isDead = false;
         inEvent = false;
         isGround = true;
+        aired = true;
     }
 
     void Start()
@@ -54,9 +55,9 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (PV.IsMine)
         {
-            if(this.isDead)
+            if (this.isDead)
             {
-                if(Input.GetKeyDown(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.R))
                 {
                     transform.position = SavePointPosition;
                     isDead = false;
@@ -64,7 +65,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 return;
             }
 
-            if(!inEvent)
+            if (!inEvent)
             {
                 isGround = IsGrounded();
                 // ← → 이동
@@ -75,14 +76,18 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
                     PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
-                    PV.RPC("SoundRPC", RpcTarget.All, 1);
+                    if (isGround)
+                    {
+                        PV.RPC("SoundRPC", RpcTarget.All, 1);
+                    }
                 }
 
                 // ↑ 점프, 바닥체크
                 if (Input.GetKeyDown(KeyCode.Space) && isGround)
                 {
+                    aired = true;
                     PV.RPC("JumpRPC", RpcTarget.All);
-                    PV.RPC("SoundRPC", RpcTarget.All,2);
+                    PV.RPC("SoundRPC", RpcTarget.All, 0);
                 }
 
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
@@ -92,9 +97,9 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                     inEvent = true;
                     previousPosition = gameObject.transform.position;
                     Interaction();
-                } 
+                }
             }
-            else if(inEvent)
+            else if (inEvent)
             {
                 // 상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
                 // 상호작용 - 08.01 상호 작용 중 플레이어의 좌표를 고정함.
@@ -104,7 +109,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     gameObject.transform.position = previousPosition;
                 }
-                else if(_interactiveObject == null)
+                else if (_interactiveObject == null)
                 {
                     return;
                 }
@@ -117,7 +122,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if(!DS)
+            if (!DS)
             {
                 transform.position = Vector3.Lerp(transform.position, currPos, Time.deltaTime * 10f);
                 transform.rotation = Quaternion.Lerp(transform.rotation, currRot, Time.deltaTime * 10f);
@@ -147,17 +152,17 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         AudioSource audio = GetComponent<AudioSource>();
         if (type == 0)
         {
-        //    audio.Stop();
+            audio.Stop();
         }
-        if(type == 1)
+        if (type == 1)
         {
             if (!audio.isPlaying)
             {
-                audio.clip = walkAudio[Random.Range(0,9)];
+                audio.clip = walkAudio[Random.Range(0, 9)];
                 audio.Play();
             }
         }
-        if(type == 2)
+        if (type == 2)
         {
             if (!audio.isPlaying)
             {
@@ -172,17 +177,17 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     private Quaternion currRot;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-            if (stream.IsWriting)
-            {
-                stream.SendNext(transform.position);
-                stream.SendNext(transform.rotation);
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
 
-            }
-            else if (stream.IsReading)
-            {
-                currPos = (Vector3)stream.ReceiveNext();
-                currRot = (Quaternion)stream.ReceiveNext();
-            }
+        }
+        else if (stream.IsReading)
+        {
+            currPos = (Vector3)stream.ReceiveNext();
+            currRot = (Quaternion)stream.ReceiveNext();
+        }
     }
 
     public bool IsGrounded()
@@ -197,13 +202,21 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("DeadZone"))
+        if (other.CompareTag("DeadZone"))
         {
             this.isDead = true;
         }
-        if(other.CompareTag("SavePoint"))
+        if (other.CompareTag("SavePoint"))
         {
             SavePointPosition = other.transform.position;
         }
-    }    
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") && aired)
+        {
+            PV.RPC("SoundRPC", RpcTarget.All, 2);
+            aired = false;
+        }
+    }
 }

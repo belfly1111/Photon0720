@@ -404,6 +404,7 @@ MonoBehaviour:
     m_Bits: 512
   jumpSpeed: 5
   previousPosition: {x: 0, y: 0, z: 0}
+  aired: 0
   isDead: 0
   isGround: 0
 --- !u!114 &5025623226350121862
