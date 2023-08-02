@@ -50,7 +50,12 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     void Awake()
     {
         Application.targetFrameRate = 144;
+
+        // 현재 16 : 9 비율이지만, 1920 * 1080 비율로 변경하는 코드이다.
+        // 테스트 중 불편함으로 인해 주석처리했으나 제출 시 이를 활성화 시켜야한다.
         Screen.SetResolution(Screen.width, (Screen.width * 9) / 16, false);
+        //Screen.SetResolution(1920, 1080, true);
+
 
         SelectedStage = 0;
         LocalPlayerRule = -1;

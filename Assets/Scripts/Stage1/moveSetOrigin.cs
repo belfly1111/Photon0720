@@ -25,9 +25,10 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     // 대화 & 상호작용 관련 변수.
     private InteractiveObject _interactiveObject;
     public InteractiveObject InteractiveObject { set { _interactiveObject = value; } }
-    [SerializeField] Vector3 previousPosition; 
+    [SerializeField] Vector3 previousPosition;
+    [SerializeField] bool isAnotherDialog;
     public static bool inEvent;
-
+    
 
     // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
     // 플레이어가 죽었을 때 세이브 포인트로 이동하기 위한 변수를 저장하는 변수
@@ -42,6 +43,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         SavePointPosition = new Vector2(-25, 0.5f);
         this.isDead = false;
         inEvent = false;
+        isAnotherDialog = false;
         isGround = true;
     }
 
@@ -65,6 +67,8 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 return;
             }
+
+            // 각자 npc 대화 중에는 서로가 이동도 못하고 아무것도 못한다!
             if(!inEvent)
             {
                 isGround = IsGrounded();
@@ -99,7 +103,12 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
             {
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
                 //상호작용 - 08.01 상호 작용 중 플레이어의 좌표를 고정함.
-                gameObject.transform.position = previousPosition;
+                //만일 상호작용할 애들이 없다면 좌표를 고정시키지는 않는다.
+                if (_interactiveObject != null)
+                {
+                    gameObject.transform.position = previousPosition;
+                }
+                
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     Interaction();
@@ -181,15 +190,9 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Interaction()
     {
-        //만일 상호작용할 애들이 없다면 반환한다.
-        if (_interactiveObject == null)
-        {
-            return;
-        }
-
         _interactiveObject.Interaction();
-
     }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
