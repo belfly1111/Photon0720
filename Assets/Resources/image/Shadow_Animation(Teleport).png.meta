@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b57fed90d72704b458a08a079a40b4f6
+guid: c121cb5ae351c8949ad5ecca27283e6a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 487
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,390 +105,159 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_0
+      name: Shadow_Animation(Teleport)_1
+      rect:
+        serializedVersion: 2
+        x: 2494
+        y: 1090
+        width: 403
+        height: 494
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 099d04800035e2442b6e63f616b42b94
+      internalID: 1349018459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_2
+      rect:
+        serializedVersion: 2
+        x: 1525
+        y: 1088
+        width: 422
+        height: 291
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2c4753f0fc2a8b488e353959ea83eca
+      internalID: -573342675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_3
+      rect:
+        serializedVersion: 2
+        x: 2028
+        y: 1088
+        width: 393
+        height: 362
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48324d6d2030fc44abe0a1adcebb9952
+      internalID: 1908726616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_6
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 1090
+        width: 403
+        height: 244
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a75cd40af66c2d479bcebc8fc67f3b0
+      internalID: 338051961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_8
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 1085
+        width: 403
+        height: 166
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ded282d08f88d341946ccf86927f9c0
+      internalID: -676282441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_9
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 1088
+        width: 437
+        height: 194
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d84b6f1ad8256a4383bb5e409c6ccaf
+      internalID: -37427032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_10
       rect:
         serializedVersion: 2
         x: 16
         y: 504
         width: 378
-        height: 490
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 489
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d94919c0916d5154ab3941614321d6ef
-      internalID: 969877414
+      spriteID: 1a9187df91355ca46af6c27ad9533edf
+      internalID: 571799815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_1
+      name: Shadow_Animation(Teleport)_11
       rect:
         serializedVersion: 2
         x: 414
         y: 504
-        width: 378
-        height: 487
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da95230faca4e2c49b34ece048794f73
-      internalID: -1038770814
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_2
-      rect:
-        serializedVersion: 2
-        x: 819
-        y: 504
         width: 376
-        height: 473
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b066d2164227ce429fdf728863d7023
-      internalID: 414989012
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_3
-      rect:
-        serializedVersion: 2
-        x: 1217
-        y: 499
-        width: 376
-        height: 485
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ef1ab14bf8a47c49a46e190964b194c
-      internalID: -1667569476
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_4
-      rect:
-        serializedVersion: 2
-        x: 1652
-        y: 860
-        width: 56
-        height: 58
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b0d05d1a54758ee419652519bd0863cc
-      internalID: 1366346092
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_5
-      rect:
-        serializedVersion: 2
-        x: 1791
-        y: 494
-        width: 378
-        height: 493
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c7b6aa8b3472d3408614bf3b6800ef2
-      internalID: -1822150580
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_6
-      rect:
-        serializedVersion: 2
-        x: 2213
-        y: 479
-        width: 425
-        height: 490
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 176171b0ceedaed43b82a3327141a921
-      internalID: -1959391039
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_7
-      rect:
-        serializedVersion: 2
-        x: 2652
-        y: 477
-        width: 474
-        height: 489
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79e77d238db36524a964903db9b0d1c8
-      internalID: 673820658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_8
-      rect:
-        serializedVersion: 2
-        x: 3175
-        y: 470
-        width: 425
-        height: 499
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8929f4b12cff5264395cda69bb62bd53
-      internalID: -191697642
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_9
-      rect:
-        serializedVersion: 2
-        x: 3639
-        y: 474
-        width: 378
-        height: 487
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a1aa5f048531f24687523bcef5e999b
-      internalID: 585604997
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_10
-      rect:
-        serializedVersion: 2
-        x: 4101
-        y: 782
-        width: 129
-        height: 97
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 61ae0b4fd4ba5ca4192dd1bb16860bbb
-      internalID: 1241800591
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_11
-      rect:
-        serializedVersion: 2
-        x: 1652
-        y: 789
-        width: 56
-        height: 68
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac026b831fe890a47966f1519fc038ce
-      internalID: 933962489
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_12
-      rect:
-        serializedVersion: 2
-        x: 1659
-        y: 718
-        width: 44
-        height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8cd3a7e174fb6a146b77d2012000f84c
-      internalID: -125266413
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_13
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 16
-        width: 378
-        height: 490
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 331b70310f179374199fa57f66a426cf
-      internalID: 1453498308
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_14
-      rect:
-        serializedVersion: 2
-        x: 402
-        y: 9
-        width: 412
-        height: 495
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 933651e2fee69af44ac135470361506d
-      internalID: -447376802
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_15
-      rect:
-        serializedVersion: 2
-        x: 822
-        y: 13
-        width: 378
-        height: 489
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f0b65c856e2f644ab09ac46494280b9
-      internalID: -1891093978
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_16
-      rect:
-        serializedVersion: 2
-        x: 1210
-        y: 16
-        width: 402
-        height: 483
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b40683a2e9591f64f9c28a241b30e88d
-      internalID: 2124144939
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_17
-      rect:
-        serializedVersion: 2
-        x: 1652
-        y: 267
-        width: 68
-        height: 139
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0bf71fee05f3913409a8fb741c26b56e
-      internalID: 1778066481
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_18
-      rect:
-        serializedVersion: 2
-        x: 1801
-        y: 4
-        width: 378
         height: 486
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -497,20 +266,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfb77a6c432768946afcf97c93e8d71f
-      internalID: -70575585
+      spriteID: 9d22622919ad2194fbc2282f02f30004
+      internalID: -781813793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_19
+      name: Shadow_Animation(Teleport)_12
       rect:
         serializedVersion: 2
-        x: 2235
-        y: 15
-        width: 368
-        height: 460
+        x: 819
+        y: 504
+        width: 376
+        height: 474
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -518,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56c898c055c6661419e1cb59042c8e7d
-      internalID: -1264461391
+      spriteID: cda2d29af34c14f43800c93d356dd333
+      internalID: -94746569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_20
+      name: Shadow_Animation(Teleport)_13
       rect:
         serializedVersion: 2
-        x: 2638
-        y: 17
-        width: 349
-        height: 444
+        x: 1217
+        y: 499
+        width: 376
+        height: 486
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -539,41 +308,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f6621b2ab2e63f44b97304c74fcffcd
-      internalID: -1786409412
+      spriteID: 0540e12ac60bcc44eb59568cd3f2c904
+      internalID: 1685743479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_21
+      name: Shadow_Animation(Teleport)_15
       rect:
         serializedVersion: 2
-        x: 3381
-        y: 397
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84b58a4e6e575804e8dc208d114cea2b
-      internalID: -712628215
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shadow_Animation(Die)_22
-      rect:
-        serializedVersion: 2
-        x: 3432
-        y: 10
-        width: 646
-        height: 450
+        x: 1791
+        y: 494
+        width: 378
+        height: 491
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -581,134 +329,281 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d94b237fe096b924fa8d811161a70c4b
-      internalID: 1458585538
+      spriteID: c5479cdf747d8de4db22d06e2893ddf0
+      internalID: -1126608600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_23
+      name: Shadow_Animation(Teleport)_16
+      rect:
+        serializedVersion: 2
+        x: 2213
+        y: 480
+        width: 425
+        height: 490
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fa13fae5d99a3a49a9e2f7f29e1b0c6
+      internalID: 1491133024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_17
+      rect:
+        serializedVersion: 2
+        x: 2653
+        y: 477
+        width: 473
+        height: 489
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c45169a333511fc4eb9b5600183330cd
+      internalID: -2034626696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_18
       rect:
         serializedVersion: 2
         x: 3175
-        y: 378
-        width: 7
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 470
+        width: 425
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7eabbc655964174dbf7603b766076f7
-      internalID: 834356304
+      spriteID: 4929865259aeceb438c411789ddd8826
+      internalID: 136642207
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_24
+      name: Shadow_Animation(Teleport)_19
       rect:
         serializedVersion: 2
-        x: 1705
-        y: 257
-        width: 20
-        height: 76
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 3639
+        y: 475
+        width: 378
+        height: 487
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e07ded11c28dbc74ea888d45d654b687
-      internalID: 1134400289
+      spriteID: f7940b130706705408d30be2d5c5c5f3
+      internalID: -195127386
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_25
+      name: Shadow_Animation(Teleport)_24
       rect:
         serializedVersion: 2
-        x: 3110
-        y: 137
-        width: 246
-        height: 232
-      alignment: 9
-      pivot: {x: 0.5, y: -0.48}
+        x: 28
+        y: 16
+        width: 378
+        height: 491
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 546bc4855adaeed40a6270057c2b669d
-      internalID: 1000262819
+      spriteID: a726fbce407c1ea40969577ce6916cdf
+      internalID: 755908920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_26
+      name: Shadow_Animation(Teleport)_25
       rect:
         serializedVersion: 2
-        x: 4130
-        y: 191
-        width: 114
-        height: 110
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 402
+        y: 11
+        width: 412
+        height: 493
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97a100540cd5ad4478aac2b45061ab11
-      internalID: -800678165
+      spriteID: c82d786c360aa5842b5014a1e0279837
+      internalID: 1944611011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_27
+      name: Shadow_Animation(Teleport)_26
       rect:
         serializedVersion: 2
-        x: 3250
-        y: 24
-        width: 5
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 822
+        y: 13
+        width: 378
+        height: 490
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ef015e0040a91e438d94c4c95e4a48d
-      internalID: 1220017493
+      spriteID: b48dec5ab0a6a1e4abd1cc91ac17ad51
+      internalID: -1358786372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shadow_Animation(Die)_28
+      name: Shadow_Animation(Teleport)_27
       rect:
         serializedVersion: 2
-        x: 3844
-        y: 9
-        width: 28
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1210
+        y: 16
+        width: 400
+        height: 482
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83c2771587c7e5b408e8433e5e8d8fc1
-      internalID: 1384030405
+      spriteID: bd4c2c70d5e3db348b5d3667a904c7c6
+      internalID: -482899104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_29
+      rect:
+        serializedVersion: 2
+        x: 1801
+        y: 4
+        width: 376
+        height: 490
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad317b8e85993ff4eb5122bc14afc336
+      internalID: 853152013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_30
+      rect:
+        serializedVersion: 2
+        x: 2235
+        y: 6
+        width: 366
+        height: 469
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b794404b98999b439c975247300c718
+      internalID: 1391694096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_31
+      rect:
+        serializedVersion: 2
+        x: 2638
+        y: 13
+        width: 347
+        height: 442
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9126271bba0eb944d9275759527a8dd2
+      internalID: 667938346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_33
+      rect:
+        serializedVersion: 2
+        x: 3423
+        y: 10
+        width: 649
+        height: 478
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e5dcca43edb81f4bbead9899987ebee
+      internalID: 592536553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Animation(Teleport)_37
+      rect:
+        serializedVersion: 2
+        x: 3112
+        y: 131
+        width: 244
+        height: 227
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a784cf2d061414249bf90e08f58ecf96
+      internalID: -771303512
       vertices: []
       indices: 
       edges: []
@@ -724,35 +619,47 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Shadow_Animation(Die)_15: -1891093978
-      Shadow_Animation(Die)_0: 969877414
-      Shadow_Animation(Die)_10: 1241800591
-      Shadow_Animation(Die)_19: -1264461391
-      Shadow_Animation(Die)_27: 1220017493
-      Shadow_Animation(Die)_21: -712628215
-      Shadow_Animation(Die)_7: 673820658
-      Shadow_Animation(Die)_12: -125266413
-      Shadow_Animation(Die)_2: 414989012
-      Shadow_Animation(Die)_8: -191697642
-      Shadow_Animation(Die)_26: -800678165
-      Shadow_Animation(Die)_4: 1366346092
-      Shadow_Animation(Die)_6: -1959391039
-      Shadow_Animation(Die)_24: 1134400289
-      Shadow_Animation(Die)_1: -1038770814
-      Shadow_Animation(Die)_3: -1667569476
-      Shadow_Animation(Die)_28: 1384030405
-      Shadow_Animation(Die)_5: -1822150580
-      Shadow_Animation(Die)_14: -447376802
-      Shadow_Animation(Die)_11: 933962489
-      Shadow_Animation(Die)_20: -1786409412
-      Shadow_Animation(Die)_9: 585604997
-      Shadow_Animation(Die)_13: 1453498308
-      Shadow_Animation(Die)_25: 1000262819
-      Shadow_Animation(Die)_17: 1778066481
-      Shadow_Animation(Die)_23: 834356304
-      Shadow_Animation(Die)_16: 2124144939
-      Shadow_Animation(Die)_18: -70575585
-      Shadow_Animation(Die)_22: 1458585538
+      Shadow_Animation(Teleport)_0: -1072115344
+      Shadow_Animation(Teleport)_11: -781813793
+      Shadow_Animation(Teleport)_30: 1391694096
+      Shadow_Animation(Teleport)_2: -573342675
+      Shadow_Animation(Teleport)_13: 1685743479
+      Shadow_Animation(Teleport)_40: -1854564796
+      Shadow_Animation(Teleport)_3: 1908726616
+      Shadow_Animation(Teleport)_12: -94746569
+      Shadow_Animation(Teleport)_10: 571799815
+      Shadow_Animation(Teleport)_37: -771303512
+      Shadow_Animation(Teleport)_20: -1704415426
+      Shadow_Animation(Teleport)_29: 853152013
+      Shadow_Animation(Teleport)_14: 1346363946
+      Shadow_Animation(Teleport)_21: -1805746705
+      Shadow_Animation(Teleport)_38: 440945017
+      Shadow_Animation(Teleport)_7: -790877042
+      Shadow_Animation(Teleport)_18: 136642207
+      Shadow_Animation(Teleport)_19: -195127386
+      Shadow_Animation(Teleport)_33: 592536553
+      Shadow_Animation(Teleport)_5: 2001594171
+      Shadow_Animation(Teleport)_15: -1126608600
+      Shadow_Animation(Teleport)_9: -37427032
+      Shadow_Animation(Teleport)_35: -1636469063
+      Shadow_Animation(Teleport)_32: -1578246282
+      Shadow_Animation(Teleport)_17: -2034626696
+      Shadow_Animation(Teleport)_27: -482899104
+      Shadow_Animation(Teleport)_34: -1852481149
+      Shadow_Animation(Teleport)_24: 755908920
+      Shadow_Animation(Teleport)_22: 964145102
+      Shadow_Animation(Teleport)_39: -1669070136
+      Shadow_Animation(Teleport)_16: 1491133024
+      Shadow_Animation(Teleport)_4: -1175461433
+      Shadow_Animation(Teleport)_23: 350179792
+      Shadow_Animation(Teleport)_31: 667938346
+      Shadow_Animation(Teleport)_28: 460690683
+      Shadow_Animation(Teleport)_26: -1358786372
+      Shadow_Animation(Teleport)_36: 1037849364
+      Shadow_Animation(Teleport)_6: 338051961
+      Shadow_Animation(Teleport)_1: 1349018459
+      Shadow_Animation(Teleport)_25: 1944611011
+      Shadow_Animation(Teleport)_8: -676282441
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

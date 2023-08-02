@@ -78,6 +78,7 @@ MonoBehaviour:
   - setAlive_Light
   - setAlive_Dark
   - setDead_Dark
+  - TeleportAnimationRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

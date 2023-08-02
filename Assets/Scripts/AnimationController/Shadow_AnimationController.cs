@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.VisualScripting;
 
 public class Shadow_AnimationController : MonoBehaviour
 {
@@ -56,7 +57,6 @@ public class Shadow_AnimationController : MonoBehaviour
                 {
                     Animator.SetBool("isWalking", true);
                     Animator.SetBool("isIdle", false);
-
                 }
                 else
                 {
@@ -74,6 +74,16 @@ public class Shadow_AnimationController : MonoBehaviour
                 {
                     Animator.SetBool("isJumping", false);
                 }
+
+                // 텔레포트 스킬 기능을 여기서 한번에 관리하고 싶었으나,
+                // 더 복잡해지는 결과를 낳기 때문에 Skillmanager_Stage1에서
+                // 한번에 관리한다.
+                /*
+                if (Input.GetKeyDown(KeyCode.K) && isGround)
+                {
+                    Animator.SetBool("isTeleport", true);
+                }
+                */
             }
         }
     }
@@ -84,6 +94,12 @@ public class Shadow_AnimationController : MonoBehaviour
         Animator.SetBool("isJumping", true);
         Animator.SetBool("isIdle", false);
         Animator.SetBool("isWalking", false);
+    }
+
+    [PunRPC]
+    void TeleportAnimationRPC()
+    {
+        
     }
 
     [PunRPC]

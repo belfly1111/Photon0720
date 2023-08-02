@@ -27,7 +27,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public bool canTP = true;
     public moveSetOrigin mso;
 
-
+    
     void FindPrefab()
     {
         Light = GameObject.Find("Light(Clone)");
@@ -117,6 +117,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         canPassive = false;
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
 
+
         //TP에서는 위치만 가져오도록 하기 + 캐릭터 안보이게
         PV.RPC("TP", RpcTarget.AllBuffered);
 
@@ -132,9 +133,17 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     IEnumerator SRdisabled(Rigidbody2D RB){
         moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
         SpriteRenderer SR = Shadow.GetComponent<SpriteRenderer>();
+        Animator ShadowAnimator = Shadow.GetComponent<Animator>();
+
+        ShadowAnimator.SetBool("isTeleport", true);
+        yield return new WaitForSeconds(0.3f);
+
         SR.enabled = false;
         yield return new WaitForSeconds(5.3f);
         SR.enabled = true;
+
+        ShadowAnimator.SetBool("isTeleport", false);
+
         mso.DS = false;
         RB.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
