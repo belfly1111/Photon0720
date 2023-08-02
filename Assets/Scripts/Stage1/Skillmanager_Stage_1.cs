@@ -136,16 +136,17 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Animator ShadowAnimator = Shadow.GetComponent<Animator>();
 
         ShadowAnimator.SetBool("isTeleport", true);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
 
         SR.enabled = false;
-        yield return new WaitForSeconds(5.3f);
+        yield return new WaitForSeconds(5.0f);
         SR.enabled = true;
 
         ShadowAnimator.SetBool("isTeleport", false);
 
         mso.DS = false;
         RB.constraints = RigidbodyConstraints2D.FreezeRotation;
+        RB.velocity = new Vector2(0, -1);
     }
 
     IEnumerator SetMark(Vector3 SPos)
@@ -153,7 +154,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         GameObject Marker = Instantiate(Dport,SPos,Quaternion.identity);
         GameObject TMP = Shadow;
         Shadow = Marker;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5.0f);
         if(canTP){
             Vector2 MP = Shadow.transform.position;
             Shadow = TMP;
@@ -239,6 +240,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         mso.DS = true;
         
         StartCoroutine(SRdisabled(RB));
+
 
         RB.constraints = RigidbodyConstraints2D.FreezeAll;
     }
