@@ -29,8 +29,8 @@ public class InteractiveObject : MonoBehaviour
         isDialoging = false;
         curTextNum = 0;
         NPC_1[0] = "[Light]\n괜찮아?";
-        NPC_1[1] = "[Shadow]\n(으... 머리 아파...) 감사합니다... 혹시 여기가 어딘가요?";
-        NPC_1[2] = "[Light]\n좋아, 일단 저를 따라와 보실래요?";
+        NPC_1[1] = "[Shadow]\n(으... 머리 아파...) 도와주셔서 감사합니다... 혹시 여기가 어딘가요?";
+        NPC_1[2] = "[Light]\n(여기? )";
 
     }
     private void OnTriggerEnter2D(Collider2D collision)

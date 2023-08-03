@@ -32,15 +32,14 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
     // 플레이어가 죽었을 때 세이브 포인트로 이동하기 위한 변수를 저장하는 변수
     public bool isDead;
-    private Vector2 SavePointPosition;
+    public Vector2 SavePointPosition;
 
     public bool isGround;
-    //Vector3 curPos;
 
     void Awake()
     {
         SavePointPosition = new Vector2(-25, 0.5f);
-        this.isDead = false;
+        isDead = false;
         inEvent = false;
         isGround = true;
         aired = true;
@@ -55,12 +54,11 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (PV.IsMine)
         {
-            if (this.isDead)
+            if (isDead)
             {
-                if (Input.GetKeyDown(KeyCode.R))
+                if(Input.GetKey(KeyCode.R))
                 {
-                    transform.position = SavePointPosition;
-                    isDead = false;
+                    PV.RPC("RevivePoint", RpcTarget.All);
                 }
                 return;
             }
@@ -92,7 +90,8 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
                 //상호작용 - 08.01 땅에 붙어있어야 대화가 가능함.
-                if (Input.GetKeyDown(KeyCode.F) && isGround)
+                //상호작용 - 08.03 다른 사람이 대화중이면 대화할 수 없음.
+                if (Input.GetKeyDown(KeyCode.F) && isGround && !inEvent)
                 {
                     inEvent = true;
                     previousPosition = gameObject.transform.position;
@@ -172,6 +171,12 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    [PunRPC]
+    void RevivePoint()
+    {
+        transform.position = SavePointPosition;
+        isDead = false;
+    }
 
     private Vector3 currPos;
     private Quaternion currRot;
@@ -204,7 +209,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (other.CompareTag("DeadZone"))
         {
-            this.isDead = true;
+            isDead = true;
         }
         if (other.CompareTag("SavePoint"))
         {

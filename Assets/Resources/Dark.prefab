@@ -241,6 +241,7 @@ MonoBehaviour:
   previousPosition: {x: 0, y: 0, z: 0}
   aired: 0
   isDead: 0
+  SavePointPosition: {x: 0, y: 0}
   isGround: 0
 --- !u!114 &-8649996401001896956
 MonoBehaviour:

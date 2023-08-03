@@ -27,30 +27,15 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public bool canTP = true;
     public moveSetOrigin mso;
 
-    
-    void FindPrefab()
-    {
-        Light = GameObject.Find("Light(Clone)");
-        Shadow = GameObject.Find("Dark(Clone)");
-    }
 
-    void FindPrefabCam()
+    private void Awake()
     {
-        if (PhotonManeger.LocalPlayerRule == 1)
-        {
-            VM.Follow = Light.transform.GetChild(0);
-        }
-        else if (PhotonManeger.LocalPlayerRule == 0)
-        {
-            VM.Follow = Shadow.transform.GetChild(0);
-        }
+        PV = GetComponent<PhotonView>();
     }
-
     void Start()
     {
-        Invoke("FindPrefab", 1f);
-        Invoke("FindPrefabCam", 1f);
-        PV = this.GetComponent<PhotonView>();
+        Invoke("FindPrefab", 1.0f);
+        Invoke("FindPrefabCam", 1.5f);
     }
 
     void Update()
@@ -59,7 +44,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         {
             UseSkill();
         }
-        if(Input.GetKeyDown(KeyCode.K) && !moveSetOrigin.inEvent)
+        if (Input.GetKeyDown(KeyCode.K) && !moveSetOrigin.inEvent)
         {
             UniqueSkill();
         }
@@ -106,6 +91,23 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             StartCoroutine("Teleport");
         }
     }
+
+    void FindPrefab()
+    {
+        Light = GameObject.Find("Light(Clone)");
+        Shadow = GameObject.Find("Dark(Clone)");
+    }
+    void FindPrefabCam()
+    {
+        if (PhotonManeger.LocalPlayerRule == 1)
+        {
+            VM.Follow = Light.transform.GetChild(0);
+        }
+        else if (PhotonManeger.LocalPlayerRule == 0)
+        {
+            VM.Follow = Shadow.transform.GetChild(0);
+        }
+    }
     #endregion
 
     //Dark 텔레포트 (구현중)
@@ -116,7 +118,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
         canPassive = false;
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
-
 
         //TP에서는 위치만 가져오도록 하기 + 캐릭터 안보이게
         PV.RPC("TP", RpcTarget.AllBuffered);
