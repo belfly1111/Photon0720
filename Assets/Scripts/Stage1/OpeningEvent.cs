@@ -29,10 +29,16 @@ public class OpeningEvent : MonoBehaviourPun
 
     [SerializeField] Image BlackImg;
     [SerializeField] Image NextIcon;
+    [SerializeField] Image Light_image;
+    [SerializeField] Image Shadow_image;
+    [SerializeField] TMP_Text Light_Profile;
+    [SerializeField] TMP_Text Shadow_Profile;
+
 
     [SerializeField] GameObject SelectLightBtn;
     [SerializeField] GameObject SelectShadowBtn;
     [SerializeField] GameObject Skillmaneger_Stage_1;
+
 
     bool LightReady;
     bool DarkReady;
@@ -49,6 +55,12 @@ public class OpeningEvent : MonoBehaviourPun
         DarkReady = false;
         isDialoging = false;
         StartFadeIn = false;
+
+        // 일러스트와 소개문구 초기화.
+        Light_image.enabled = false;
+        Shadow_image.enabled = false;
+        Light_Profile.enabled = false;
+        Shadow_Profile.enabled = false;
 
         // 오프닝 대화는 직접 초기화함.
         OpeningText.text = "...";
@@ -70,6 +82,12 @@ public class OpeningEvent : MonoBehaviourPun
             {
                 NextIcon.enabled = false;
                 OpeningText.enabled = false;
+
+                // 일러스트와 소개문구 표시
+                Light_image.enabled = true;
+                Shadow_image.enabled = true;
+                Light_Profile.enabled = true;
+                Shadow_Profile.enabled = true;
 
                 if (!LightReady)
                 {
@@ -100,6 +118,13 @@ public class OpeningEvent : MonoBehaviourPun
             }
 
             Skillmaneger_Stage_1.SetActive(true);
+
+            // 일러스트와 소개문구 표시
+            Light_image.enabled = false;
+            Shadow_image.enabled = false;
+            Light_Profile.enabled = false;
+            Shadow_Profile.enabled = false;
+
             SelectLightBtn.SetActive(false);
             SelectShadowBtn.SetActive(false);
             StartFadeIn = true;

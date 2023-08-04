@@ -189,8 +189,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Rigidbody2D rb = Light.GetComponent<Rigidbody2D>();
         Vector2 DPos = rb.position + dir.normalized * dashingPower;
 
-        //layerMask에서 플레이어 레이어 삭제
-        int layerMask = ~(1 << LayerMask.NameToLayer("Player_Light"));
+        //layerMask에서 플레이어 레이어, Scaffolding_Light 제외;
+        int layerMask = ~(1 << LayerMask.NameToLayer("Player_Light") | (1 << LayerMask.NameToLayer("Scaffolding_Shadow")));
         //레이케스트 중심이 (0,0)일 경우 발에서 레이케스트를 쏘기 때문에 지하로 들어가는 것을 Vector2(0,0.5f)를 추가함으로 정 가운데서 레이케스트를 쏨
         RaycastHit2D RCh = Physics2D.Raycast(rb.position + new Vector2(0, 0.5f), dir.normalized, dir.normalized.magnitude * dashingPower, layerMask);
 
