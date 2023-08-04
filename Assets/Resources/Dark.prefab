@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -8649996401001896956}
   - component: {fileID: -5730772242730143593}
   - component: {fileID: 5129419667822447535}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Dark
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -236,13 +236,13 @@ MonoBehaviour:
   RB_groundCheck: {fileID: 3244911331013244387}
   jumpableGround:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   jumpSpeed: 5
+  isGround: 0
   previousPosition: {x: 0, y: 0, z: 0}
   aired: 0
   isDead: 0
   SavePointPosition: {x: 0, y: 0}
-  isGround: 0
 --- !u!114 &-8649996401001896956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333466571988164524}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: CameraLocate
   m_TagString: Untagged
   m_Icon: {fileID: 0}

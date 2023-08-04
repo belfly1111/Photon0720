@@ -21,6 +21,8 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private BoxCollider2D RB_groundCheck;
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] int jumpSpeed = 5;
+    public bool isGround;
+
 
     // 대화 & 상호작용 관련 변수.
     private InteractiveObject _interactiveObject;
@@ -28,13 +30,14 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] Vector3 previousPosition;
     public static bool inEvent;
     
+    // 소리 관련 상호 작용 변수
     public bool aired;
+    AudioSource audio;
+
     // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
     // 플레이어가 죽었을 때 세이브 포인트로 이동하기 위한 변수를 저장하는 변수
     public bool isDead;
     public Vector2 SavePointPosition;
-
-    public bool isGround;
 
     void Awake()
     {
@@ -43,10 +46,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         inEvent = false;
         isGround = true;
         aired = true;
-    }
-
-    void Start()
-    {
+        audio = GetComponent<AudioSource>();
         PV = this.GetComponent<PhotonView>();
     }
 
@@ -81,7 +81,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 }
 
                 // ↑ 점프, 바닥체크
-                if (Input.GetKeyDown(KeyCode.Space) && isGround)
+                if (Input.GetKey(KeyCode.Space) && isGround)
                 {
                     aired = true;
                     PV.RPC("JumpRPC", RpcTarget.All);
@@ -94,23 +94,17 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 if (Input.GetKeyDown(KeyCode.F) && isGround && !inEvent)
                 {
                     inEvent = true;
-                    previousPosition = gameObject.transform.position;
                     Interaction();
+                    previousPosition = gameObject.transform.position;
                 }
             }
             else if (inEvent)
             {
                 // 상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
-                // 상호작용 - 08.01 상호 작용 중 플레이어의 좌표를 고정함.
-                // 만일 상호작용할 애들이 없다면 좌표를 고정시키지는 않는다.
-                // 
+                // 상호작용 - 08.01 상호 작용 중 플레이어의 좌표를 고정함.              
                 if (_interactiveObject != null)
                 {
                     gameObject.transform.position = previousPosition;
-                }
-                else if (_interactiveObject == null)
-                {
-                    return;
                 }
 
                 if (Input.GetKeyDown(KeyCode.F))
@@ -138,8 +132,11 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void JumpRPC()
     {
-        isGround = false;
-        RB.velocity = new Vector2(RB.velocity.x, jumpSpeed);
+        if (isGround)
+        {
+            isGround = false;
+            RB.velocity = new Vector2(RB.velocity.x, jumpSpeed);
+        }
     }
 
     [PunRPC]
@@ -148,7 +145,6 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void SoundRPC(int type)
     {
-        AudioSource audio = GetComponent<AudioSource>();
         if (type == 0)
         {
             audio.Stop();
@@ -197,11 +193,17 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
+        return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
     }
 
     public void Interaction()
     {
+        if (_interactiveObject == null)
+        {
+            inEvent = false;
+            return;
+        }
+
         _interactiveObject.Interaction();
     }
 

@@ -55,13 +55,13 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     public void UseSkill()
     {
         // 플레이어가 선택한게 'Light'인 경우
-        if (PhotonManeger.LocalPlayerRule == 1 && canSkill && canDash && !Light_AnimationController.isDead_Light)
+        if (PhotonManeger.instance.LocalPlayerRule == 1 && canSkill && canDash && !Light_AnimationController.isDead_Light)
         {
             StartCoroutine("Dash");
         }
 
         // 플레이어가 선택한게 'Dark'인 경우
-        else if (PhotonManeger.LocalPlayerRule == 0 && canSkill && !Shadow_AnimationController.isDead_Shadow)
+        else if (PhotonManeger.instance.LocalPlayerRule == 0 && canSkill && !Shadow_AnimationController.isDead_Shadow)
         {
             return;
         }
@@ -69,12 +69,12 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     public void UniqueSkill(){
 
-        if (PhotonManeger.LocalPlayerRule == 1 && canPassive && !Light_AnimationController.isDead_Light)
+        if (PhotonManeger.instance.LocalPlayerRule == 1 && canPassive && !Light_AnimationController.isDead_Light)
         {
             StartCoroutine("flashTime");
         }
 
-        else if (PhotonManeger.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
+        else if (PhotonManeger.instance.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
         {
             moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
             Debug.Log("고유스킬 시작");
@@ -86,7 +86,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             else Debug.Log("텔포실패 이유: isGround = " + mso.isGround);
         }
 
-        else if (PhotonManeger.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
+        else if (PhotonManeger.instance.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
         {
             StartCoroutine("Teleport");
         }
@@ -99,11 +99,11 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     }
     void FindPrefabCam()
     {
-        if (PhotonManeger.LocalPlayerRule == 1)
+        if (PhotonManeger.instance.LocalPlayerRule == 1)
         {
             VM.Follow = Light.transform.GetChild(0);
         }
-        else if (PhotonManeger.LocalPlayerRule == 0)
+        else if (PhotonManeger.instance.LocalPlayerRule == 0)
         {
             VM.Follow = Shadow.transform.GetChild(0);
         }
@@ -190,7 +190,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         Vector2 DPos = rb.position + dir.normalized * dashingPower;
 
         //layerMask에서 플레이어 레이어 삭제
-        int layerMask = ~(1 << LayerMask.NameToLayer("Player"));
+        int layerMask = ~(1 << LayerMask.NameToLayer("Player_Light"));
         //레이케스트 중심이 (0,0)일 경우 발에서 레이케스트를 쏘기 때문에 지하로 들어가는 것을 Vector2(0,0.5f)를 추가함으로 정 가운데서 레이케스트를 쏨
         RaycastHit2D RCh = Physics2D.Raycast(rb.position + new Vector2(0, 0.5f), dir.normalized, dir.normalized.magnitude * dashingPower, layerMask);
 

@@ -45,7 +45,7 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
     // 1. 미선택 : -1
     // 2. Light : 1
     // 3. Dark : 0
-    public static int LocalPlayerRule;
+    public int LocalPlayerRule;
 
     void Awake()
     {

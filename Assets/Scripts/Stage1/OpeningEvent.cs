@@ -64,7 +64,7 @@ public class OpeningEvent : MonoBehaviourPun
         // 07.28 현재는 개인 추가 컷신이 없으므로 페이드인 효과만 추가함.
 
         // 1. 스페이스를 눌러 오프닝 대화를 진행함.
-        if (Input.GetKey(KeyCode.Space) && !isDialoging && dialogNum <= 3 && PhotonManeger.LocalPlayerRule == -1)
+        if (Input.GetKey(KeyCode.Space) && !isDialoging && dialogNum <= 3 && PhotonManeger.instance.LocalPlayerRule == -1)
         {
             if (dialogNum > 2)
             {
@@ -88,19 +88,22 @@ public class OpeningEvent : MonoBehaviourPun
         }
 
         // 2. 역할군을 선택함. 역할군을 선택한 뒤에는 되돌릴 수 없음.
-        if (LightReady && DarkReady && !isDialoging && PhotonManeger.LocalPlayerRule != -1 && !StartFadeIn)
+        if (LightReady && DarkReady && !isDialoging && PhotonManeger.instance.LocalPlayerRule != -1 && !StartFadeIn)
         {
-            if (PhotonManeger.LocalPlayerRule == 1)
+            if (PhotonManeger.instance.LocalPlayerRule == 1)
             {
-                PhotonNetwork.Instantiate("Light", new Vector3(-26, 0.5f, 0), Quaternion.identity);
+                //PhotonNetwork.Instantiate("Light", new Vector3(-26, 0.5f, 0), Quaternion.identity);
+                PhotonNetwork.Instantiate("Light", new Vector3(47.84431f, -11.28937f, 0), Quaternion.identity);
+
             }
-            else if (PhotonManeger.LocalPlayerRule == 0)
+            else if (PhotonManeger.instance.LocalPlayerRule == 0)
             {
-                PhotonNetwork.Instantiate("Dark", new Vector3(-25, 0.5f, 0), Quaternion.identity);
+                //PhotonNetwork.Instantiate("Dark", new Vector3(-25, 0.5f, 0), Quaternion.identity);
+                PhotonNetwork.Instantiate("Dark", new Vector3(47.84431f, -11.28937f, 0), Quaternion.identity);
+
             }
 
             Skillmaneger_Stage_1.SetActive(true);
-
             SelectLightBtn.SetActive(false);
             SelectShadowBtn.SetActive(false);
             StartFadeIn = true;
@@ -142,11 +145,11 @@ public class OpeningEvent : MonoBehaviourPun
         SelectShadowBtn.SetActive(false);
 
         // '1' 인 경우 'Light'
-        PhotonManeger.LocalPlayerRule = 1;
+        PhotonManeger.instance.LocalPlayerRule = 1;
 
         Debug.Log("Light를 선택하셨습니다.");
 
-        photonView.RPC("SetInActiveBtn", RpcTarget.OthersBuffered, PhotonManeger.LocalPlayerRule);
+        photonView.RPC("SetInActiveBtn", RpcTarget.OthersBuffered, PhotonManeger.instance.LocalPlayerRule);
         photonView.RPC("setLightReady", RpcTarget.AllBuffered);
 
     }
@@ -157,11 +160,11 @@ public class OpeningEvent : MonoBehaviourPun
         SelectShadowBtn.SetActive(false);
 
         // '0' 인 경우 'Dark'
-        PhotonManeger.LocalPlayerRule = 0;
+        PhotonManeger.instance.LocalPlayerRule = 0;
 
         Debug.Log("Dark를 선택하셨습니다.");
 
-        photonView.RPC("SetInActiveBtn", RpcTarget.OthersBuffered, PhotonManeger.LocalPlayerRule);
+        photonView.RPC("SetInActiveBtn", RpcTarget.OthersBuffered, PhotonManeger.instance.LocalPlayerRule);
         photonView.RPC("setDarkReady", RpcTarget.AllBuffered);
     }
 
