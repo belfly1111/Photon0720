@@ -236,7 +236,7 @@ MonoBehaviour:
   RB_groundCheck: {fileID: 3244911331013244387}
   jumpableGround:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 2560
   jumpSpeed: 5
   isGround: 0
   previousPosition: {x: 0, y: 0, z: 0}

@@ -92,15 +92,11 @@ public class OpeningEvent : MonoBehaviourPun
         {
             if (PhotonManeger.instance.LocalPlayerRule == 1)
             {
-                //PhotonNetwork.Instantiate("Light", new Vector3(-26, 0.5f, 0), Quaternion.identity);
-                PhotonNetwork.Instantiate("Light", new Vector3(47.84431f, -11.28937f, 0), Quaternion.identity);
-
+                PhotonNetwork.Instantiate("Light", new Vector3(-26, 0.5f, 0), Quaternion.identity);
             }
             else if (PhotonManeger.instance.LocalPlayerRule == 0)
             {
-                //PhotonNetwork.Instantiate("Dark", new Vector3(-25, 0.5f, 0), Quaternion.identity);
-                PhotonNetwork.Instantiate("Dark", new Vector3(47.84431f, -11.28937f, 0), Quaternion.identity);
-
+                PhotonNetwork.Instantiate("Dark", new Vector3(-25, 0.5f, 0), Quaternion.identity);
             }
 
             Skillmaneger_Stage_1.SetActive(true);
