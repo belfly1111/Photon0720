@@ -156,7 +156,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         GameObject TMP = Shadow;
         Shadow = Marker;
         yield return new WaitForSeconds(5.0f);
-        if(canTP){
+        if (canTP){
             Vector2 MP = Shadow.transform.position;
             Shadow = TMP;
             Shadow.transform.position = MP;

@@ -164,6 +164,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SM: {fileID: 0}
+  _isTouchingLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4299124305899392680
 GameObject:
   m_ObjectHideFlags: 0
