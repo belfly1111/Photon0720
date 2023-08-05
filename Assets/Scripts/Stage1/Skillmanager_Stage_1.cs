@@ -67,12 +67,7 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         // 플레이어가 선택한게 'Dark'인 경우
         else if (PhotonManeger.instance.LocalPlayerRule == 0 && canSkill && !Shadow_AnimationController.isDead_Shadow)
         {
-            if(canPassive){
-                if(IsKey){
-                    PV.RPC("RPCDestroy",RpcTarget.All);
-                    //사용문구 추가 필요
-                }
-            }
+            return;
         }
     }
 
@@ -282,10 +277,5 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         BL.SetActive(!BL.activeSelf);
     }
 
-    [PunRPC]
-    void RPCDestroy(){
-        Key.gameObject.SetActive(false);
-        IsKey = false;
-    }
     #endregion
 }

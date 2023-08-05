@@ -15,6 +15,8 @@ public class Keyobj : MonoBehaviourPun
     public Skillmanager_Stage_1 SM;
     public Rigidbody2D RB;
     public SpriteRenderer SR;
+    public GameObject KeyDoor;
+    public GameObject Key;
     public bool IsDark = false;
     
     void Start(){
@@ -25,6 +27,13 @@ public class Keyobj : MonoBehaviourPun
     void Update(){
         if(IsDark){
             RB.transform.position = SM.Shadow.transform.position + new Vector3(0f,1.5f,0f);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.name == "KeyDoor"){
+            Destroy(KeyDoor);
+            Destroy(Key);
         }
     }
 
