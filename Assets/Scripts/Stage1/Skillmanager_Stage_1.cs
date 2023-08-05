@@ -58,6 +58,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         if (PhotonManeger.instance.LocalPlayerRule == 1 && canSkill && canDash && !Light_AnimationController.isDead_Light)
         {
             StartCoroutine("Dash");
+            moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
+            mso.PV.RPC("SoundRPC", RpcTarget.All, 3);
         }
 
         // 플레이어가 선택한게 'Dark'인 경우
@@ -72,6 +74,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         if (PhotonManeger.instance.LocalPlayerRule == 1 && canPassive && !Light_AnimationController.isDead_Light)
         {
             StartCoroutine("flashTime");
+            moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
+            mso.PV.RPC("SoundRPC", RpcTarget.All, 6);
         }
 
         else if (PhotonManeger.instance.LocalPlayerRule == 0 && canPassive && !Shadow_AnimationController.isDead_Shadow)
@@ -117,7 +121,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     IEnumerator Teleport()
     {   
         if(!PV.IsMine) yield return null;
-
+        moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
+        mso.skilled = true;
         canPassive = false;
         Rigidbody2D RB = Shadow.GetComponent<Rigidbody2D>();
 
@@ -156,19 +161,20 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {   
         GameObject Marker = Instantiate(Dport,SPos,Quaternion.identity);
         GameObject TMP = Shadow;
-        
+        moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
         Shadow = Marker;
         yield return new WaitForSeconds(5.0f);
         if (canTP){
             Vector2 MP = Shadow.transform.position;
             Shadow = TMP;
             Shadow.transform.position = MP;
-            moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
             mso.PV.RPC("SoundRPC", RpcTarget.All, 5);
         }
         else{
             Shadow = TMP;
         }
+        
+        mso.skilled = false;
         Destroy(Marker);
         //Shadow움직임 제한 풀기
     }
@@ -181,10 +187,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         if(!PV.IsMine) yield return null;
         canSkill = false;
         Debug.Log("Dash코드실행");
-
         PV.RPC("DASH", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(3f);
-
         canSkill = true;
         Debug.Log("스킬 재사용 가능!");
     }
@@ -257,8 +261,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void DASH()
     {
         Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
-        mso.PV.RPC("SoundRPC", RpcTarget.All, 3);
         StartCoroutine(LerpDash(dir));
     }
 
@@ -267,8 +269,6 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void Flash(){
         GameObject BL = Light.transform.GetChild(1).gameObject;
         BL.SetActive(!BL.activeSelf);
-        moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
-        mso.PV.RPC("SoundRPC", RpcTarget.All, 6);
     }
 
     #endregion

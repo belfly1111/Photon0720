@@ -35,6 +35,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     
     // 소리 관련 상호 작용 변수
     public bool aired;
+    public bool skilled;
     
 
     // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
@@ -49,6 +50,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         inEvent = false;
         isGround = true;
         aired = true;
+        skilled = false;
         
         PV = this.GetComponent<PhotonView>();
     }
@@ -77,7 +79,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     // 재접속시 filpX를 동기화해주기 위해서 AllBuffered
                     PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis);
-                    if (isGround)
+                    if (isGround && !skilled)
                     {
                         PV.RPC("SoundRPC", RpcTarget.All, 1);
                     }
