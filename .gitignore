@@ -76,3 +76,5 @@ ProjectSettings/ShaderGraphSettings.asset
 .vscode/settings.json
 ProjectSettings/BurstAotSettings_StandaloneOSX.json
 Assets/Scripts/Skillmanager.cs.meta
+
+.fake

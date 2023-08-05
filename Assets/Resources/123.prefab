@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8800965480379110283}
   - component: {fileID: -3291153010214839574}
   - component: {fileID: -2053413916045348353}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: 123
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8800965480379110283
 MonoBehaviour:
@@ -146,7 +146,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

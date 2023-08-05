@@ -15,8 +15,8 @@ using UnityEngine.Rendering.Universal;
 public class Skillmanager_Stage_1 : MonoBehaviourPun
 {
     [SerializeField] PhotonView PV;
-    [SerializeField] GameObject Light;
-    [SerializeField] GameObject Shadow;
+    [SerializeField] public GameObject Light;
+    [SerializeField] public GameObject Shadow;
     [SerializeField] GameObject Dport;
     [SerializeField] CinemachineVirtualCamera VM;
     [SerializeField] private float dashingPower = 4f;
