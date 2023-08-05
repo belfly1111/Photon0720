@@ -148,11 +148,13 @@ public class OpeningEvent : MonoBehaviourPun
 
     IEnumerator TypingRoutine(int dialogNum)
     {
+        AudioSource audio = GetComponent<AudioSource>();
         isDialoging = true;
         int typingLength = OriginText[dialogNum].GetTypingLength();
 
         for(int index = 0; index <= typingLength; index++)
         {
+            audio.Play();
             OpeningText.text = OriginText[dialogNum].Typing(index);
             yield return new WaitForSeconds(0.05f);
         }

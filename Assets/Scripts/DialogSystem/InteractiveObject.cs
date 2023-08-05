@@ -131,6 +131,7 @@ public class InteractiveObject : MonoBehaviour
 
     IEnumerator TypingRoutine(string curText)
     {
+        AudioSource audio = GetComponent<AudioSource>();
         isDialoging = true;
         int typingLength = curText.GetTypingLength();
         
@@ -138,6 +139,10 @@ public class InteractiveObject : MonoBehaviour
         {
             DialogTxt.text = curText.Typing(index);
             yield return new WaitForSeconds(0.025f);
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
         }
         isDialoging = false;
     }
