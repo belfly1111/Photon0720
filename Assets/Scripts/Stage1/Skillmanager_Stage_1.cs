@@ -21,10 +21,12 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     [SerializeField] CinemachineVirtualCamera VM;
     [SerializeField] private float dashingPower = 4f;
     [SerializeField] private float dashingTime = 0.2f;
+    public GameObject Key;
     public bool canSkill = true;
     public bool canPassive= true;
     public bool canDash = false;
     public bool canTP = true;
+    public bool IsKey = false;
     public moveSetOrigin mso;
 
 
@@ -65,7 +67,12 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         // 플레이어가 선택한게 'Dark'인 경우
         else if (PhotonManeger.instance.LocalPlayerRule == 0 && canSkill && !Shadow_AnimationController.isDead_Shadow)
         {
-            return;
+            if(canPassive){
+                if(IsKey){
+                    PV.RPC("RPCDestroy",RpcTarget.All);
+                    //사용문구 추가 필요
+                }
+            }
         }
     }
 
@@ -142,13 +149,17 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
         SpriteRenderer SR = Shadow.GetComponent<SpriteRenderer>();
         Animator ShadowAnimator = Shadow.GetComponent<Animator>();
+        SpriteRenderer SRK = Key.GetComponent<SpriteRenderer>();
 
         ShadowAnimator.SetBool("isTeleport", true);
+        if(IsKey){
+            SRK.enabled = false;
+        }
         yield return new WaitForSeconds(0.5f);
-
         SR.enabled = false;
         yield return new WaitForSeconds(5.0f);
         SR.enabled = true;
+        SRK.enabled = true;
 
         ShadowAnimator.SetBool("isTeleport", false);
 
@@ -271,5 +282,10 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         BL.SetActive(!BL.activeSelf);
     }
 
+    [PunRPC]
+    void RPCDestroy(){
+        Key.gameObject.SetActive(false);
+        IsKey = false;
+    }
     #endregion
 }

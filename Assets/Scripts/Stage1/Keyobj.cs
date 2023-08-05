@@ -17,23 +17,25 @@ public class Keyobj : MonoBehaviourPun
     public SpriteRenderer SR;
     public bool IsDark = false;
     
-    void Awake(){
-        SM = GameObject.FindObjectOfType<Skillmanager_Stage_1>();
+    void Start(){
+        RB = GetComponent<Rigidbody2D>();
+        SR = GetComponent<SpriteRenderer>();
     }
 
     void Update(){
         if(IsDark){
-            RB.transform.position = SM.Shadow.transform.position + new Vector3(0f,0.5f,0f);
+            RB.transform.position = SM.Shadow.transform.position + new Vector3(0f,1.5f,0f);
         }
     }
 
     void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.name == "Dark(Clone)"){
             IsDark = true;
+            SM.IsKey = true;
         }
         else{
             IsDark = false;
+            SM.IsKey = false;
         }
-        
     }
 }
