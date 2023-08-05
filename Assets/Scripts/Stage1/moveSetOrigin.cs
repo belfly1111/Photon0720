@@ -211,6 +211,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (other.CompareTag("DeadZone"))
         {
+            RB.velocity = Vector2.zero;
             isDead = true;
         }
         if (other.CompareTag("SavePoint"))

@@ -16,24 +16,13 @@ public class TouchTrigger : MonoBehaviourPun
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Trigger")){
             SM.canDash = true;
-            SM.canTP = false;
-        }
-        if(other.CompareTag("Ground")){
-            SM.canTP = false;
         }
     }
-
-    void OnTriggerStay2D(Collider2D other) {
-        if(other.CompareTag("Ground")){
-            SM.canTP = false;
-        }
-    }
-    
 
     void OnTriggerExit2D(Collider2D other) {
-        if(other.CompareTag("Trigger") || other.CompareTag("Ground")){
+        if(other.CompareTag("Trigger"))
+        {
             SM.canDash = false;
-            SM.canTP = true;
         }
     }
 
