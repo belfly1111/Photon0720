@@ -14,6 +14,9 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     // 사운드 관리를 위해 추가한 변수
     public AudioClip[] walkAudio;
     public AudioClip[] jumpAudio;
+    public AudioClip[] dashAudio;
+    public AudioClip[] tpAudio;
+    public AudioClip[] tpeAudio;
 
     public bool DS = false;
 
@@ -32,7 +35,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     
     // 소리 관련 상호 작용 변수
     public bool aired;
-    AudioSource audio;
+    
 
     // 플레이어가 죽었을 때 추가 조작을 막기 위한 변수
     // 플레이어가 죽었을 때 세이브 포인트로 이동하기 위한 변수를 저장하는 변수
@@ -46,7 +49,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         inEvent = false;
         isGround = true;
         aired = true;
-        audio = GetComponent<AudioSource>();
+        
         PV = this.GetComponent<PhotonView>();
     }
 
@@ -85,7 +88,7 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     aired = true;
                     PV.RPC("JumpRPC", RpcTarget.All);
-                    PV.RPC("SoundRPC", RpcTarget.All, 0);
+          //          PV.RPC("SoundRPC", RpcTarget.All, 0);
                 }
 
                 //상호작용 - 07.28 상호 작용 중 다른 키의 입력을 못받게 수정함.
@@ -143,11 +146,12 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     void DestroyRPC() => Destroy(gameObject);
 
     [PunRPC]
-    void SoundRPC(int type)
+    void SoundRPC(int type) 
     {
+        AudioSource audio = GetComponent<AudioSource>();
         if (type == 0)
         {
-            audio.Stop();
+         //   audio.Stop();
         }
         if (type == 1)
         {
@@ -159,11 +163,28 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (type == 2)
         {
-            if (!audio.isPlaying)
-            {
-                audio.clip = jumpAudio[Random.Range(0, 2)];
-                audio.Play();
-            }
+            audio.clip = jumpAudio[Random.Range(0, 2)];
+            audio.Play();
+        }
+        if(type == 3)
+        {
+            audio.clip = dashAudio[0];
+            audio.Play();
+        }
+        if (type == 4)
+        {
+            audio.clip = tpAudio[0];
+            audio.Play();
+        }
+        if (type == 5)
+        {
+            audio.clip = tpeAudio[0];
+            audio.Play();
+        }
+        if (type == 6)
+        {
+            audio.clip = dashAudio[1];
+            audio.Play();
         }
     }
 
@@ -194,6 +215,11 @@ public class moveSetOrigin : MonoBehaviourPunCallbacks, IPunObservable
     public bool IsGrounded()
     {
         return Physics2D.BoxCast(RB_groundCheck.bounds.center, RB_groundCheck.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
+    }
+
+    public void Audioplayer(int type)
+    {
+        PV.RPC("SoundRPC", RpcTarget.All, type);
     }
 
     public void Interaction()

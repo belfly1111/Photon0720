@@ -400,6 +400,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8e0c586341010324fadd73453569f0aa, type: 3}
   - {fileID: 8300000, guid: 7d65afb5fe7bb7e41a03b001f5acfbde, type: 3}
   - {fileID: 8300000, guid: 54cd8769272b7ca4c9a1386d106f621d, type: 3}
+  dashAudio:
+  - {fileID: 8300000, guid: 8c8ead0e2239ae8418fa0700611da715, type: 3}
+  - {fileID: 8300000, guid: b109259a414c7304ba2de07ca9a3023f, type: 3}
+  tpAudio: []
+  tpeAudio: []
   DS: 0
   RB_groundCheck: {fileID: 4299124305899392685}
   jumpableGround:

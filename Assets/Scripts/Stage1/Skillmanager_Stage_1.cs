@@ -81,7 +81,9 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
             if (mso.isGround)
             {
                 Debug.Log("텔포시작");
+                mso.PV.RPC("SoundRPC", RpcTarget.All, 4);
                 StartCoroutine("Teleport");
+                
             }
             else Debug.Log("텔포실패 이유: isGround = " + mso.isGround);
         }
@@ -154,12 +156,15 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     {   
         GameObject Marker = Instantiate(Dport,SPos,Quaternion.identity);
         GameObject TMP = Shadow;
+        
         Shadow = Marker;
         yield return new WaitForSeconds(5.0f);
         if (canTP){
             Vector2 MP = Shadow.transform.position;
             Shadow = TMP;
             Shadow.transform.position = MP;
+            moveSetOrigin mso = Shadow.GetComponent<moveSetOrigin>();
+            mso.PV.RPC("SoundRPC", RpcTarget.All, 5);
         }
         else{
             Shadow = TMP;
@@ -252,6 +257,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void DASH()
     {
         Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
+        mso.PV.RPC("SoundRPC", RpcTarget.All, 3);
         StartCoroutine(LerpDash(dir));
     }
 
@@ -260,6 +267,8 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
     void Flash(){
         GameObject BL = Light.transform.GetChild(1).gameObject;
         BL.SetActive(!BL.activeSelf);
+        moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
+        mso.PV.RPC("SoundRPC", RpcTarget.All, 6);
     }
 
     #endregion
