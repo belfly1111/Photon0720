@@ -33,7 +33,8 @@ public class Keyobj : MonoBehaviourPun
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.name == "KeyDoor"){
             Destroy(KeyDoor);
-            Destroy(Key);
+            Key.SetActive(false);
+            SM.IsKey = false;
         }
     }
 
