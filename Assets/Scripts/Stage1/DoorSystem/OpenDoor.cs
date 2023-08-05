@@ -12,10 +12,19 @@ public class OpenDoor : MonoBehaviour
     {
         if(LS.onSwitch && SS.onSwitch)
         {
-            Destroy(gameObject);
+            AudioSource a = GetComponent<AudioSource>(); 
+            if (!a.isPlaying)
+            {
+                a.Play();
+            }
+            StartCoroutine(Destroyer());
         }
     }
-
-
-
+    IEnumerator Destroyer()
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
+    }
 }
