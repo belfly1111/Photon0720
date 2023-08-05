@@ -6,17 +6,25 @@ public class OpenOrDoor : MonoBehaviour
 {
     public Light_Switch LS;
     public Shadow_Switch SS;
+    public SpriteRenderer SR;
+    public BoxCollider2D BC;
     public GameObject OrGate;
 
+    public void Start(){
+        SR = OrGate.GetComponent<SpriteRenderer>();
+        BC = OrGate.GetComponent<BoxCollider2D>();
+    }
 
     private void Update()
     {
         if(LS.onSwitch || SS.onSwitch)
         {
-            OrGate.gameObject.SetActive(false);
+            SR.enabled = false;
+            BC.enabled = false;
         }
         else{
-            OrGate.gameObject.SetActive(true);
+            SR.enabled = true;
+            BC.enabled = true;
         }
     }
 
