@@ -145,20 +145,13 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
         moveSetOrigin mso = Light.GetComponent<moveSetOrigin>();
         SpriteRenderer SR = Shadow.GetComponent<SpriteRenderer>();
         Animator ShadowAnimator = Shadow.GetComponent<Animator>();
-        SpriteRenderer SRK = Key.GetComponent<SpriteRenderer>();
         
 
         ShadowAnimator.SetBool("isTeleport", true);
-        if(IsKey){
-            SRK.enabled = false;
-        }
         yield return new WaitForSeconds(0.5f);
         SR.enabled = false;
         yield return new WaitForSeconds(5.0f);
         SR.enabled = true;
-        if(IsKey){
-            SRK.enabled = true;
-        }
 
         ShadowAnimator.SetBool("isTeleport", false);
 
