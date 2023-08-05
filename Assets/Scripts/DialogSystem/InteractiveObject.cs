@@ -66,6 +66,7 @@ public class InteractiveObject : MonoBehaviour
     public void Interaction()
     {
         if (isDialoging) return;
+
         if (objectType == 1)
         {
             if(curTextNum == 0)
