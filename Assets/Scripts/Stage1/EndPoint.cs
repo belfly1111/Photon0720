@@ -11,17 +11,12 @@ using UnityEngine.SceneManagement;
 public class EndPoint : MonoBehaviourPun
 {
     public PhotonView PV;
-    public Image Endingimg;
-    public TMP_Text EndingDialog;
+    public GameObject EndingGameobject;
     PhotonManeger PM;
-    Animator animator;
 
     private void Awake()
     {
         PM = FindObjectOfType<PhotonManeger>();
-        Endingimg.enabled = false;
-        EndingDialog.enabled = false;
-        animator = Endingimg.GetComponent<Animator>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -32,17 +27,12 @@ public class EndPoint : MonoBehaviourPun
     [PunRPC]
     void EndingStart()
     {
-        Endingimg.enabled = true;
-        EndingDialog.enabled = true;
-        animator.SetBool("isEnding", true);
-        Invoke("GoTitle", 3f);
+        EndingGameobject.SetActive(true);
     }
 
-    void GoTitle()
+    public void ExitGame()
     {
-        PM.LeaveRoom();
-        PM.Disconnect();
-        SceneManager.LoadScene("Title");
-        Destroy(PM);
+        Application.Quit();
     }
+
 }
