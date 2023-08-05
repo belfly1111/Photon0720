@@ -20,6 +20,9 @@ public class InteractiveObject : MonoBehaviour
     [SerializeField] private Image LightImg;
     [SerializeField] private Image DarkImg;
 
+    [Header("Tutorial")]
+    [SerializeField] private GameObject TutorialDialog;
+    [SerializeField] private TMP_Text TutorialDialogTxt;
 
 
     string[] NPC_1 = new string[3];
@@ -66,6 +69,11 @@ public class InteractiveObject : MonoBehaviour
     public void Interaction()
     {
         if (isDialoging) return;
+
+        if(objectType == 0)
+        {
+
+        }
 
         if (objectType == 1)
         {

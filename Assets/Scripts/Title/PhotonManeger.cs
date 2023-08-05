@@ -212,9 +212,6 @@ public class PhotonManeger : MonoBehaviourPunCallbacks
         if(SelectedStage == 1)
         {
             photonView.RPC("InActiveTitleCanvas", RpcTarget.AllBuffered);
-
-
-
             PhotonNetwork.LoadLevel("Stage1");
         }
     }
