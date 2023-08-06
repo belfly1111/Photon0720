@@ -30,12 +30,14 @@ public class InteractiveObject : MonoBehaviour
     string[] NPC_3 = new string[2];
     string[] NPC_4 = new string[3];
     string[] NPC_5 = new string[3];
-    string[] NPC_6 = new string[3];
-    string[] NPC_7 = new string[2];
-    string[] NPC_8 = new string[6];
+    string[] NPC_6 = new string[2];
+    string[] NPC_7 = new string[3];
+    string[] NPC_8 = new string[2];
     string[] NPC_9 = new string[3];
     string[] NPC_10 = new string[6];
-    string[] NPC_11 = new string[4];
+    string[] NPC_11 = new string[2];
+    string[] NPC_12 = new string[4];
+
 
     private void Awake()
     {
@@ -78,45 +80,48 @@ public class InteractiveObject : MonoBehaviour
         NPC_4[1] = "[옥스]\n루즈, 혹시 길을 잃은게 아닌...";
         NPC_4[2] = "[루즈]\n아니! 모르는 길이면 찾아가면 되지.";
 
-        NPC_5[0] = "[루즈]\n여기 발판이 있네.";
-        NPC_5[1] = "[옥스]\n이 발판을 밟으면.. 벽이 열리는 걸까?";
-        NPC_5[2] = "[루즈]\n한 번 해보지 뭐.";
+        NPC_5[0] = "[루즈]\n저 안개는 뭐야! 저런 안개는 숲에 원래 없었는데?";
+        NPC_5[1] = "[옥스]\n그, 그래? 저 발판이랑 연관이 있지 않을까…?";
+        NPC_5[2] = "[루즈]\n그래, 한 번 해보지 뭐.";
 
         //3-3 벽통과 
-        NPC_6[0] = "[루즈]\n쉽네!";
-        NPC_6[1] = "[옥스]\n여긴.. 우리가 아까 사용했던 능력이나 벽의 틍성을 사용하면 될 것 같아.";
-        NPC_6[2] = "[루즈]\n다치지 마, 번거로워진다고.";
+        NPC_6[0] = "[???]\n'명심하라. 보이는 것이 전부가 아니다.'";
+        NPC_6[1] = "[옥스]\n(여기 이상한 말이 적혀 있어…! 루즈에게 알려줄까?)";
 
-        //3-4 연못 있으면
-        NPC_7[0] = "[옥스]\n연못이 있네.";
-        NPC_7[1] = "[루즈]\n잘됐다, 목마르면 여기서 물을 마셔도 되겠어.";
-        
-        //4-1 점프맵 도달
-        NPC_8[0] = "[루즈]\n아니, 여기는 막다른 곳 같은데?";
-        NPC_8[1] = "[옥스]\n루즈, 저길봐. 꽃이 있어.";
-        NPC_8[2] = "[꽃]\n목이 말라, 내 잎이 시들어가고 있어....";
-        NPC_8[3] = "[옥스]\n그렇지만 우리에겐 물이 없는걸...]";
-        NPC_8[4] = "[루즈]\n우리 아까 연못을 지나왔었어. 거기서 물을 가지고 오자.";
-        NPC_8[5] = "[옥스]\n좋은 생각인 것 같아.";
+        //3-4 열쇠 기믹 대화 - Light
+        NPC_7[0] = "[???]\n'명심하라. 동료와 함께 움직여야 빛날 수 있을 것이다.'";
+        NPC_7[1] = "[루즈]\n(하아... 역시 누가 숲에 못된 장난을 치고 간게 틀림없어.)";
+        NPC_7[2] = "[루즈]\n(옥스가 따로 뭔갈 할 때까지 기다리면 되는걸까?)";
 
-        //4-2 꽃에 물을 주고 나서
-        NPC_9[0] = "[꽃]\n고마워, 살 것 같아! 어, 너는 그림자구나! 어떻게 이곳까지 온거지?";
-        NPC_9[1] = "[옥스]\n혹시 내가 돌아가는 방법을 알고 있니?";
-        NPC_9[2] = "[꽃]\n그건 잘 몰라. 하지만 그림자는 바닥에 숨을 수 있다더라고.";
 
-        //5-1 집 도착
-        NPC_10[0] = "[루즈]\n도착했어! 저기가 우리집이야.";
-        NPC_10[1] = "[옥스]\n다행이다...";
-        NPC_10[2] = "[루즈]\n뭐야? 내 열쇠... 열쇠가 어디갔지?";
-        NPC_10[3] = "[옥스]\n무슨 일이야?";
-        NPC_10[4] = "[루즈]\n내 열쇠를 잃어버렸어! 어떡해...";
-        NPC_10[5] = "[옥스]\n음... 내가 해볼 수 있을 것 같아.";
+        //3-4 열쇠 기믹 대화 - Shadow
+        NPC_8[0] = "[???]\n'명심하라. 열쇠가 있어야 길이 열릴 것이다.";
+        NPC_8[1] = "[옥스]\n(또 그 낙서야…! 저기 보이는 열쇠와 연관이 있는걸까?)";
 
-        //5-2 열쇠를 찾은 후
-        NPC_11[0] = "[옥스]\n루즈, 내가 열쇠를 찾았어.";
-        NPC_11[1] = "[루즈]\n정말? 이거 내 열쇠잖아!\n 바보같은 줄만 알았는데... 고마워, 옥스.";
-        NPC_11[2] = "[옥스]\n바보는 아닌...";
-        NPC_11[3] = "[루즈]\n아무튼, 우리 집으로 초대할게. 어서와!";
+
+        // 4. 아래로 떨어지고 나서.
+        NPC_9[0] = "[루즈]\n누가 숲에다 이런 못된 장난을 친거야! 전부 처음보는 것들 뿐이야!";
+        NPC_9[1] = "[옥스]\n진, 진정해 루즈. 일단 여기를 벗어나는게 낫지 않을까? 곧 '어둠'이 쫓아올꺼야…";
+        NPC_9[2] = "[루즈]\n그래! 우리 동네에 빨리 가서 누가 이런 짓을 했는지 물어봐야겠어!";
+
+        //5-1 점프맵 설명
+        NPC_10[0] = "[루즈]\n누군지 모르겠지만 정말 대단하다... 방범안개까지 작동시키고 갔네...";
+        NPC_10[1] = "[옥스]\n어떤 방범 안개…?";
+        NPC_10[2] = "[루즈]\n동네로 가는 길을 막는 안개야. 높은 곳에 있는 2개의 스위치를 동시에 눌러야 안개가 사라져.";
+        NPC_10[3] = "[루즈]\n원래 전부 하얀색 벽이지만, 일부가 검은색으로 바뀌었네. 아마 오늘 숲을 이상하게 만든 범인의 짓이겠지.";
+        NPC_10[4] = "[옥스]\n그럼 나혼자 검은색 벽을 올라가야 한다고…? 내, 내가 할 수 있을까?";
+        NPC_10[5] = "[루즈]\n할 수 밖에 없어! 빨리 풀어버리고 지나가자!";
+         
+        //5-2 가시와 종유석 기믹 & OrGate 설명
+        NPC_11[0] = "[옥스]\n저 종유석하고 가시는 위험해보여...! 집, 집에 가고 싶어… 엄마아…";
+        NPC_11[1] = "[루즈]\n지금까지 잘해왔잖아! 정신차려! 곧 숲이 어두워 진다고! 빨리 벗어나야해!";
+
+
+        //6-1 마지막 열쇠 설명
+        NPC_12[0] = "[루즈]\n다왔다! 열쇠가 어디있더라...? 헉! 설마 왼쪽 연못 안에 두고 왔나?";
+        NPC_12[1] = "[옥스]\n열쇠는 나에게 맡겨줘…! 왼쪽으로 가면 되는거지!";
+        NPC_12[2] = "[루즈]\n오, 이제 적극적으로 변했구나! 응응! 왼쪽으로 가면 있어!";
+        NPC_12[3] = "[옥스]\n(으으…빨리 벗어나서 안전한 곳으로 갈꺼야! 이런 경험은 한 번이면 족해...)";
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -229,7 +234,7 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-        if (objectType == 1)
+        else if (objectType == 1)
         {
             if(curTextNum == 0)
             {
@@ -276,7 +281,7 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-        if (objectType == 2)
+        else if (objectType == 2)
         {
             if (curTextNum == 0)
             {
@@ -335,7 +340,7 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-        if (objectType == 3)
+        else if (objectType == 3)
         {
             if (curTextNum == 0)
             {
@@ -358,7 +363,7 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-        if (objectType == 4)
+        else if (objectType == 4)
         {
             if (curTextNum == 0)
             {
@@ -387,7 +392,7 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-        if (objectType == 5)
+        else if (objectType == 5)
         {
             if (curTextNum == 0)
             {
@@ -416,12 +421,34 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-        if(objectType == 6)
+        else if (objectType == 6)
         {
 
         }
+        else if (objectType == 7)
+        {
 
+        }
+        else if (objectType == 8)
+        {
 
+        }
+        else if (objectType == 9)
+        {
+
+        }
+        else if (objectType == 10)
+        {
+
+        }
+        else if (objectType == 11)
+        {
+
+        }
+        else if (objectType == 12)
+        {
+
+        }
     }
 
     // 들어가는 변수에 따라서 NPC의 image가 활성 / 비활성화됨.
