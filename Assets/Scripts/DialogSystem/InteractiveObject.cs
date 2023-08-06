@@ -398,19 +398,19 @@ public class InteractiveObject : MonoBehaviour
             {
                 DialogImg.SetActive(true);
 
-                chageNPCImage(false, true);
+                chageNPCImage(true, false);
                 StartCoroutine(TypingRoutine(NPC_5[curTextNum]));
                 curTextNum++;
             }
             else if (curTextNum == 1)
             {
-                chageNPCImage(true, false);
+                chageNPCImage(false, true);
                 StartCoroutine(TypingRoutine(NPC_5[curTextNum]));
                 curTextNum++;
             }
             else if (curTextNum == 2)
             {
-                chageNPCImage(false, true);
+                chageNPCImage(true, false);
                 StartCoroutine(TypingRoutine(NPC_5[curTextNum]));
                 curTextNum++;
             }
@@ -641,7 +641,6 @@ public class InteractiveObject : MonoBehaviour
         if (Shadow) DarkImg.enabled = true;
         else if (!Shadow) DarkImg.enabled = false;
     }
-
 
     IEnumerator TypingRoutine(string curText)
     {

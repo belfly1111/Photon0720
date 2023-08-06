@@ -24,7 +24,7 @@ public class Stalactities : MonoBehaviourPun
 
     private void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, playerLayer);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, 5f, playerLayer);
         if(hit.collider == null) return;
         if (hit.collider.CompareTag("Player") && !isFalling)
         {
