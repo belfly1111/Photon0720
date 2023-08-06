@@ -423,31 +423,212 @@ public class InteractiveObject : MonoBehaviour
         }
         else if (objectType == 6)
         {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
 
+                chageNPCImage(false, false);
+                StartCoroutine(TypingRoutine(NPC_6[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 1)
+            {
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_6[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 2)
+            {
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
         else if (objectType == 7)
         {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
 
+                chageNPCImage(false, false);
+                StartCoroutine(TypingRoutine(NPC_7[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 1)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_7[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 2)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_7[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 3)
+            {
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
         else if (objectType == 8)
         {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
 
+                chageNPCImage(false, false);
+                StartCoroutine(TypingRoutine(NPC_8[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 1)
+            {
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_8[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 2)
+            {
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
         else if (objectType == 9)
         {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
 
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_9[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 1)
+            {
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_9[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 2)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_9[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 3)
+            {
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
         else if (objectType == 10)
         {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
 
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_10[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 1)
+            {
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_10[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 2)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_10[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 3)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_10[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 4)
+            {
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_10[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 5)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_10[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 6)
+            {
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
         else if (objectType == 11)
         {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
 
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_11[curTextNum]));
+                curTextNum++;
+            }
+            else if(curTextNum == 1)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_11[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 2)
+            {
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
         else if (objectType == 12)
         {
+            if (curTextNum == 0)
+            {
+                DialogImg.SetActive(true);
 
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_12[curTextNum]));
+                curTextNum++;
+            }
+            else if(curTextNum == 1)
+            {
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_12[curTextNum]));
+                curTextNum++;
+            }
+            else if(curTextNum == 2)
+            {
+                chageNPCImage(true, false);
+                StartCoroutine(TypingRoutine(NPC_12[curTextNum]));
+                curTextNum++;
+            }
+            else if(curTextNum == 3)
+            {
+                chageNPCImage(false, true);
+                StartCoroutine(TypingRoutine(NPC_12[curTextNum]));
+                curTextNum++;
+            }
+            else if (curTextNum == 4)
+            {
+                curTextNum = 0;
+                DialogImg.SetActive(false);
+                moveSetOrigin.inEvent = false;
+            }
         }
     }
 
