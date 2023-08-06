@@ -43,13 +43,13 @@ public class Skillmanager_Stage_1 : MonoBehaviourPun
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V) && !moveSetOrigin.inEvent)
+        if (Input.GetKeyDown(KeyCode.J) && !moveSetOrigin.inEvent)
         {
-            UseSkill();
+            UniqueSkill();
         }
         if (Input.GetKeyDown(KeyCode.K) && !moveSetOrigin.inEvent)
         {
-            UniqueSkill();
+            UseSkill();
         }
     }
 

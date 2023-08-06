@@ -26,6 +26,7 @@ public class OpeningEvent : MonoBehaviourPun
     string[] OriginText = new string[3];
     [SerializeField] TMP_Text OpeningText;
     [SerializeField] int dialogNum;
+    [SerializeField] Image F_btn;
 
     [SerializeField] Image BlackImg;
     [SerializeField] Image NextIcon;
@@ -75,13 +76,14 @@ public class OpeningEvent : MonoBehaviourPun
         // Skillmaeger_Stage_1을 활성화함.
         // 07.28 현재는 개인 추가 컷신이 없으므로 페이드인 효과만 추가함.
 
-        // 1. 스페이스를 눌러 오프닝 대화를 진행함.
-        if (Input.GetKey(KeyCode.Space) && !isDialoging && dialogNum <= 3 && PhotonManeger.instance.LocalPlayerRule == -1)
+        // 1. F를 눌러 오프닝 대화를 진행함.
+        if (Input.GetKey(KeyCode.F) && !isDialoging && dialogNum <= 3 && PhotonManeger.instance.LocalPlayerRule == -1)
         {
             if (dialogNum > 2)
             {
                 NextIcon.enabled = false;
                 OpeningText.enabled = false;
+                F_btn.enabled = false;
 
                 // 일러스트와 소개문구 표시
                 Light_image.enabled = true;
