@@ -151,7 +151,6 @@ public class InteractiveObject : MonoBehaviour
     public void Interaction()
     {
         if (isDialoging) return;
-      //  Debug.Log("objectty : " + objectType + " , curtex : " + curTextNum + " , text : " + NPC_0[curTextNum]);
 
         if(objectType == 0)
         {
@@ -230,7 +229,6 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-
         if (objectType == 1)
         {
             if(curTextNum == 0)
@@ -278,8 +276,7 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
-
-        if(objectType == 2)
+        if (objectType == 2)
         {
             if (curTextNum == 0)
             {
@@ -400,13 +397,13 @@ public class InteractiveObject : MonoBehaviour
                 StartCoroutine(TypingRoutine(NPC_5[curTextNum]));
                 curTextNum++;
             }
-            else if (curTextNum == 2)
+            else if (curTextNum == 1)
             {
                 chageNPCImage(true, false);
                 StartCoroutine(TypingRoutine(NPC_5[curTextNum]));
                 curTextNum++;
             }
-            else if (curTextNum == 0)
+            else if (curTextNum == 2)
             {
                 chageNPCImage(false, true);
                 StartCoroutine(TypingRoutine(NPC_5[curTextNum]));
@@ -419,6 +416,12 @@ public class InteractiveObject : MonoBehaviour
                 moveSetOrigin.inEvent = false;
             }
         }
+        if(objectType == 6)
+        {
+
+        }
+
+
     }
 
     // 들어가는 변수에 따라서 NPC의 image가 활성 / 비활성화됨.
